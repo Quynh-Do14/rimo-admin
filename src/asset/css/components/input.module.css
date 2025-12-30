@@ -1,0 +1,114 @@
+.inputCommon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.inputCommon .avatarWrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #ccc;
+  transition: all 0.3s ease;
+}
+
+.inputCommon .avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.inputCommon .overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  padding: 4px 0;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.inputCommon .avatarWrapper:hover .overlay {
+  opacity: 1;
+}
+
+.upload_common {
+  position: relative;
+}
+
+.upload_common .circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.upload_common .card {
+  width: 100% !important;
+  height: 100%;
+}
+
+.upload_common .upload_btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  height: 102px;
+}
+
+.upload_common .upload_btn p {
+  font-size: 14px;
+  color: #443b3b;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.upload_common .btn-primary {
+  border-color: #ff3f3f !important;
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #ff3f3f !important;
+  border-color: #ff3f3f !important;
+}
+
+.upload_common .main_image {
+  background: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 260px;
+  width: 100%;
+  min-height: 10vh;
+  max-height: 40vh;
+  overflow: hidden;
+  border: 1px solid #d3d3d3;
+  cursor: pointer;
+  position: relative;
+  border-radius: 8px;
+}
+
+.upload_common .main_image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.upload_common .main_image .close_btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 12;
+}
+
+.upload_common .main_image .close_btn i {
+  border: 2px solid #fff;
+  border-radius: 50%;
+  font-size: 20px;
+  color: #cb4c51;
+}

@@ -1,0 +1,69 @@
+.inputCommon label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.inputCommon .required {
+  color: #e74c3c;
+  margin-left: 4px;
+}
+
+.inputCommon select,
+.inputCommon input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+.inputCommon textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.inputCommon select:focus,
+.inputCommon input:focus,
+.inputCommon textarea:focus {
+  border-color: #fcb800;
+  box-shadow: 0 0 0 2px rgba(252, 184, 0, 0.1);
+  outline: none;
+}
+
+.inputCommon input::placeholder,
+.inputCommon textarea::placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+/* Thêm styles cho trạng thái lỗi nếu cần */
+.inputCommon .error {
+  border-color: #e74c3c;
+}
+
+.inputCommon .error-message {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 4px;
+  display: none;
+}
+
+.inputCommon .error + .error-message {
+  display: block;
+}
+
+/* Căn lề container nếu có */
+.inputCommon {
+  margin-bottom: 20px;
+}
