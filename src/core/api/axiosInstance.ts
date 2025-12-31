@@ -17,7 +17,7 @@ const axiosInstance = axios.create({
 
 // Hàm lấy token từ cookie
 const getToken = () => {
-    const token = Cookies.get('token');
+    const token = sessionStorage.getItem('token');
     return token ? JSON.parse(token) : null;
 };
 
@@ -78,19 +78,14 @@ axiosInstance.interceptors.response.use(
                     const { refreshToken, accessToken } = response.data;
 
                     // Lưu token mới vào cookie
-                    Cookies.set('token', JSON.stringify({ refreshToken, accessToken }), {
-                        path: '/',
-                        secure: process.env.NODE_ENV === 'production',
-                        sameSite: 'Strict',
-                        expires: 7,
-                    });
+                    sessionStorage.setItem('token', JSON.stringify({ refreshToken, accessToken }));
 
                     processQueue(null, accessToken);
                     originalRequest.headers.Authorization = `Bearer ${accessToken}`;
                     return axiosInstance(originalRequest);
                 } catch (error) {
                     processQueue(error, null);
-                    Cookies.remove('token');
+                    sessionStorage.removeItem('token');
                     // notification.error({
                     //     message: 'Thông báo',
                     //     description: 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.',

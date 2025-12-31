@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Input, Pagination, Space, Button } from 'antd';
 import styles from '../../asset/css/admin/admin-component.module.css';
-import { useNavigate } from 'react-router-dom';
-import productService from '../../infrastructure/repository/product/product.service';
 import Constants from '../../core/common/constants';
 import AdminLayout from '../../infrastructure/common/layout/admin/MainLayout';
 import { ROUTE_PATH } from '../../core/common/appRouter';
@@ -11,10 +9,12 @@ import { TitleTableCommon } from '../../infrastructure/common/text/title-table-c
 import { ActionCommon } from '../../infrastructure/common/action/action-common';
 import { PaginationCommon } from '../../infrastructure/common/pagination/PaginationPageSize';
 import DialogConfirmCommon from '../../infrastructure/common/modal/dialogConfirm';
+import { useNavigate } from 'react-router-dom';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
+import seriesService from '../../infrastructure/repository/series/series.service';
 
 let timeout: any
-const ProductFiguresListPage = () => {
+const SeriesListPage = () => {
     const [listResponse, setListResponse] = useState<Array<any>>([])
     const [total, setTotal] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -36,7 +36,7 @@ const ProductFiguresListPage = () => {
             search: search,
         }
         try {
-            await productService.GetProduct(
+            await seriesService.GetSeries(
                 param,
                 setLoading
             ).then((res) => {
@@ -86,7 +86,7 @@ const ProductFiguresListPage = () => {
 
     const onDeleteAsync = async () => {
         try {
-            await productService.DeleteProductAdmin(
+            await seriesService.DeleteSeriesAdmin(
                 idSelected,
                 setLoading
             ).then((res) => {
@@ -102,18 +102,17 @@ const ProductFiguresListPage = () => {
     };
 
     const onNavigate = (id: any) => {
-        router(`${(ROUTE_PATH.VIEW_PRODUCT_FIGURES_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
+        router(`${(ROUTE_PATH.VIEW_SERIES_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
     }
-
 
     return (
         <AdminLayout
-            breadcrumb={"Quản lý thông số sản phẩm"}
-            title={"Quản lý thông số sản phẩm"}
-            redirect={ROUTE_PATH.PRODUCT_FIGURES_MANAGEMENT}
+            breadcrumb={"Quản lý danh mục dòng sản phẩm"}
+            title={"Quản lý danh mục dòng sản phẩm"}
+            redirect={ROUTE_PATH.SERIES_MANAGEMENT}
         >
             <div className={styles.manage_container}>
-                <h2>Quản lý thông số sản phẩm</h2>
+                <h2>Quản lý danh mục dòng sản phẩm</h2>
                 <div className={styles.searchBar}>
                     <Input
                         className="form-control"
@@ -122,7 +121,7 @@ const ProductFiguresListPage = () => {
                         onChange={onChangeSearchText}
                     />
                     <ButtonHref
-                        href={ROUTE_PATH.ADD_PRODUCT_FIGURES_MANAGEMENT}
+                        href={ROUTE_PATH.ADD_SERIES_MANAGEMENT}
                         title={'Thêm mới'}
                         width={150}
                         variant={'ps-btn--fullwidth'}
@@ -150,7 +149,7 @@ const ProductFiguresListPage = () => {
                         <Table.Column
                             title={
                                 <TitleTableCommon
-                                    title="Tên thông số sản phẩm"
+                                    title="Dòng sản phẩm"
                                     width={'150px'}
                                 />
                             }
@@ -187,7 +186,7 @@ const ProductFiguresListPage = () => {
                     />
                 </div>
                 <DialogConfirmCommon
-                    message={"Bạn có muốn xóa thông số sản phẩm này ra khỏi hệ thống"}
+                    message={"Bạn có muốn xóa danh mục dòng sản phẩm này ra khỏi hệ thống"}
                     titleCancel={"Bỏ qua"}
                     titleOk={"Xóa"}
                     visible={isDeleteModal}
@@ -201,4 +200,4 @@ const ProductFiguresListPage = () => {
 
     );
 }
-export default ProductFiguresListPage;
+export default SeriesListPage;

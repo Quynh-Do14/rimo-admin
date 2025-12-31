@@ -15,6 +15,12 @@ import LoginPage from "../../pages/login";
 import ProductListPage from "../../pages/product-management";
 import AddProductManagement from "../../pages/product-management/add";
 import SlugProductManagement from "../../pages/product-management/slug";
+import ProductSeriesListPage from "../../pages/product-series-management";
+import AddProductSeriesManagement from "../../pages/product-series-management/add";
+import SlugProductSeriesManagement from "../../pages/product-series-management/slug";
+import SeriesListPage from "../../pages/series-management";
+import AddSeriesManagement from "../../pages/series-management/add";
+import SlugSeriesManagement from "../../pages/series-management/view";
 import UserListPage from "../../pages/user-management";
 import AddUserManagement from "../../pages/user-management/add";
 import SlugUserManagement from "../../pages/user-management/view";
@@ -124,6 +130,38 @@ export const privateRoutes = [
     {
         path: ROUTE_PATH.VIEW_PRODUCT_MANAGEMENT,
         component: SlugProductManagement,
+        private: true,
+    },
+
+    {
+        path: ROUTE_PATH.PRODUCT_SERIES_MANAGEMENT,
+        component: ProductSeriesListPage,
+        private: true,
+    },
+    {
+        path: ROUTE_PATH.ADD_PRODUCT_SERIES_MANAGEMENT,
+        component: AddProductSeriesManagement,
+        private: true,
+    },
+    {
+        path: ROUTE_PATH.VIEW_PRODUCT_SERIES_MANAGEMENT,
+        component: SlugProductSeriesManagement,
+        private: true,
+    },
+
+    {
+        path: ROUTE_PATH.SERIES_MANAGEMENT,
+        component: SeriesListPage,
+        private: true,
+    },
+    {
+        path: ROUTE_PATH.ADD_SERIES_MANAGEMENT,
+        component: AddSeriesManagement,
+        private: true,
+    },
+    {
+        path: ROUTE_PATH.VIEW_SERIES_MANAGEMENT,
+        component: SlugSeriesManagement,
         private: true,
     },
 ]

@@ -20,9 +20,13 @@ export const ROUTE_PATH = {
     ADD_PRODUCT_MANAGEMENT: `${PREFIX}/product-management/add`,
     VIEW_PRODUCT_MANAGEMENT: `${PREFIX}/product-management/view/:id`,
 
-    PRODUCT_FIGURES_MANAGEMENT: `${PREFIX}/product-figures-management`,
-    ADD_PRODUCT_FIGURES_MANAGEMENT: `${PREFIX}/product-figures-management/add`,
-    VIEW_PRODUCT_FIGURES_MANAGEMENT: `${PREFIX}/product-figures-management/view/:id`,
+    PRODUCT_SERIES_MANAGEMENT: `${PREFIX}/product-series-management`,
+    ADD_PRODUCT_SERIES_MANAGEMENT: `${PREFIX}/product-series-management/add`,
+    VIEW_PRODUCT_SERIES_MANAGEMENT: `${PREFIX}/product-series-management/view/:id`,
+
+    SERIES_MANAGEMENT: `${PREFIX}/series-management`,
+    ADD_SERIES_MANAGEMENT: `${PREFIX}/series-management/add`,
+    VIEW_SERIES_MANAGEMENT: `${PREFIX}/series-management/view/:id`,
 
     BANNER_MANAGEMENT: `${PREFIX}/banner-management`,
     ADD_BANNER_MANAGEMENT: `${PREFIX}/banner-management/add`,

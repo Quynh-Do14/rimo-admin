@@ -17,48 +17,52 @@ export default class Constants {
         icon: 'fas fa-images'
       },
       {
-        id: 3, // Đã sửa từ id: 2 thành id: 3 (id phải unique)
+        id: 3,
         text: 'Quản lý thương hiệu',
         url: ROUTE_PATH.BRAND_MANAGEMENT,
-        icon: 'fas fa-tags'
+        icon: 'fas fa-copyright' // Icon phù hợp hơn cho thương hiệu
       },
       {
-        id: 4,
+        id: 4, // Đã sửa id từ 3 thành 4
+        text: 'Quản lý dòng sản phẩm',
+        url: ROUTE_PATH.SERIES_MANAGEMENT,
+        icon: 'fas fa-layer-group' // Icon phù hợp hơn cho dòng sản phẩm
+      },
+      {
+        id: 5, // Đã sửa id từ 4 thành 5
         text: 'Quản lý sản phẩm',
-        url: '', // Để trống hoặc có thể là "#" để tránh chuyển trang
+        url: '', // Để trống vì có menu con
         icon: 'fas fa-boxes',
         children: [
           {
-            id: 41,
-            text: 'Danh sách sản phẩm', // Đổi tên để phân biệt
+            id: 51, // Đã sửa id từ 41 thành 51
+            text: 'Danh sách sản phẩm',
             url: ROUTE_PATH.PRODUCT_MANAGEMENT,
-            icon: 'fas fa-box'
+            icon: 'fas fa-list' // Icon phù hợp cho danh sách
           },
           {
-            id: 42,
-            text: 'Thông số sản phẩm', // Đổi tên để phân biệt
-            url: ROUTE_PATH.PRODUCT_FIGURES_MANAGEMENT, // Cần có route cho thêm sản phẩm
-            icon: 'fas fa-plus-circle'
+            id: 52, // Đã sửa id từ 42 thành 52
+            text: 'Thông số sản phẩm',
+            url: ROUTE_PATH.PRODUCT_SERIES_MANAGEMENT,
+            icon: 'fas fa-sliders-h' // Icon phù hợp cho thông số/cài đặt
           }
         ]
       },
       {
-        id: 5,
+        id: 6, // Đã sửa id từ 5 thành 6
         text: 'Quản lý danh mục tin tức',
         url: ROUTE_PATH.CATEGORY_BLOG_MANAGEMENT,
         icon: 'fas fa-folder-open'
       },
       {
-        id: 6,
+        id: 7, // Đã sửa id từ 6 thành 7
         text: 'Quản lý tin tức',
         url: ROUTE_PATH.BLOG_MANAGEMENT,
         icon: 'fas fa-newspaper'
       },
     ]
-
   }
-
-
+  
   static DefaultURL = 'idai.vn/'
   static TOKEN = 'token'
   static DEBOUNCE_SEARCH = 800

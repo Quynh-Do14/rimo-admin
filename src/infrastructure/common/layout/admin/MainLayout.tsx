@@ -7,8 +7,11 @@ import categoryBlogService from "../../../repository/category/categoryBlog.servi
 import { useRecoilState } from "recoil";
 import { CategoryBlogState, CategoryProductState } from "../../../../core/atoms/category/categoryState";
 import { BrandState } from "../../../../core/atoms/brand/brandState";
-import { configImageURL } from "../../../helper/helper";
 import brandService from "../../../repository/brand/brand.service";
+import { SeriesState } from "../../../../core/atoms/series/series";
+import seriesService from "../../../repository/series/series.service";
+import { ProductState } from "../../../../core/atoms/product/productState";
+import productService from "../../../repository/product/product.service";
 
 
 export default function AdminLayout({ breadcrumb, title, redirect, children }: any) {
@@ -16,14 +19,19 @@ export default function AdminLayout({ breadcrumb, title, redirect, children }: a
     const [, setCategoryProductState] = useRecoilState(CategoryProductState);
     const [, setCategoryBlogState] = useRecoilState(CategoryBlogState);
     const [, setBrandState] = useRecoilState(BrandState);
+    const [, setSeriesState] = useRecoilState(SeriesState);
+    const [, setProductState] = useRecoilState(ProductState);
 
-    const onGetListCategoryAsync = async () => {
+
+    const onGetListSeriesAsync = async () => {
         try {
-            await categoryProductService.GetCategory(
-                {},
+            await seriesService.GetSeries(
+                {
+                    limit: 1000
+                },
                 () => { }
             ).then((res) => {
-                setCategoryProductState({
+                setSeriesState({
                     data: res.data
                 })
             })
@@ -36,7 +44,9 @@ export default function AdminLayout({ breadcrumb, title, redirect, children }: a
     const onGetListBlogCategoryAsync = async () => {
         try {
             await categoryBlogService.GetBlogCategory(
-                {},
+                {
+                    limit: 1000
+                },
                 () => { }
             ).then((res) => {
                 setCategoryBlogState({
@@ -52,7 +62,9 @@ export default function AdminLayout({ breadcrumb, title, redirect, children }: a
     const onGetListBrandAsync = async () => {
         try {
             await brandService.GetBrand(
-                {},
+                {
+                    limit: 1000
+                },
                 () => { }
             ).then((res) => {
                 setBrandState({
@@ -64,10 +76,29 @@ export default function AdminLayout({ breadcrumb, title, redirect, children }: a
             console.error(error)
         }
     }
+
+    const onGetListProductAsync = async () => {
+        try {
+            await productService.GetProduct(
+                {
+                    limit: 1000
+                },
+                () => { }
+            ).then((res) => {
+                setProductState({
+                    data: res.data
+                })
+            })
+        }
+        catch (error) {
+            console.error(error)
+        }
+    }
     useEffect(() => {
-        onGetListCategoryAsync().then(_ => { });
+        onGetListSeriesAsync().then(_ => { });
         onGetListBlogCategoryAsync().then(_ => { });
         onGetListBrandAsync().then(_ => { });
+        onGetListProductAsync().then(_ => { });
     }, []);
 
     return (

@@ -1,13 +1,9 @@
 import React, { useState } from 'react'
 import styles from '../../asset/css/admin/admin-component.module.css';
 import { Col, Row } from 'antd';
-
 import { useRecoilValue } from 'recoil';
-import { BrandState } from '../../core/atoms/brand/brandState';
-import { CategoryProductState } from '../../core/atoms/category/categoryState';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_PATH } from '../../core/common/appRouter';
-import productService from '../../infrastructure/repository/product/product.service';
 import { WarningMessage } from '../../infrastructure/common/toast/message';
 import AdminLayout from '../../infrastructure/common/layout/admin/MainLayout';
 import ButtonHref from '../../infrastructure/common/button/ButtonHref';
@@ -15,14 +11,14 @@ import ButtonCommon from '../../infrastructure/common/button/ButtonCommon';
 import UploadAvatar from '../../infrastructure/common/input/upload-image';
 import InputTextCommon from '../../infrastructure/common/input/input-text-common';
 import InputSelectCommon from '../../infrastructure/common/input/select-common';
-import InputNumberCommon from '../../infrastructure/common/input/input-number';
-import UploadListImage from '../../infrastructure/common/input/upload-list-image';
 import InputArrayTextCommon from '../../infrastructure/common/input/input-array/input-array-text-common';
-import TextAreaCommon from '../../infrastructure/common/input/textarea-common';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
+import { ProductState } from '../../core/atoms/product/productState';
+import productSeriesService from '../../infrastructure/repository/product-series/product-series.service';
+import { SeriesState } from '../../core/atoms/series/series';
 
 
-const AddProductFiguresManagement = () => {
+const AddProductSeriesManagement = () => {
     const [figureList, setFigureList] = useState<any[]>([
         {
             index: 0,
@@ -53,41 +49,37 @@ const AddProductFiguresManagement = () => {
         });
         return allRequestOK;
     };
-    const brandState = useRecoilValue(BrandState).data;
-    const categoryProductState = useRecoilValue(CategoryProductState).data;
+    const productState = useRecoilValue(ProductState).data;
+    const seriesState = useRecoilValue(SeriesState).data;
 
     const router = useNavigate();
     const onBack = () => {
-        router(ROUTE_PATH.PRODUCT_MANAGEMENT)
+        router(ROUTE_PATH.PRODUCT_SERIES_MANAGEMENT)
     }
 
     const onCreateAsync = async () => {
         await setSubmittedTime(Date.now());
 
         if (isValidData()) {
-            const listImage: any[] = dataRequest.images;
             const formData = new FormData();
-
-            // Append ảnh
-            listImage?.forEach((file) => {
-                formData.append('images', file.originFileObj);
-            });
 
             // Append các trường đơn
             formData.append('image', dataRequest.image);
             formData.append('name', dataRequest.name);
-            formData.append('category_id', dataRequest.category_id);
-            formData.append('brand_id', dataRequest.brand_id);
-            formData.append('price', dataRequest.price);
-            formData.append('percent_sale', dataRequest.percent_sale);
-            formData.append('warranty', dataRequest.warranty);
-            formData.append('short_description', dataRequest.short_description);
-            formData.append('more_infomation', dataRequest.more_infomation);
-            formData.append('description', dataRequest.description);
+            formData.append('product_id', dataRequest.product_id);
+            formData.append('series_id', dataRequest.series_id);
             formData.append('productFigure', JSON.stringify(figureList));
 
             try {
-                await productService.AddProductAdmin(formData, onBack, setLoading);
+                await productSeriesService.AddProductAdmin(
+                    {
+                        image: dataRequest.image,
+                        name: dataRequest.name,
+                        product_id: dataRequest.product_id,
+                        series_id: dataRequest.series_id,
+                        productFigure: JSON.stringify(figureList),
+                    }
+                    , onBack, setLoading);
             } catch (error) {
                 console.error(error);
             }
@@ -116,16 +108,16 @@ const AddProductFiguresManagement = () => {
 
     return (
         <AdminLayout
-            breadcrumb={"Quản lý sản phẩm"}
-            title={"Thêm sản phẩm"}
-            redirect={ROUTE_PATH.PRODUCT_MANAGEMENT}
+            breadcrumb={"Quản lý thông số"}
+            title={"Thêm thông số"}
+            redirect={ROUTE_PATH.PRODUCT_SERIES_MANAGEMENT}
         >
             <div className={styles.manage_container}>
                 <div className={styles.headerPage}>
-                    <h2>Thêm sản phẩm</h2>
+                    <h2>Thêm thông số</h2>
                     <div className={styles.btn_container}>
                         <ButtonHref
-                            href={ROUTE_PATH.PRODUCT_MANAGEMENT}
+                            href={ROUTE_PATH.PRODUCT_SERIES_MANAGEMENT}
                             title={'Quay lại'}
                             width={150}
                             variant={'ps-btn--gray'}
@@ -164,16 +156,44 @@ const AddProductFiguresManagement = () => {
                                     />
                                 </Col>
                                 <Col span={24}>
+                                    <InputSelectCommon
+                                        label={"Thuộc sản phẩm"}
+                                        attribute={"product_id"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.product_id}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                        listDataOfItem={productState}
+                                    />
+                                </Col>
+                                <Col span={24}>
+                                    <InputSelectCommon
+                                        label={"Dòng sản phẩm"}
+                                        attribute={"series_id"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.series_id}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                        listDataOfItem={seriesState}
+                                    />
+                                </Col>
+                                <Col span={24}>
                                     <div className={styles.figureContainer}>
                                         <div className={styles.figureHeader} onClick={onAddFigure}>
-                                            <span>Ưu điểm nổi bật</span>
+                                            <span>Thông số kĩ thuật</span>
                                             <i className="fa fa-plus-circle" aria-hidden="true"></i>
                                         </div>
 
                                         {figureList.map((item, index) => (
                                             <div key={index} className={styles.figureBox}>
                                                 <div className={styles.figureIndex}>
-                                                    <span>Ưu điểm {index + 1}</span>
+                                                    <span>Thêm mới thông số {index + 1}</span>
                                                     <div onClick={() => onDeleteOption(index)}>
                                                         <i className="fa fa-trash-o" aria-hidden="true"></i>
                                                     </div>
@@ -224,4 +244,4 @@ const AddProductFiguresManagement = () => {
     )
 }
 
-export default AddProductFiguresManagement
+export default AddProductSeriesManagement

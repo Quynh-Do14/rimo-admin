@@ -1,7 +1,6 @@
 import { Endpoint } from "../../../core/common/apiLink";
 import { FailMessage, SuccessMessage } from "../../common/toast/message";
 import { RequestService } from "../../utilities/response";
-import Cookies from "js-cookie";
 import { clearSesionStorage } from "../../utilities/storage";
 class AuthService {
     async login(data: any, onBack: Function, setLoading: Function) {
@@ -17,13 +16,7 @@ class AuthService {
                             accessToken: response.accessToken,
                             refreshToken: response.refreshToken,
                         }
-                        Cookies.set("token", JSON.stringify(token), {
-                            path: "/", // Cookie có hiệu lực toàn bộ domain
-                            secure: process.env.NODE_ENV === "production", // Chỉ gửi cookie qua HTTPS trong production
-                            httpOnly: false, // Đặt false vì client-side sử dụng
-                            sameSite: "strict", // Ngăn ngừa CSRF
-                            expires: 7, // Thời gian hết hạn cookie (7 ngày)
-                        });
+                        sessionStorage.setItem("token", JSON.stringify(token));
                     }
                     setLoading(false);
                     onBack();
@@ -42,7 +35,7 @@ class AuthService {
         try {
             localStorage.clear();
             clearSesionStorage();
-            Cookies.remove('token', { path: '/' });
+            sessionStorage.removeItem("token");
             SuccessMessage("Đăng xuất thành công", "")
         } catch (error) {
             console.error(error)

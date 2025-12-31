@@ -19,6 +19,20 @@ export class Endpoint {
         static Update = "/product"
         static Delete = "/product"
     }
+    static ProductSeries = class {
+        static Get = "/product-series"
+        static GetById = "/product-series"
+        static Add = "/product-series"
+        static Update = "/product-series"
+        static Delete = "/product-series"
+    }
+    static Series = class {
+        static Get = "/series"
+        static GetById = "/series"
+        static Add = "/series"
+        static Update = "/series"
+        static Delete = "/series"
+    }
     static Category = class {
         static Get = "/category"
         static GetById = "/category"
