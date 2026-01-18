@@ -1,4 +1,7 @@
 import { ROUTE_PATH } from "../../core/common/appRouter";
+import AgencyListPage from "../../pages/agency-management";
+import AddAgencyManagement from "../../pages/agency-management/add";
+import SlugAgencyManagement from "../../pages/agency-management/slug";
 import BannerListPage from "../../pages/banner-management";
 import AddBannerManagement from "../../pages/banner-management/add";
 import SlugBannerManagement from "../../pages/banner-management/view";
@@ -11,6 +14,9 @@ import SlugBrandManagement from "../../pages/brand-management/slug";
 import BlogCategoryListPage from "../../pages/category-blog-management";
 import AddCategoryBlogManagement from "../../pages/category-blog-management/add";
 import SlugCategoryBlogManagement from "../../pages/category-blog-management/view";
+import ProductCategoryListPage from "../../pages/category-product-management";
+import AddProductCategoryManagement from "../../pages/category-product-management/add";
+import SlugProductCategoryManagement from "../../pages/category-product-management/slug";
 import LoginPage from "../../pages/login";
 import ProductListPage from "../../pages/product-management";
 import AddProductManagement from "../../pages/product-management/add";
@@ -162,6 +168,38 @@ export const privateRoutes = [
     {
         path: ROUTE_PATH.VIEW_SERIES_MANAGEMENT,
         component: SlugSeriesManagement,
+        private: true,
+    },
+
+    {
+        path: ROUTE_PATH.CATEGORY_PRODUCT_MANAGEMENT,
+        component: ProductCategoryListPage,
+        private: true,
+    },
+    {
+        path: ROUTE_PATH.ADD_CATEGORY_PRODUCT_MANAGEMENT,
+        component: AddProductCategoryManagement,
+        private: true,
+    },
+    {
+        path: ROUTE_PATH.VIEW_CATEGORY_PRODUCT_MANAGEMENT,
+        component: SlugProductCategoryManagement,
+        private: true,
+    },
+
+    {
+        path: ROUTE_PATH.AGENCY_MANAGEMENT,
+        component: AgencyListPage,
+        private: true,
+    },
+    {
+        path: ROUTE_PATH.ADD_AGENCY_MANAGEMENT,
+        component: AddAgencyManagement,
+        private: true,
+    },
+    {
+        path: ROUTE_PATH.VIEW_AGENCY_MANAGEMENT,
+        component: SlugAgencyManagement,
         private: true,
     },
 ]

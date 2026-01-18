@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Input, Pagination, Space, Button } from 'antd';
+import { Table, Input, } from 'antd';
 import styles from '../../asset/css/admin/admin-component.module.css';
 import { useNavigate } from 'react-router-dom';
-import productService from '../../infrastructure/repository/product/product.service';
 import Constants from '../../core/common/constants';
 import AdminLayout from '../../infrastructure/common/layout/admin/MainLayout';
 import { ROUTE_PATH } from '../../core/common/appRouter';
 import ButtonHref from '../../infrastructure/common/button/ButtonHref';
 import { TitleTableCommon } from '../../infrastructure/common/text/title-table-common';
+import { configImageURL } from '../../infrastructure/helper/helper';
 import { ActionCommon } from '../../infrastructure/common/action/action-common';
 import { PaginationCommon } from '../../infrastructure/common/pagination/PaginationPageSize';
 import DialogConfirmCommon from '../../infrastructure/common/modal/dialogConfirm';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
+import agencyService from '../../infrastructure/repository/agency/agency.service';
 
 let timeout: any
-const ProductListPage = () => {
+const AgencyListPage = () => {
     const [listResponse, setListResponse] = useState<Array<any>>([])
     const [total, setTotal] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -36,7 +37,7 @@ const ProductListPage = () => {
             search: search,
         }
         try {
-            await productService.GetProduct(
+            await agencyService.GetAgency(
                 param,
                 setLoading
             ).then((res) => {
@@ -86,7 +87,7 @@ const ProductListPage = () => {
 
     const onDeleteAsync = async () => {
         try {
-            await productService.DeleteProductAdmin(
+            await agencyService.DeleteAgencyAdmin(
                 idSelected,
                 setLoading
             ).then((res) => {
@@ -100,19 +101,17 @@ const ProductListPage = () => {
             console.error(error)
         }
     };
-
     const onNavigate = (id: any) => {
-        router(`${(ROUTE_PATH.VIEW_PRODUCT_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
+        router(`${(ROUTE_PATH.VIEW_AGENCY_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
     }
-
     return (
         <AdminLayout
-            breadcrumb={"Quản lý sản phẩm"}
-            title={"Quản lý sản phẩm"}
-            redirect={ROUTE_PATH.PRODUCT_MANAGEMENT}
+            breadcrumb={"Quản lý đại lý"}
+            title={"Quản lý đại lý"}
+            redirect={ROUTE_PATH.AGENCY_MANAGEMENT}
         >
             <div className={styles.manage_container}>
-                <h2>Quản lý sản phẩm</h2>
+                <h2>Quản lý đại lý</h2>
                 <div className={styles.searchBar}>
                     <Input
                         className="form-control"
@@ -121,7 +120,7 @@ const ProductListPage = () => {
                         onChange={onChangeSearchText}
                     />
                     <ButtonHref
-                        href={ROUTE_PATH.ADD_PRODUCT_MANAGEMENT}
+                        href={ROUTE_PATH.ADD_AGENCY_MANAGEMENT}
                         title={'Thêm mới'}
                         width={150}
                         variant={'ps-btn--fullwidth'}
@@ -149,7 +148,22 @@ const ProductListPage = () => {
                         <Table.Column
                             title={
                                 <TitleTableCommon
-                                    title="Tên sản phẩm"
+                                    title="Ảnh"
+                                    width={'150px'}
+                                />
+                            }
+                            key={"image"}
+                            dataIndex={"image"}
+                            render={(val, record) => {
+                                return (
+                                    <img src={configImageURL(val)} alt="" width={150} height={150} />
+                                )
+                            }}
+                        />
+                        <Table.Column
+                            title={
+                                <TitleTableCommon
+                                    title="Tên đại lý"
                                     width={'150px'}
                                 />
                             }
@@ -159,32 +173,12 @@ const ProductListPage = () => {
                         <Table.Column
                             title={
                                 <TitleTableCommon
-                                    title="Danh mục"
-                                    width={'150px'}
-                                />
-                            }
-                            key={"category_name"}
-                            dataIndex={"category_name"}
-                        />
-                        {/* <Table.Column
-                            title={
-                                <TitleTableCommon
-                                    title="Thương hiệu"
-                                    width={'150px'}
-                                />
-                            }
-                            key={"brand_name"}
-                            dataIndex={"brand_name"}
-                        /> */}
-                        <Table.Column
-                            title={
-                                <TitleTableCommon
-                                    title="Mô tả ngắn"
+                                    title="Địa chỉ"
                                     width={'200px'}
                                 />
                             }
-                            key={"short_description"}
-                            dataIndex={"short_description"}
+                            key={"address"}
+                            dataIndex={"address"}
                         />
                         <Table.Column
                             title={
@@ -216,7 +210,7 @@ const ProductListPage = () => {
                     />
                 </div>
                 <DialogConfirmCommon
-                    message={"Bạn có muốn xóa sản phẩm này ra khỏi hệ thống"}
+                    message={"Bạn có muốn xóa đại lý này ra khỏi hệ thống"}
                     titleCancel={"Bỏ qua"}
                     titleOk={"Xóa"}
                     visible={isDeleteModal}
@@ -230,4 +224,4 @@ const ProductListPage = () => {
 
     );
 }
-export default ProductListPage;
+export default AgencyListPage;

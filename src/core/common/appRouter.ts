@@ -15,6 +15,7 @@ export const ROUTE_PATH = {
 
     CATEGORY_PRODUCT_MANAGEMENT: `${PREFIX}/category-product-management`,
     ADD_CATEGORY_PRODUCT_MANAGEMENT: `${PREFIX}/category-product-management/add`,
+    VIEW_CATEGORY_PRODUCT_MANAGEMENT: `${PREFIX}/category-product-management/view/:id`,
 
     PRODUCT_MANAGEMENT: `${PREFIX}/product-management`,
     ADD_PRODUCT_MANAGEMENT: `${PREFIX}/product-management/add`,
@@ -39,6 +40,8 @@ export const ROUTE_PATH = {
     BRAND_MANAGEMENT: `${PREFIX}/brand-management`,
     ADD_BRAND_MANAGEMENT: `${PREFIX}/brand-management/add`,
     VIEW_BRAND_MANAGEMENT: `${PREFIX}/brand-management/view/:id`,
-    // ADMIN
 
+    AGENCY_MANAGEMENT: `${PREFIX}/agency-management`,
+    ADD_AGENCY_MANAGEMENT: `${PREFIX}/agency-management/add`,
+    VIEW_AGENCY_MANAGEMENT: `${PREFIX}/agency-management/view/:id`,
 }

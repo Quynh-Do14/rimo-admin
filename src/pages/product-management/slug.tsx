@@ -96,7 +96,7 @@ const SlugProductManagement = () => {
                 category_id: detail.category_id,
                 brand_id: detail.brand_id,
                 price: detail.price,
-                percent_sale: detail.percent_sale,
+                price_sale: detail.price_sale,
                 warranty: detail.warranty,
                 year: detail.year,
                 short_description: detail.short_description,
@@ -142,13 +142,13 @@ const SlugProductManagement = () => {
             // Append các trường thông tin
             formData.append('name', dataRequest.name);
             formData.append('category_id', dataRequest.category_id);
-            formData.append('brand_id', dataRequest.brand_id);
+            // formData.append('brand_id', dataRequest.brand_id);
             formData.append('price', dataRequest.price);
-            formData.append('percent_sale', dataRequest.percent_sale);
-            formData.append('warranty', dataRequest.warranty);
-            formData.append('year', dataRequest.year);
+            formData.append('price_sale', dataRequest.price_sale);
+            // formData.append('warranty', dataRequest.warranty);
+            // formData.append('year', dataRequest.year);
             formData.append('short_description', dataRequest.short_description);
-            formData.append('more_infomation', dataRequest.more_infomation);
+            // formData.append('more_infomation', dataRequest.more_infomation);
             formData.append('description', dataRequest.description);
             formData.append('productFigure', JSON.stringify(figureList));
 
@@ -236,7 +236,7 @@ const SlugProductManagement = () => {
                                         submittedTime={submittedTime}
                                     />
                                 </Col>
-                                {/* <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                                     <InputSelectCommon
                                         label={"Danh mục"}
                                         attribute={"category_id"}
@@ -249,8 +249,8 @@ const SlugProductManagement = () => {
                                         submittedTime={submittedTime}
                                         listDataOfItem={categoryProductState}
                                     />
-                                </Col> */}
-                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                </Col>
+                                {/* <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                                     <InputSelectCommon
                                         label={"Thương hiệu"}
                                         attribute={"brand_id"}
@@ -263,7 +263,7 @@ const SlugProductManagement = () => {
                                         submittedTime={submittedTime}
                                         listDataOfItem={brandState}
                                     />
-                                </Col>
+                                </Col> */}
                                 <Col xs={24} sm={24} md={12}>
                                     <InputNumberCommon
                                         label={"Giá"}
@@ -280,9 +280,9 @@ const SlugProductManagement = () => {
                                 <Col xs={24} sm={24} md={12}>
                                     <InputNumberCommon
                                         label={"Giá đã giảm"}
-                                        attribute={"percent_sale"}
-                                        isRequired={true}
-                                        dataAttribute={dataRequest.percent_sale}
+                                        attribute={"price_sale"}
+                                        isRequired={false}
+                                        dataAttribute={dataRequest.price_sale}
                                         setData={setDataRequest}
                                         disabled={false}
                                         validate={validate}
@@ -409,7 +409,7 @@ const SlugProductManagement = () => {
                                         submittedTime={submittedTime}
                                     />
                                 </Col> */}
-                                {/* <Col span={24}>
+                                <Col span={24}>
                                     <TextEditorCommon
                                         label={"Mô tả"}
                                         attribute={"description"}
@@ -421,7 +421,7 @@ const SlugProductManagement = () => {
                                         setValidate={setValidate}
                                         submittedTime={submittedTime}
                                     />
-                                </Col> */}
+                                </Col>
                             </Row>
                         </Col>
                     </Row>

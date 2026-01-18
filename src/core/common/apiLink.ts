@@ -68,4 +68,16 @@ export class Endpoint {
         static Update = "/users"
         static Delete = "/users"
     }
+
+    static Agency = class {
+        static Get = "/agency"
+        static GetById = "/agency"
+        static Add = "/agency"
+        static Update = "/agency"
+        static Delete = "/agency"
+    }
+
+    static APIDistrict = class {
+        static Get = "https://provinces.open-api.vn/api/v1/p/"
+    }
 }

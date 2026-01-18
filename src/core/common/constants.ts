@@ -1,9 +1,17 @@
 import { ROUTE_PATH } from "./appRouter"
 
+export interface MenuInterface {
+  id: number
+  text: string
+  url: string
+  icon: string
+  children?: MenuInterface[]
+}
+
 export default class Constants {
 
   static Menu = class {
-    static PrivateList = [
+    static PrivateList: MenuInterface[] = [
       {
         id: 1,
         text: 'Quản lý người dùng',
@@ -16,37 +24,43 @@ export default class Constants {
         url: ROUTE_PATH.BANNER_MANAGEMENT,
         icon: 'fas fa-images'
       },
+      // {
+      //   id: 3,
+      //   text: 'Quản lý thương hiệu',
+      //   url: ROUTE_PATH.BRAND_MANAGEMENT,
+      //   icon: 'fas fa-copyright' // Icon phù hợp hơn cho thương hiệu
+      // },
       {
         id: 3,
-        text: 'Quản lý thương hiệu',
-        url: ROUTE_PATH.BRAND_MANAGEMENT,
+        text: 'Quản lý đại lý',
+        url: ROUTE_PATH.AGENCY_MANAGEMENT,
         icon: 'fas fa-copyright' // Icon phù hợp hơn cho thương hiệu
       },
       {
         id: 4, // Đã sửa id từ 3 thành 4
-        text: 'Quản lý dòng sản phẩm',
-        url: ROUTE_PATH.SERIES_MANAGEMENT,
+        text: 'Quản lý danh mục sản phẩm',
+        url: ROUTE_PATH.CATEGORY_PRODUCT_MANAGEMENT,
         icon: 'fas fa-layer-group' // Icon phù hợp hơn cho dòng sản phẩm
       },
       {
         id: 5, // Đã sửa id từ 4 thành 5
         text: 'Quản lý sản phẩm',
-        url: '', // Để trống vì có menu con
+        url: ROUTE_PATH.PRODUCT_MANAGEMENT,
         icon: 'fas fa-boxes',
-        children: [
-          {
-            id: 51, // Đã sửa id từ 41 thành 51
-            text: 'Danh sách sản phẩm',
-            url: ROUTE_PATH.PRODUCT_MANAGEMENT,
-            icon: 'fas fa-list' // Icon phù hợp cho danh sách
-          },
-          {
-            id: 52, // Đã sửa id từ 42 thành 52
-            text: 'Thông số sản phẩm',
-            url: ROUTE_PATH.PRODUCT_SERIES_MANAGEMENT,
-            icon: 'fas fa-sliders-h' // Icon phù hợp cho thông số/cài đặt
-          }
-        ]
+        // children: [
+        //   {
+        //     id: 51, // Đã sửa id từ 41 thành 51
+        //     text: 'Danh sách sản phẩm',
+        //     url: ROUTE_PATH.PRODUCT_MANAGEMENT,
+        //     icon: 'fas fa-list' // Icon phù hợp cho danh sách
+        //   },
+        //   {
+        //     id: 52, // Đã sửa id từ 42 thành 52
+        //     text: 'Thông số sản phẩm',
+        //     url: ROUTE_PATH.PRODUCT_SERIES_MANAGEMENT,
+        //     icon: 'fas fa-sliders-h' // Icon phù hợp cho thông số/cài đặt
+        //   }
+        // ]
       },
       {
         id: 6, // Đã sửa id từ 5 thành 6
@@ -62,7 +76,7 @@ export default class Constants {
       },
     ]
   }
-  
+
   static DefaultURL = 'idai.vn/'
   static TOKEN = 'token'
   static DEBOUNCE_SEARCH = 800

@@ -53,7 +53,7 @@ const InputTextCommon = (props: Props) => {
                 checkValidate = validatePhoneNumber(value);
                 validateFields(isImplicitChange, attribute, !checkValidate, setValidate, validate, !checkValidate ? value ? `Vui lòng nhập đúng định dạng ${labelLower}` : `Vui lòng nhập ${labelLower}` : "");
             }
-            if (attribute.includes("cccd") || attribute.includes("long")) {
+            if (attribute.includes("cccd")) {
                 checkValidate = validateCMND(value);
                 validateFields(isImplicitChange, attribute, !checkValidate, setValidate, validate, !checkValidate ? value ? `${label} bao gồm 12 số` : `Vui lòng nhập ${labelLower}` : "");
             }

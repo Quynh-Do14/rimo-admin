@@ -22,6 +22,21 @@ export default function AdminLayout({ breadcrumb, title, redirect, children }: a
     const [, setSeriesState] = useRecoilState(SeriesState);
     const [, setProductState] = useRecoilState(ProductState);
 
+    const onGetListCategoryAsync = async () => {
+        try {
+            await categoryProductService.GetCategory(
+                {},
+                () => { }
+            ).then((res) => {
+                setCategoryProductState({
+                    data: res.data
+                })
+            })
+        }
+        catch (error) {
+            console.error(error)
+        }
+    }
 
     const onGetListSeriesAsync = async () => {
         try {
@@ -95,6 +110,7 @@ export default function AdminLayout({ breadcrumb, title, redirect, children }: a
         }
     }
     useEffect(() => {
+        onGetListCategoryAsync().then(_ => { });
         onGetListSeriesAsync().then(_ => { });
         onGetListBlogCategoryAsync().then(_ => { });
         onGetListBrandAsync().then(_ => { });
