@@ -24,26 +24,26 @@ export default class Constants {
         url: ROUTE_PATH.BANNER_MANAGEMENT,
         icon: 'fas fa-images'
       },
-      // {
-      //   id: 3,
-      //   text: 'Quản lý thương hiệu',
-      //   url: ROUTE_PATH.BRAND_MANAGEMENT,
-      //   icon: 'fas fa-copyright' // Icon phù hợp hơn cho thương hiệu
-      // },
       {
         id: 3,
+        text: 'Quản lý dòng sản phẩm',
+        url: ROUTE_PATH.CATEGORY_AGENCY_MANAGEMENT,
+        icon: 'fas fa-copyright' // Icon phù hợp hơn cho thương hiệu
+      },
+      {
+        id: 4,
         text: 'Quản lý đại lý',
         url: ROUTE_PATH.AGENCY_MANAGEMENT,
         icon: 'fas fa-copyright' // Icon phù hợp hơn cho thương hiệu
       },
       {
-        id: 4, // Đã sửa id từ 3 thành 4
+        id: 5, // Đã sửa id từ 3 thành 4
         text: 'Quản lý danh mục sản phẩm',
         url: ROUTE_PATH.CATEGORY_PRODUCT_MANAGEMENT,
         icon: 'fas fa-layer-group' // Icon phù hợp hơn cho dòng sản phẩm
       },
       {
-        id: 5, // Đã sửa id từ 4 thành 5
+        id: 6, // Đã sửa id từ 4 thành 5
         text: 'Quản lý sản phẩm',
         url: ROUTE_PATH.PRODUCT_MANAGEMENT,
         icon: 'fas fa-boxes',
@@ -63,13 +63,13 @@ export default class Constants {
         // ]
       },
       {
-        id: 6, // Đã sửa id từ 5 thành 6
+        id: 7, // Đã sửa id từ 5 thành 6
         text: 'Quản lý danh mục tin tức',
         url: ROUTE_PATH.CATEGORY_BLOG_MANAGEMENT,
         icon: 'fas fa-folder-open'
       },
       {
-        id: 7, // Đã sửa id từ 6 thành 7
+        id: 8, // Đã sửa id từ 6 thành 7
         text: 'Quản lý tin tức',
         url: ROUTE_PATH.BLOG_MANAGEMENT,
         icon: 'fas fa-newspaper'

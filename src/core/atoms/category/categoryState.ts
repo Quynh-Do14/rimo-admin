@@ -19,3 +19,13 @@ export const CategoryProductState = atom({
 
     }, // default value (aka initial value)
 });
+
+export const CategoryAgencyState = atom({
+    key: 'CATEGORY_AGENCY_STATE', // unique ID (with respect to other atoms/selectors)
+    default: {
+        // isLoading: false,
+        // uri: '',
+        data: <Array<any>>[],
+
+    }, // default value (aka initial value)
+});

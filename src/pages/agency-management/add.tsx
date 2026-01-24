@@ -15,6 +15,10 @@ import agencyService from '../../infrastructure/repository/agency/agency.service
 import districtService from '../../infrastructure/repository/district/district.service';
 import InputSelectCommon from '../../infrastructure/common/input/select-common';
 import InputSelectProvince from '../../infrastructure/common/input/select-province';
+import ComboBoxCommon from '../../infrastructure/common/input/combo-box-common';
+import { useRecoilValue } from 'recoil';
+import { CategoryAgencyState } from '../../core/atoms/category/categoryState';
+import InputNumberCommon from '../../infrastructure/common/input/input-number';
 
 
 const AddAgencyManagement = () => {
@@ -25,6 +29,7 @@ const AddAgencyManagement = () => {
     const dataRequest = _data;
     const [listProvince, setListProvince] = useState<Array<any>>([])
     const [listDistrict, setListDistrict] = useState<Array<any>>([])
+    const categoryAgencyState = useRecoilValue(CategoryAgencyState).data;
 
     const setDataRequest = (data: any) => {
         Object.assign(dataRequest, { ...data });
@@ -47,6 +52,7 @@ const AddAgencyManagement = () => {
     const onBack = () => {
         router(ROUTE_PATH.AGENCY_MANAGEMENT)
     }
+
     const onCreateAsync = async () => {
         await setSubmittedTime(Date.now());
         if (isValidData()) {
@@ -60,6 +66,8 @@ const AddAgencyManagement = () => {
                     long: dataRequest.long,
                     lat: dataRequest.lat,
                     phone_number: dataRequest.phone_number,
+                    star_rate: dataRequest.star_rate,
+                    agency_category_type: JSON.stringify(dataRequest.agency_category_type)
                 },
                     onBack,
                     setLoading
@@ -219,6 +227,35 @@ const AddAgencyManagement = () => {
                                     listDataOfItem={listDistrict}
                                     valueName='name'
                                     labelName='name'
+                                />
+                            </Col>
+                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                <ComboBoxCommon
+                                    label={"Dòng sản phầm"}
+                                    attribute={"agency_category_type"}
+                                    isRequired={true}
+                                    dataAttribute={dataRequest.agency_category_type}
+                                    setData={setDataRequest}
+                                    disabled={false}
+                                    validate={validate}
+                                    setValidate={setValidate}
+                                    submittedTime={submittedTime}
+                                    listDataOfItem={categoryAgencyState}
+                                    valueName='id'
+                                    labelName='name'
+                                />
+                            </Col>
+                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                <InputNumberCommon
+                                    label={"Đánh giá sao"}
+                                    attribute={"star_rate"}
+                                    isRequired={true}
+                                    dataAttribute={dataRequest.star_rate}
+                                    setData={setDataRequest}
+                                    disabled={false}
+                                    validate={validate}
+                                    setValidate={setValidate}
+                                    submittedTime={submittedTime}
                                 />
                             </Col>
                             <Col xs={24} sm={24} md={24} lg={12} xl={12}>

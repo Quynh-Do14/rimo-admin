@@ -54,6 +54,13 @@ export class Endpoint {
         static Update = "/blog-category"
         static Delete = "/blog-category"
     }
+    static AgencyCategory = class {
+        static Get = "/agency-category"
+        static GetById = "/agency-category"
+        static Add = "/agency-category"
+        static Update = "/agency-category"
+        static Delete = "/agency-category"
+    }
     static Brand = class {
         static Get = "/brand"
         static GetById = "/brand"

@@ -11,6 +11,9 @@ import SlugBlogManagement from "../../pages/blog-management/slug";
 import BrandListPage from "../../pages/brand-management";
 import AddBrandManagement from "../../pages/brand-management/add";
 import SlugBrandManagement from "../../pages/brand-management/slug";
+import AgencyCategoryListPage from "../../pages/category-agency-management";
+import AddCategoryAgencyManagement from "../../pages/category-agency-management/add";
+import SlugCategoryAgencyManagement from "../../pages/category-agency-management/view";
 import BlogCategoryListPage from "../../pages/category-blog-management";
 import AddCategoryBlogManagement from "../../pages/category-blog-management/add";
 import SlugCategoryBlogManagement from "../../pages/category-blog-management/view";
@@ -200,6 +203,22 @@ export const privateRoutes = [
     {
         path: ROUTE_PATH.VIEW_AGENCY_MANAGEMENT,
         component: SlugAgencyManagement,
+        private: true,
+    },
+
+    {
+        path: ROUTE_PATH.CATEGORY_AGENCY_MANAGEMENT,
+        component: AgencyCategoryListPage,
+        private: true,
+    },
+    {
+        path: ROUTE_PATH.ADD_CATEGORY_AGENCY_MANAGEMENT,
+        component: AddCategoryAgencyManagement,
+        private: true,
+    },
+    {
+        path: ROUTE_PATH.VIEW_CATEGORY_AGENCY_MANAGEMENT,
+        component: SlugCategoryAgencyManagement,
         private: true,
     },
 ]

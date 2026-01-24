@@ -44,4 +44,8 @@ export const ROUTE_PATH = {
     AGENCY_MANAGEMENT: `${PREFIX}/agency-management`,
     ADD_AGENCY_MANAGEMENT: `${PREFIX}/agency-management/add`,
     VIEW_AGENCY_MANAGEMENT: `${PREFIX}/agency-management/view/:id`,
+
+    CATEGORY_AGENCY_MANAGEMENT: `${PREFIX}/agency-category-management`,
+    ADD_CATEGORY_AGENCY_MANAGEMENT: `${PREFIX}/agency-category-management/add`,
+    VIEW_CATEGORY_AGENCY_MANAGEMENT: `${PREFIX}/agency-category-management/view/:id`,
 }
