@@ -48,4 +48,11 @@ export const ROUTE_PATH = {
     CATEGORY_AGENCY_MANAGEMENT: `${PREFIX}/agency-category-management`,
     ADD_CATEGORY_AGENCY_MANAGEMENT: `${PREFIX}/agency-category-management/add`,
     VIEW_CATEGORY_AGENCY_MANAGEMENT: `${PREFIX}/agency-category-management/view/:id`,
+
+    VIDEO_MANAGEMENT: `${PREFIX}/video-management`,
+    ADD_VIDEO_MANAGEMENT: `${PREFIX}/video-management/add`,
+    VIEW_VIDEO_MANAGEMENT: `${PREFIX}/video-management/view/:id`,
+
+    CONTACT_MANAGEMENT: `${PREFIX}/contact-management`,
+
 }

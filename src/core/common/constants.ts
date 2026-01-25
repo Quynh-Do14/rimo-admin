@@ -74,6 +74,18 @@ export default class Constants {
         url: ROUTE_PATH.BLOG_MANAGEMENT,
         icon: 'fas fa-newspaper'
       },
+      {
+        id: 9, // Đã sửa id từ 6 thành 7
+        text: 'Quản lý video',
+        url: ROUTE_PATH.VIDEO_MANAGEMENT,
+        icon: 'fas fa-newspaper'
+      },
+      {
+        id: 10, // Đã sửa id từ 6 thành 7
+        text: 'Quản lý liên hệ',
+        url: ROUTE_PATH.CONTACT_MANAGEMENT,
+        icon: 'fas fa-newspaper'
+      },
     ]
   }
 

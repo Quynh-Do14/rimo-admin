@@ -20,6 +20,7 @@ import SlugCategoryBlogManagement from "../../pages/category-blog-management/vie
 import ProductCategoryListPage from "../../pages/category-product-management";
 import AddProductCategoryManagement from "../../pages/category-product-management/add";
 import SlugProductCategoryManagement from "../../pages/category-product-management/slug";
+import ContactListPage from "../../pages/contact-management";
 import LoginPage from "../../pages/login";
 import ProductListPage from "../../pages/product-management";
 import AddProductManagement from "../../pages/product-management/add";
@@ -33,6 +34,9 @@ import SlugSeriesManagement from "../../pages/series-management/view";
 import UserListPage from "../../pages/user-management";
 import AddUserManagement from "../../pages/user-management/add";
 import SlugUserManagement from "../../pages/user-management/view";
+import VideoListPage from "../../pages/video-management";
+import AddVideoManagement from "../../pages/video-management/add";
+import SlugVideoManagement from "../../pages/video-management/view";
 import AdminLayout from "../common/layout/admin/MainLayout";
 
 export const privateRoutes = [
@@ -219,6 +223,28 @@ export const privateRoutes = [
     {
         path: ROUTE_PATH.VIEW_CATEGORY_AGENCY_MANAGEMENT,
         component: SlugCategoryAgencyManagement,
+        private: true,
+    },
+
+    {
+        path: ROUTE_PATH.VIDEO_MANAGEMENT,
+        component: VideoListPage,
+        private: true,
+    },
+    {
+        path: ROUTE_PATH.ADD_VIDEO_MANAGEMENT,
+        component: AddVideoManagement,
+        private: true,
+    },
+    {
+        path: ROUTE_PATH.VIEW_VIDEO_MANAGEMENT,
+        component: SlugVideoManagement,
+        private: true,
+    },
+
+    {
+        path: ROUTE_PATH.CONTACT_MANAGEMENT,
+        component: ContactListPage,
         private: true,
     },
 ]

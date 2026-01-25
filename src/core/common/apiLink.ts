@@ -87,4 +87,17 @@ export class Endpoint {
     static APIDistrict = class {
         static Get = "https://provinces.open-api.vn/api/v1/p/"
     }
+
+    static Video = class {
+        static Get = "/video"
+        static GetById = "/video"
+        static Add = "/video"
+        static Update = "/video"
+        static Delete = "/video"
+    }
+    static Contact = class {
+        static Get = "/contact"
+        static GetById = "/contact"
+        static Add = "/contact"
+    }
 }
