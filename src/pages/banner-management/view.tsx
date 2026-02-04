@@ -75,7 +75,7 @@ const SlugBannerManagement = () => {
             setDataRequest({
                 image: configImageURL(detail.image),
                 name: detail.name,
-                type: detail.type,
+                // type: detail.type,
 
             });
         };
@@ -88,7 +88,7 @@ const SlugBannerManagement = () => {
             try {
                 const payload: any = {
                     name: dataRequest.name,
-                    type: dataRequest.type,
+                    type: "",
                 };
 
                 if (dataRequest.image !== originalImage) {
@@ -157,7 +157,7 @@ const SlugBannerManagement = () => {
                                     submittedTime={submittedTime}
                                 />
                             </Col>
-                            <Col span={24}>
+                            {/* <Col span={24}>
                                 <InputSelectCommon
                                     label={"Loại ảnh"}
                                     attribute={"type"}
@@ -172,7 +172,7 @@ const SlugBannerManagement = () => {
                                     labelName='label'
                                     valueName='value'
                                 />
-                            </Col>
+                            </Col> */}
                         </Row>
                     </Col>
                 </Row>

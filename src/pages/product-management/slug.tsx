@@ -7,7 +7,7 @@ import { CategoryProductState } from '../../core/atoms/category/categoryState';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ROUTE_PATH } from '../../core/common/appRouter';
 import productService from '../../infrastructure/repository/product/product.service';
-import { configImageURL } from '../../infrastructure/helper/helper';
+import { configImageURL, configImageURLSplit } from '../../infrastructure/helper/helper';
 import AdminLayout from '../../infrastructure/common/layout/admin/MainLayout';
 import ButtonHref from '../../infrastructure/common/button/ButtonHref';
 import ButtonCommon from '../../infrastructure/common/button/ButtonCommon';
@@ -103,6 +103,7 @@ const SlugProductManagement = () => {
                 more_infomation: detail.more_infomation,
                 description: detail.description,
                 imagesCode: arrImgConvert, // ảnh cũ giữ nguyên
+                imagesCodeOrigin: arrImgConvert, // ảnh cũ giữ nguyên
                 remainImg: detail.images,
                 images: [] // ảnh mới chưa có
             });
@@ -117,13 +118,19 @@ const SlugProductManagement = () => {
             setFigureList(figures)
         };
     }, [detail]);
+    console.log('dataRequest', dataRequest);
 
     const onUpdateAsync = async () => {
         await setSubmittedTime(Date.now());
 
         if (isValidData()) {
             const listImage: any[] = dataRequest.images; // ảnh mới (chưa upload)
-            const imageOldCodes: any[] = dataRequest.imagesCode; // ảnh cũ giữ lại
+            const imageOldCodes: any[] = dataRequest.imagesCode?.map((url: string) => configImageURLSplit(url)); // ảnh cũ giữ lại
+            console.log('imageOldCodes', imageOldCodes);
+            console.log('listImage', listImage);
+            console.log('remainImg', dataRequest.remainImg);
+            const imagesToKeep = dataRequest.remainImg?.filter((url: any) => imageOldCodes.includes(url));
+            console.log("imagesToKeep", imagesToKeep);
 
             const formData = new FormData();
 
@@ -153,7 +160,7 @@ const SlugProductManagement = () => {
             formData.append('productFigure', JSON.stringify(figureList));
 
             // ✅ Truyền danh sách ảnh giữ lại để BE biết ảnh nào cần xóa
-            formData.append('remainingImages', JSON.stringify(dataRequest.remainImg));
+            formData.append('remainingImages', JSON.stringify(imagesToKeep));
 
             try {
                 await productService.UpdateProductAdmin(

@@ -172,7 +172,7 @@ const BannerListPage = () => {
                             key={"name"}
                             dataIndex={"name"}
                         />
-                        <Table.Column
+                        {/* <Table.Column
                             title={
                                 <TitleTableCommon
                                     title="Loại ảnh"
@@ -181,7 +181,7 @@ const BannerListPage = () => {
                             }
                             key={"type"}
                             dataIndex={"type"}
-                        />
+                        /> */}
                         <Table.Column
                             title={
                                 <TitleTableCommon

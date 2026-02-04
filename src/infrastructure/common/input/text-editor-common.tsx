@@ -97,7 +97,7 @@ const TextEditorCommon = (props: Props) => {
                     'video',
                     'code-block',
                 ]}
-                style={{ height: 500, marginBottom: 80 }}
+                style={{ height: 700, marginBottom: 80 }}
                 readOnly={disabled} // Đặt readOnly nếu disabled
             />
         </div>

@@ -50,7 +50,7 @@ const AddBannerManagement = () => {
                 await bannerService.AddBannerAdmin({
                     image: dataRequest.image,
                     name: dataRequest.name,
-                    type: dataRequest.type,
+                    type: "",
                 },
                     onBack,
                     setLoading
@@ -114,7 +114,7 @@ const AddBannerManagement = () => {
                                     submittedTime={submittedTime}
                                 />
                             </Col>
-                            <Col span={24}>
+                            {/* <Col span={24}>
                                 <InputSelectCommon
                                     label={"Loại ảnh"}
                                     attribute={"type"}
@@ -129,7 +129,7 @@ const AddBannerManagement = () => {
                                     labelName='label'
                                     valueName='value'
                                 />
-                            </Col>
+                            </Col> */}
                         </Row>
                     </Col>
                 </Row>

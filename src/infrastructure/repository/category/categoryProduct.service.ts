@@ -47,7 +47,7 @@ class CategoryProductService {
         setLoading(true)
         try {
             return await RequestService
-                .postForm(Endpoint.Category.Add,
+                .post(Endpoint.Category.Add,
                     data
                 )
                 .then(response => {
@@ -59,8 +59,8 @@ class CategoryProductService {
                     setLoading(false)
                     return response;
                 });
-        } catch (error) {
-            FailMessage("Thêm mới không thành công", "Vui lòng kiểm tra thông tin")
+        } catch (error: any) {
+            FailMessage("Thêm mới không thành công", error.response.data.message || "Vui lòng kiểm tra thông tin")
             console.error(error)
         } finally {
             setLoading(false);
@@ -70,7 +70,7 @@ class CategoryProductService {
         setLoading(true)
         try {
             return await RequestService
-                .putForm(`${Endpoint.Category.Update}/${id}`,
+                .put(`${Endpoint.Category.Update}/${id}`,
                     data
                 )
                 .then(response => {
@@ -82,8 +82,8 @@ class CategoryProductService {
                     setLoading(false)
                     return response;
                 });
-        } catch (error) {
-            FailMessage("Cập nhật không thành công", "Vui lòng kiểm tra thông tin")
+        } catch (error: any) {
+            FailMessage("Cập nhật không thành công", error.response.data.message || "Vui lòng kiểm tra thông tin")
             console.error(error)
         } finally {
             setLoading(false);
@@ -102,8 +102,8 @@ class CategoryProductService {
                     setLoading(false)
                     return response;
                 });
-        } catch (error) {
-            FailMessage("Xóa không thành công", "Vui lòng kiểm tra thông tin")
+        } catch (error: any) {
+            FailMessage("Xóa không thành công", error.response.data.message || "Vui lòng kiểm tra thông tin")
             console.error(error)
         } finally {
             setLoading(false);

@@ -1,7 +1,7 @@
 import { ROUTE_PATH } from "./appRouter"
 
 export interface MenuInterface {
-  id: number
+  id: string
   text: string
   url: string
   icon: string
@@ -13,78 +13,72 @@ export default class Constants {
   static Menu = class {
     static PrivateList: MenuInterface[] = [
       {
-        id: 1,
+        id: 'user-management',
         text: 'Quản lý người dùng',
         url: ROUTE_PATH.USER_MANAGEMENT,
         icon: 'fas fa-users'
       },
       {
-        id: 2,
+        id: 'banner-management',
         text: 'Quản lý banner',
         url: ROUTE_PATH.BANNER_MANAGEMENT,
         icon: 'fas fa-images'
       },
       {
-        id: 3,
-        text: 'Quản lý dòng sản phẩm',
-        url: ROUTE_PATH.CATEGORY_AGENCY_MANAGEMENT,
-        icon: 'fas fa-copyright' // Icon phù hợp hơn cho thương hiệu
+        id: 'categories',
+        text: 'Quản lý danh mục',
+        url: '#',
+        icon: 'fas fa-folder-tree',
+        children: [
+          {
+            id: 'category-product',
+            text: 'Danh mục sản phẩm',
+            url: ROUTE_PATH.CATEGORY_PRODUCT_MANAGEMENT,
+            icon: 'fas fa-boxes'
+          },
+          {
+            id: 'category-blog',
+            text: 'Danh mục tin tức',
+            url: ROUTE_PATH.CATEGORY_BLOG_MANAGEMENT,
+            icon: 'fas fa-folder-open'
+          },
+          {
+            id: 'series',
+            text: 'Dòng sản phẩm',
+            url: ROUTE_PATH.CATEGORY_AGENCY_MANAGEMENT,
+            icon: 'fas fa-layer-group'
+          }
+        ]
       },
       {
-        id: 4,
-        text: 'Quản lý đại lý',
-        url: ROUTE_PATH.AGENCY_MANAGEMENT,
-        icon: 'fas fa-copyright' // Icon phù hợp hơn cho thương hiệu
-      },
-      {
-        id: 5, // Đã sửa id từ 3 thành 4
-        text: 'Quản lý danh mục sản phẩm',
-        url: ROUTE_PATH.CATEGORY_PRODUCT_MANAGEMENT,
-        icon: 'fas fa-layer-group' // Icon phù hợp hơn cho dòng sản phẩm
-      },
-      {
-        id: 6, // Đã sửa id từ 4 thành 5
+        id: 'product-management',
         text: 'Quản lý sản phẩm',
         url: ROUTE_PATH.PRODUCT_MANAGEMENT,
-        icon: 'fas fa-boxes',
-        // children: [
-        //   {
-        //     id: 51, // Đã sửa id từ 41 thành 51
-        //     text: 'Danh sách sản phẩm',
-        //     url: ROUTE_PATH.PRODUCT_MANAGEMENT,
-        //     icon: 'fas fa-list' // Icon phù hợp cho danh sách
-        //   },
-        //   {
-        //     id: 52, // Đã sửa id từ 42 thành 52
-        //     text: 'Thông số sản phẩm',
-        //     url: ROUTE_PATH.PRODUCT_SERIES_MANAGEMENT,
-        //     icon: 'fas fa-sliders-h' // Icon phù hợp cho thông số/cài đặt
-        //   }
-        // ]
+        icon: 'fas fa-box-open',
       },
       {
-        id: 7, // Đã sửa id từ 5 thành 6
-        text: 'Quản lý danh mục tin tức',
-        url: ROUTE_PATH.CATEGORY_BLOG_MANAGEMENT,
-        icon: 'fas fa-folder-open'
+        id: 'agency-management',
+        text: 'Quản lý đại lý',
+        url: ROUTE_PATH.AGENCY_MANAGEMENT,
+        icon: 'fas fa-store-alt'
       },
       {
-        id: 8, // Đã sửa id từ 6 thành 7
+        id: 'blog-management',
         text: 'Quản lý tin tức',
         url: ROUTE_PATH.BLOG_MANAGEMENT,
         icon: 'fas fa-newspaper'
       },
       {
-        id: 9, // Đã sửa id từ 6 thành 7
+        id: 'video-management',
         text: 'Quản lý video',
         url: ROUTE_PATH.VIDEO_MANAGEMENT,
-        icon: 'fas fa-newspaper'
+        icon: 'fas fa-video'
       },
       {
-        id: 10, // Đã sửa id từ 6 thành 7
+        id: 'contact-management',
         text: 'Quản lý liên hệ',
         url: ROUTE_PATH.CONTACT_MANAGEMENT,
-        icon: 'fas fa-newspaper'
+        icon: 'fas fa-address-book'
       },
     ]
   }
