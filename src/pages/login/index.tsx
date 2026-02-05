@@ -58,55 +58,7 @@ const LoginPage = () => {
             <div className={styles.loginContainer}>
                 {/* Left Panel - Branding */}
                 <div className={styles.brandPanel}>
-                    <div className={styles.brandContent}>
-                        <div className={styles.brandLogo}>
-                            <div className={styles.logoIcon}>
-                                <span className={styles.logoText}>Q</span>
-                            </div>
-                            <div className={styles.logoGlow}></div>
-                        </div>
-
-                        <h1 className={styles.brandTitle}>
-                            <span className={styles.brandGradient}>QuadFilm</span>
-                        </h1>
-                        <p className={styles.brandSubtitle}>
-                            Công nghệ phim cách nhiệt <br />đẳng cấp thế giới
-                        </p>
-
-                        <div className={styles.brandFeatures}>
-                            <div className={styles.featureItem}>
-                                <div className={styles.featureIcon}>
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
-                                            stroke="#FFD700" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </div>
-                                <span>Bảo hành 12 năm</span>
-                            </div>
-                            <div className={styles.featureItem}>
-                                <div className={styles.featureIcon}>
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                                            stroke="#FFD700" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M12 6V12L16 14"
-                                            stroke="#FFD700" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </div>
-                                <span>Tiết kiệm 30% điện năng</span>
-                            </div>
-                            <div className={styles.featureItem}>
-                                <div className={styles.featureIcon}>
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                        <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
-                                            stroke="#FFD700" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M2 12.88V11.12C2 10.08 2.85 9.22 3.9 9.22C5.71 9.22 6.45 7.94 5.54 6.37C5.02 5.47 5.33 4.3 6.24 3.78L7.97 2.79C8.76 2.32 9.78 2.6 10.25 3.39L10.36 3.58C11.26 5.15 12.74 5.15 13.64 3.58L13.75 3.39C14.22 2.6 15.24 2.32 16.03 2.79L17.76 3.78C18.67 4.3 18.98 5.47 18.46 6.37C17.55 7.94 18.29 9.22 20.1 9.22C21.15 9.22 22 10.07 22 11.12V12.88C22 13.92 21.15 14.78 20.1 14.78C18.29 14.78 17.55 16.06 18.46 17.63C18.98 18.54 18.67 19.7 17.76 20.22L16.03 21.21C15.24 21.68 14.22 21.4 13.75 20.61L13.64 20.42C12.74 18.85 11.26 18.85 10.36 20.42L10.25 20.61C9.78 21.4 8.76 21.68 7.97 21.21L6.24 20.22C5.33 19.7 5.02 18.53 5.54 17.63C6.45 16.06 5.71 14.78 3.9 14.78C2.85 14.78 2 13.93 2 12.88Z"
-                                            stroke="#FFD700" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </div>
-                                <span>Chống 99% tia UV</span>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
 
                 {/* Right Panel - Login Form */}
