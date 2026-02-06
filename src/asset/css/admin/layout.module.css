@@ -27,8 +27,9 @@
 }
 
 .logo {
-  font-size: 24px;
-  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  background-color: #000;
 }
 
 .menu {
