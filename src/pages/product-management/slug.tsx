@@ -118,7 +118,6 @@ const SlugProductManagement = () => {
             setFigureList(figures)
         };
     }, [detail]);
-    console.log('dataRequest', dataRequest);
 
     const onUpdateAsync = async () => {
         await setSubmittedTime(Date.now());
@@ -126,12 +125,7 @@ const SlugProductManagement = () => {
         if (isValidData()) {
             const listImage: any[] = dataRequest.images; // ảnh mới (chưa upload)
             const imageOldCodes: any[] = dataRequest.imagesCode?.map((url: string) => configImageURLSplit(url)); // ảnh cũ giữ lại
-            console.log('imageOldCodes', imageOldCodes);
-            console.log('listImage', listImage);
-            console.log('remainImg', dataRequest.remainImg);
             const imagesToKeep = dataRequest.remainImg?.filter((url: any) => imageOldCodes.includes(url));
-            console.log("imagesToKeep", imagesToKeep);
-
             const formData = new FormData();
 
             // Append ảnh phụ mới
@@ -354,7 +348,7 @@ const SlugProductManagement = () => {
                                 <Col span={24}>
                                     <div className={styles.figureContainer}>
                                         <div className={styles.figureHeader} onClick={onAddFigure}>
-                                            <span>Ưu điểm nổi bật</span>
+                                            <span>Thông số sản phẩm</span>
                                             <i className="fa fa-plus-circle" aria-hidden="true"></i>
                                         </div>
 

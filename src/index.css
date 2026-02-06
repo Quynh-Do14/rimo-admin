@@ -1,21 +1,7 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 * {
   font-family: 'Work Sans', sans-serif;
   font-optical-sizing: auto;
-  font-style: normal;
+  /* font-style: normal; */
 }
 
 .form-control {
@@ -82,4 +68,44 @@ code {
 
 .ant-collapse-header {
   padding: 0px !important;
+}
+
+/* Fix cho ReactQuill - QUAN TRỌNG */
+/* Chỉ cần 2 dòng này để fix bug italic */
+.ql-snow .ql-editor {
+  font-style: normal !important;
+  font-family: var(--font-family, source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace) !important;
+}
+.ql-snow .ql-italic {
+  font-style: italic !important;
+}
+
+/* Đảm bảo toolbar hiển thị đúng */
+.ql-snow .ql-toolbar button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  float: left;
+  height: 24px;
+  padding: 3px 5px;
+  width: 28px;
+}
+
+/* Fix icon italic */
+.ql-snow .ql-stroke {
+  fill: none;
+  stroke: #444;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+/* Active state */
+.ql-snow .ql-active .ql-stroke {
+  stroke: #06c !important;
+}
+
+.ql-snow .ql-active {
+  color: #06c !important;
 }

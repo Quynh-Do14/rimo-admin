@@ -95,6 +95,7 @@ const ComboBoxCommon = ({
                 style={{ width: '100%' }}
                 placeholder="Please select"
                 onChange={onChange}
+                value={value}
             >
                 {listDataOfItem?.map((item, index) => (
                     <Select.Option

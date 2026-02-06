@@ -1,7 +1,7 @@
 import { Col, Row, Tooltip, Upload, UploadProps } from 'antd';
 import { useEffect, useRef, useState } from 'react';
-import styles from "../../..//asset/css/components/input.module.css";
-import type { RcFile } from 'antd/es/upload/interface';
+import styles from "../../../asset/css/components/input.module.css";
+import type { RcFile, UploadFile } from 'antd/es/upload/interface';
 
 type Props = {
     label: string;
@@ -44,13 +44,19 @@ function UploadListImage(props: Props) {
     const inputRef = useRef<HTMLDivElement>(null);
     const [listImg, setListImg] = useState<Array<any>>([]);
     const [hasUpdated, setHasUpdated] = useState<boolean>(false);
+    const [fileList, setFileList] = useState<UploadFile[]>([]);
+    const [deletedImgList, setDeletedImgList] = useState<any[]>([]);
 
     const handleChange: UploadProps['onChange'] = async (info) => {
         const files = info.fileList.map((file) => file.originFileObj as RcFile);
-        const updateArray: any[] = [];
+        const result: any[] = files.filter(file =>
+            !deletedImgList.some(deleted => deleted.uid === file.uid)
+        );
 
+        const updateArray: any[] = [];
+        setFileList(result)
         try {
-            const base64List: any[] = await Promise.all(files.map((file) => getBase64(file)));
+            const base64List: any[] = await Promise.all(result.map((file) => getBase64(file)));
 
             if (isUpdate) {
                 const concatArray: any[] = base64List.concat(listImg);
@@ -67,7 +73,6 @@ function UploadListImage(props: Props) {
         }
 
     };
-
     useEffect(() => {
         if (isUpdate && !hasUpdated && dataAttribute) {
             setHasUpdated(true);
@@ -77,6 +82,8 @@ function UploadListImage(props: Props) {
 
     const onDeleteImage = (index: number) => {
         setListImg((prev) => prev.filter((_item, indexF) => indexF !== index));
+        const deletedImg = fileList?.filter((_item, indexF) => indexF == index);
+        setDeletedImgList(deletedImg)
         const filterArrayImageFileCodes = dataAttribute?.filter((_item, indexF) => indexF !== index);
         const filterArrayImageFiles = dataAttributeImageFiles?.filter((_item, indexF) => indexF !== index);
         setData({ [attribute]: filterArrayImageFiles });

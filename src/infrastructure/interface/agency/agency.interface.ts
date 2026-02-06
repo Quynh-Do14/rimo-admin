@@ -9,7 +9,7 @@ export interface AgencyInterface {
     province: string;
     district: string;
     star_rate: number;
-    categories: AgencyCategory[]
+    agency_categories_type: AgencyCategory[]
 }
 
 export interface AgencyParams {

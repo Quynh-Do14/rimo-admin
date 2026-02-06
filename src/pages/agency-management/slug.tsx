@@ -18,9 +18,10 @@ import agencyService from '../../infrastructure/repository/agency/agency.service
 import ComboBoxCommon from '../../infrastructure/common/input/combo-box-common';
 import { useRecoilValue } from 'recoil';
 import { CategoryAgencyState } from '../../core/atoms/category/categoryState';
+import { AgencyInterface } from '../../infrastructure/interface/agency/agency.interface';
 
 const SlugAgencyManagement = () => {
-    const [detail, setDetail] = useState<any>({});
+    const [detail, setDetail] = useState<AgencyInterface>();
     const [originalImage, setOriginalImage] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [validate, setValidate] = useState<any>({});
@@ -81,7 +82,6 @@ const SlugAgencyManagement = () => {
             setDataRequest({
                 image: configImageURL(detail.image),
                 name: detail.name,
-                description: detail.description,
                 province: detail.province,
                 district: detail.district,
                 address: detail.address,
@@ -89,7 +89,7 @@ const SlugAgencyManagement = () => {
                 lat: detail.lat,
                 phone_number: detail.phone_number,
                 star_rate: detail.star_rate,
-                agency_category_type: JSON.stringify(dataRequest.agency_category_type)
+                agency_categories_type: detail.agency_categories_type.map((item) => item.category_id)
 
             });
         };
@@ -109,7 +109,7 @@ const SlugAgencyManagement = () => {
                     lat: dataRequest.lat,
                     phone_number: dataRequest.phone_number,
                     star_rate: dataRequest.star_rate,
-                    agency_category_type: JSON.stringify(dataRequest.agency_category_type)
+                    agency_categories_type: JSON.stringify(dataRequest.agency_categories_type)
                 };
 
                 if (dataRequest.image !== originalImage) {
@@ -173,13 +173,13 @@ const SlugAgencyManagement = () => {
 
     return (
         <AdminLayout
-            breadcrumb={"Quản lý danh mục sản phẩm"}
-            title={"Thêm danh mục sản phẩm"}
+            breadcrumb={"Quản lý đại lý"}
+            title={"Thêm đại lý"}
             redirect={ROUTE_PATH.AGENCY_MANAGEMENT}
         >
             <div className={styles.manage_container}>
                 <div className={styles.headerPage}>
-                    <h2>Cập nhật danh mục sản phẩm</h2>
+                    <h2>Cập nhật đại lý</h2>
                     <div className={styles.btn_container}>
                         <ButtonHref
                             href={ROUTE_PATH.AGENCY_MANAGEMENT}
@@ -280,9 +280,9 @@ const SlugAgencyManagement = () => {
                             <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                                 <ComboBoxCommon
                                     label={"Dòng sản phầm"}
-                                    attribute={"agency_category_type"}
+                                    attribute={"agency_categories_type"}
                                     isRequired={true}
-                                    dataAttribute={dataRequest.agency_category_type}
+                                    dataAttribute={dataRequest.agency_categories_type}
                                     setData={setDataRequest}
                                     disabled={false}
                                     validate={validate}

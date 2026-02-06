@@ -272,7 +272,7 @@ const AddProductManagement = () => {
                                 <Col span={24}>
                                     <div className={styles.figureContainer}>
                                         <div className={styles.figureHeader} onClick={onAddFigure}>
-                                            <span>Ưu điểm nổi bật</span>
+                                            <span>Thông số sản phẩm</span>
                                             <i className="fa fa-plus-circle" aria-hidden="true"></i>
                                         </div>
 
