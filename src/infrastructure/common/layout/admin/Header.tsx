@@ -4,6 +4,7 @@ import BreadCrumb from "../../breadcrumb/BreadCrumb";
 import avatar from "../../../../asset/img/avatar.png";
 import authService from "../../../repository/auth/auth.service";
 import { ROUTE_PATH } from "../../../../core/common/appRouter";
+import { AuthInterface } from "../../../interface/auth/auth.interface";
 
 type Props = {
     breadcrumb: string
@@ -11,10 +12,11 @@ type Props = {
     redirect: string
     onToggleSidebar: () => void
     onLogout?: () => void
+    profileState: AuthInterface
 }
 
 export default function Header(props: Props) {
-    const { breadcrumb, title, redirect, onToggleSidebar, onLogout } = props
+    const { breadcrumb, title, redirect, onToggleSidebar, onLogout, profileState } = props
     const [showDropdown, setShowDropdown] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -81,8 +83,8 @@ export default function Header(props: Props) {
                                     className={styles.dropdownAvatar}
                                 />
                                 <div className={styles.userInfo}>
-                                    <p className={styles.userName}>Admin</p>
-                                    <p className={styles.userEmail}>admin@gmail.com</p>
+                                    <p className={styles.userName}>{profileState.name}</p>
+                                    <p className={styles.userEmail}>{profileState.role_name}</p>
                                 </div>
                             </div>
 

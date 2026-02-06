@@ -6,6 +6,7 @@ export interface MenuInterface {
   url: string
   icon: string
   children?: MenuInterface[]
+  role: Array<"ADMIN" | "SELLER" | "ARTICLE">
 }
 
 export default class Constants {
@@ -16,37 +17,43 @@ export default class Constants {
         id: 'user-management',
         text: 'Quản lý người dùng',
         url: ROUTE_PATH.USER_MANAGEMENT,
-        icon: 'fas fa-users'
+        icon: 'fas fa-users',
+        role: ["ADMIN"]
       },
       {
         id: 'banner-management',
         text: 'Quản lý banner',
         url: ROUTE_PATH.BANNER_MANAGEMENT,
-        icon: 'fas fa-images'
+        icon: 'fas fa-images',
+        role: ["ADMIN", 'SELLER']
       },
       {
         id: 'categories',
         text: 'Quản lý danh mục',
         url: '#',
         icon: 'fas fa-folder-tree',
+        role: ["ADMIN", "ARTICLE", 'SELLER'],
         children: [
           {
             id: 'category-product',
             text: 'Danh mục sản phẩm',
             url: ROUTE_PATH.CATEGORY_PRODUCT_MANAGEMENT,
-            icon: 'fas fa-boxes'
+            icon: 'fas fa-boxes',
+            role: ["ADMIN", 'SELLER']
           },
           {
             id: 'category-blog',
             text: 'Danh mục tin tức',
             url: ROUTE_PATH.CATEGORY_BLOG_MANAGEMENT,
-            icon: 'fas fa-folder-open'
+            icon: 'fas fa-folder-open',
+            role: ["ADMIN", 'ARTICLE']
           },
           {
             id: 'series',
             text: 'Dòng sản phẩm',
             url: ROUTE_PATH.CATEGORY_AGENCY_MANAGEMENT,
-            icon: 'fas fa-layer-group'
+            icon: 'fas fa-layer-group',
+            role: ["ADMIN", 'SELLER']
           }
         ]
       },
@@ -55,30 +62,35 @@ export default class Constants {
         text: 'Quản lý sản phẩm',
         url: ROUTE_PATH.PRODUCT_MANAGEMENT,
         icon: 'fas fa-box-open',
+        role: ["ADMIN", 'SELLER']
       },
       {
         id: 'agency-management',
         text: 'Quản lý đại lý',
         url: ROUTE_PATH.AGENCY_MANAGEMENT,
-        icon: 'fas fa-store-alt'
+        icon: 'fas fa-store-alt',
+        role: ["ADMIN", 'SELLER']
       },
       {
         id: 'blog-management',
         text: 'Quản lý tin tức',
         url: ROUTE_PATH.BLOG_MANAGEMENT,
-        icon: 'fas fa-newspaper'
+        icon: 'fas fa-newspaper',
+        role: ["ADMIN", 'ARTICLE']
       },
       {
         id: 'video-management',
         text: 'Quản lý video',
         url: ROUTE_PATH.VIDEO_MANAGEMENT,
-        icon: 'fas fa-video'
+        icon: 'fas fa-video',
+        role: ["ADMIN", 'ARTICLE']
       },
       {
         id: 'contact-management',
         text: 'Quản lý liên hệ',
         url: ROUTE_PATH.CONTACT_MANAGEMENT,
-        icon: 'fas fa-address-book'
+        icon: 'fas fa-address-book',
+        role: ["ADMIN", 'SELLER']
       },
     ]
   }
@@ -136,10 +148,6 @@ export default class Constants {
         label: 'Viết bài',
         value: 3
       },
-      {
-        label: 'Người dùng',
-        value: 4
-      }
     ]
   }
   static BannerType = class {

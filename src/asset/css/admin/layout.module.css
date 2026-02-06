@@ -2,13 +2,13 @@
   display: flex;
   height: 100vh;
   overflow: hidden;
-  background: #f9fafb;
+  background: #111827; /* Đổi nền wrapper thành đen */
 }
 
 .sidebar {
   width: 220px;
-  background-color: #fcb800;
-  color: #fff;
+  background-color: #000000; /* Đổi nền sidebar thành đen */
+  color: #fbbf24; /* Đổi màu chữ thành vàng */
   padding: 20px;
   position: fixed;
   top: 0;
@@ -16,6 +16,7 @@
   left: 0;
   z-index: 1000;
   transition: transform 0.3s ease;
+  border-right: 1px solid #fbbf24; /* Thêm viền vàng bên phải */
 }
 
 .sidebar.closed {
@@ -30,26 +31,31 @@
   display: flex;
   justify-content: center;
   background-color: #000;
+  padding: 10px;
+  border-bottom: 1px solid #fbbf24; /* Thêm viền vàng dưới logo */
 }
 
 .menu {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 15px 0 0 0;
 }
 
 .menuItem {
-  margin: 10px 0;
+  margin: 8px 0;
   border-radius: 5px;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
+  border: 1px solid transparent;
 }
 
 .menuItem:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(251, 191, 36, 0.1); /* Nền vàng nhạt khi hover */
+  border-color: #fbbf24; /* Viền vàng khi hover */
 }
 
 .menuItem.active {
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(251, 191, 36, 0.15); /* Nền vàng đậm hơn khi active */
+  border-color: #fbbf24;
 }
 
 .menuItem a,
@@ -57,7 +63,7 @@
   display: flex;
   align-items: center;
   padding: 12px 15px;
-  color: #000;
+  color: #fbbf24; /* Chữ màu vàng */
   text-decoration: none;
   font-size: 16px;
   width: 100%;
@@ -65,6 +71,7 @@
 
 .menuItem a:hover {
   text-decoration: none;
+  color: #fcd34d; /* Chữ vàng sáng hơn khi hover */
 }
 
 .menuText {
@@ -73,7 +80,7 @@
 }
 
 .menuItem i {
-  color: #000;
+  color: #fbbf24; /* Icon màu vàng */
   width: 20px;
   text-align: center;
 }
@@ -81,6 +88,7 @@
 .chevronIcon {
   transition: transform 0.3s;
   font-size: 12px;
+  color: #fbbf24; /* Icon chevron màu vàng */
 }
 
 .ant-collapse-item-active .chevronIcon {
@@ -93,7 +101,7 @@
 }
 
 .customPanel :global(.ant-collapse-content) {
-  background-color: rgba(0, 0, 0, 0.05) !important;
+  background-color: rgba(251, 191, 36, 0.05) !important; /* Nền vàng rất nhạt */
   border: none !important;
 }
 
@@ -108,28 +116,31 @@
 }
 
 .submenuItem {
-  padding: 10px 15px 10px 10px;
-  transition: background-color 0.3s;
+  padding: 10px 0 10px 10px; /* Tăng padding-left để thụt vào */
+  transition: all 0.3s;
+  border-left: 2px solid transparent;
 }
 
 .submenuItem:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(251, 191, 36, 0.1);
+  border-left-color: #fbbf24; /* Viền vàng bên trái khi hover */
 }
 
 .submenuItem.active {
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(251, 191, 36, 0.15);
   position: relative;
+  border-left-color: #fbbf24; /* Viền vàng bên trái khi active */
 }
 
 .submenuItem.active::before {
   content: '';
   position: absolute;
-  left: 30px;
+  left: 20px;
   top: 50%;
   transform: translateY(-50%);
   width: 6px;
   height: 6px;
-  background-color: #000;
+  background-color: #fbbf24; /* Chấm tròn màu vàng */
   border-radius: 50%;
 }
 
@@ -138,17 +149,21 @@
   align-items: center;
   padding: 0;
   font-size: 14px;
+  color: #fbbf24; /* Chữ submenu màu vàng */
 }
 
 .submenuItem a:hover {
   text-decoration: none;
+  color: #fcd34d; /* Chữ vàng sáng hơn khi hover */
 }
 
 .submenuItem i {
   margin-right: 10px;
   font-size: 12px;
+  color: #fbbf24; /* Icon submenu màu vàng */
 }
 
+/* Phần còn lại giữ nguyên */
 .mainContent {
   margin-left: 260px;
   flex: 1;

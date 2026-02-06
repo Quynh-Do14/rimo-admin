@@ -44,6 +44,7 @@ export const privateRoutes = [
         path: ROUTE_PATH.MAIN_LAYOUT,
         component: AdminLayout,
         private: true,
+        role: ["ADMIN", 'SELLER', 'ARTICLE']
     },
     {
         path: ROUTE_PATH.LOGIN,
@@ -54,197 +55,196 @@ export const privateRoutes = [
         path: ROUTE_PATH.USER_MANAGEMENT,
         component: UserListPage,
         private: true,
+        role: ["ADMIN"],
     },
     {
         path: ROUTE_PATH.ADD_USER_MANAGEMENT,
         component: AddUserManagement,
         private: true,
+        role: ["ADMIN"],
     },
     {
         path: ROUTE_PATH.VIEW_USER_MANAGEMENT,
         component: SlugUserManagement,
         private: true,
+        role: ["ADMIN"],
     },
 
     {
         path: ROUTE_PATH.BANNER_MANAGEMENT,
         component: BannerListPage,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
     {
         path: ROUTE_PATH.ADD_BANNER_MANAGEMENT,
         component: AddBannerManagement,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
     {
         path: ROUTE_PATH.VIEW_BANNER_MANAGEMENT,
         component: SlugBannerManagement,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
 
     {
         path: ROUTE_PATH.CATEGORY_BLOG_MANAGEMENT,
         component: BlogCategoryListPage,
         private: true,
+        role: ["ADMIN", 'ARTICLE']
     },
     {
         path: ROUTE_PATH.ADD_CATEGORY_BLOG_MANAGEMENT,
         component: AddCategoryBlogManagement,
         private: true,
+        role: ["ADMIN", 'ARTICLE']
     },
     {
         path: ROUTE_PATH.VIEW_CATEGORY_BLOG_MANAGEMENT,
         component: SlugCategoryBlogManagement,
         private: true,
+        role: ["ADMIN", 'ARTICLE']
     },
 
     {
         path: ROUTE_PATH.BLOG_MANAGEMENT,
         component: BlogListPage,
         private: true,
+        role: ["ADMIN", 'ARTICLE']
     },
     {
         path: ROUTE_PATH.ADD_BLOG_MANAGEMENT,
         component: AddBlogManagement,
         private: true,
+        role: ["ADMIN", 'ARTICLE']
     },
     {
         path: ROUTE_PATH.VIEW_BLOG_MANAGEMENT,
         component: SlugBlogManagement,
         private: true,
+        role: ["ADMIN", 'ARTICLE']
     },
 
     {
         path: ROUTE_PATH.BRAND_MANAGEMENT,
         component: BrandListPage,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
     {
         path: ROUTE_PATH.ADD_BRAND_MANAGEMENT,
         component: AddBrandManagement,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
     {
         path: ROUTE_PATH.VIEW_BRAND_MANAGEMENT,
         component: SlugBrandManagement,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
 
     {
         path: ROUTE_PATH.PRODUCT_MANAGEMENT,
         component: ProductListPage,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
     {
         path: ROUTE_PATH.ADD_PRODUCT_MANAGEMENT,
         component: AddProductManagement,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
     {
         path: ROUTE_PATH.VIEW_PRODUCT_MANAGEMENT,
         component: SlugProductManagement,
         private: true,
-    },
-
-    {
-        path: ROUTE_PATH.PRODUCT_SERIES_MANAGEMENT,
-        component: ProductSeriesListPage,
-        private: true,
-    },
-    {
-        path: ROUTE_PATH.ADD_PRODUCT_SERIES_MANAGEMENT,
-        component: AddProductSeriesManagement,
-        private: true,
-    },
-    {
-        path: ROUTE_PATH.VIEW_PRODUCT_SERIES_MANAGEMENT,
-        component: SlugProductSeriesManagement,
-        private: true,
-    },
-
-    {
-        path: ROUTE_PATH.SERIES_MANAGEMENT,
-        component: SeriesListPage,
-        private: true,
-    },
-    {
-        path: ROUTE_PATH.ADD_SERIES_MANAGEMENT,
-        component: AddSeriesManagement,
-        private: true,
-    },
-    {
-        path: ROUTE_PATH.VIEW_SERIES_MANAGEMENT,
-        component: SlugSeriesManagement,
-        private: true,
+        role: ["ADMIN", 'SELLER']
     },
 
     {
         path: ROUTE_PATH.CATEGORY_PRODUCT_MANAGEMENT,
         component: ProductCategoryListPage,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
     {
         path: ROUTE_PATH.ADD_CATEGORY_PRODUCT_MANAGEMENT,
         component: AddProductCategoryManagement,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
     {
         path: ROUTE_PATH.VIEW_CATEGORY_PRODUCT_MANAGEMENT,
         component: SlugProductCategoryManagement,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
 
     {
         path: ROUTE_PATH.AGENCY_MANAGEMENT,
         component: AgencyListPage,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
     {
         path: ROUTE_PATH.ADD_AGENCY_MANAGEMENT,
         component: AddAgencyManagement,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
     {
         path: ROUTE_PATH.VIEW_AGENCY_MANAGEMENT,
         component: SlugAgencyManagement,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
 
     {
         path: ROUTE_PATH.CATEGORY_AGENCY_MANAGEMENT,
         component: AgencyCategoryListPage,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
     {
         path: ROUTE_PATH.ADD_CATEGORY_AGENCY_MANAGEMENT,
         component: AddCategoryAgencyManagement,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
     {
         path: ROUTE_PATH.VIEW_CATEGORY_AGENCY_MANAGEMENT,
         component: SlugCategoryAgencyManagement,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
 
     {
         path: ROUTE_PATH.VIDEO_MANAGEMENT,
         component: VideoListPage,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
     {
         path: ROUTE_PATH.ADD_VIDEO_MANAGEMENT,
         component: AddVideoManagement,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
     {
         path: ROUTE_PATH.VIEW_VIDEO_MANAGEMENT,
         component: SlugVideoManagement,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
 
     {
         path: ROUTE_PATH.CONTACT_MANAGEMENT,
         component: ContactListPage,
         private: true,
+        role: ["ADMIN", 'SELLER']
     },
 ]

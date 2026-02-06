@@ -14,7 +14,7 @@ function App() {
                   key={index}
                   path={page.path}
                   element={
-                    <PrivateRoute component={<page.component />} />
+                    <PrivateRoute component={<page.component />} role={page.role} />
                   } />
               )
             }

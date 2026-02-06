@@ -13,6 +13,8 @@ import seriesService from "../../../repository/series/series.service";
 import { ProductState } from "../../../../core/atoms/product/productState";
 import productService from "../../../repository/product/product.service";
 import categoryAgencyService from "../../../repository/category/categoryAgency.service";
+import { ProfileState } from "../../../../core/atoms/profile/profileState";
+import authService from "../../../repository/auth/auth.service";
 
 
 export default function AdminLayout({ breadcrumb, title, redirect, children }: any) {
@@ -23,6 +25,7 @@ export default function AdminLayout({ breadcrumb, title, redirect, children }: a
     const [, setBrandState] = useRecoilState(BrandState);
     const [, setSeriesState] = useRecoilState(SeriesState);
     const [, setProductState] = useRecoilState(ProductState);
+    const [profileState, setProfileState] = useRecoilState(ProfileState);
 
     const onGetListCategoryAsync = async () => {
         try {
@@ -129,6 +132,21 @@ export default function AdminLayout({ breadcrumb, title, redirect, children }: a
             console.error(error)
         }
     }
+
+    const onGetProfileAsync = async () => {
+        try {
+            await authService.profile(
+                () => { }
+            ).then((res) => {
+                setProfileState({
+                    data: res.user
+                })
+            })
+        }
+        catch (error) {
+            console.error(error)
+        }
+    }
     useEffect(() => {
         onGetListCategoryAsync().then(_ => { });
         onGetListSeriesAsync().then(_ => { });
@@ -136,17 +154,19 @@ export default function AdminLayout({ breadcrumb, title, redirect, children }: a
         onGetListBrandAsync().then(_ => { });
         onGetListProductAsync().then(_ => { });
         onGetListAgencyCategoryAsync().then(_ => { });
+        onGetProfileAsync().then(_ => { });
     }, []);
 
     return (
         <div className={styles.wrapper}>
-            <Sidebar isOpen={isSidebarOpen} />
+            <Sidebar isOpen={isSidebarOpen} profileState={profileState.data} />
             <div className={`${styles.mainContent} ${!isSidebarOpen ? styles.full : ''}`}>
                 <Header
                     onToggleSidebar={() => setSidebarOpen(!isSidebarOpen)}
                     breadcrumb={breadcrumb}
                     title={title}
                     redirect={redirect}
+                    profileState={profileState.data}
                 />
                 <div className={styles.pageContent}>{children}</div>
             </div>

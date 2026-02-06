@@ -3,7 +3,9 @@
   font-optical-sizing: auto;
   /* font-style: normal; */
 }
-
+body {
+  margin: 0;
+}
 .form-control {
   outline: none;
   font-size: 14px;
@@ -71,10 +73,34 @@
 }
 
 /* Fix cho ReactQuill - QUAN TRỌNG */
+/* scroll custom */
+::-webkit-scrollbar {
+  width: 2px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 0px grey;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffd700;
+  border-radius: 10px;
+}
+
 /* Chỉ cần 2 dòng này để fix bug italic */
 .ql-snow .ql-editor {
   font-style: normal !important;
-  font-family: var(--font-family, source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace) !important;
+  font-family: var(
+    --font-family,
+    source-code-pro,
+    Menlo,
+    Monaco,
+    Consolas,
+    'Courier New',
+    monospace
+  ) !important;
 }
 .ql-snow .ql-italic {
   font-style: italic !important;

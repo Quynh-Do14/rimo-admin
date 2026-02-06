@@ -4,10 +4,11 @@ import Constants from "../../../../core/common/constants";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../../../asset/img/logo.png";
 import { useState } from "react";
+import { AuthInterface } from "../../../interface/auth/auth.interface";
 
 const { Panel } = Collapse;
 
-export default function Sidebar({ isOpen }: { isOpen: boolean }) {
+export default function Sidebar({ isOpen, profileState }: { isOpen: boolean, profileState: AuthInterface }) {
     const location = useLocation();
     const [openKeys, setOpenKeys] = useState<string[]>([]);
 
@@ -33,13 +34,13 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
             <nav>
                 <ul className={styles.menu}>
                     {Constants.Menu.PrivateList.map((item, index) => {
-                        // Nếu có children, hiển thị dạng dropdown
-                        if (item.children && item.children.length > 0) {
-                            const isActiveParent = hasActiveChild(item.children);
+                        if (item.role.includes(profileState.role_name)) {
+                            // Nếu có children, hiển thị dạng dropdown
+                            if (item.children && item.children.length > 0) {
+                                const isActiveParent = hasActiveChild(item.children);
 
-                            return (
-                                <Tooltip title={item.text} key={item.id}>
-                                    <li className={`${styles.menuItem} ${isActiveParent ? styles.active : ''}`}>
+                                return (
+                                    <li className={`${styles.menuItem} ${isActiveParent ? styles.active : ''}`} key={item.id}>
                                         <Collapse
                                             bordered={false}
                                             expandIconPosition="end"
@@ -60,36 +61,39 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
                                                 className={styles.customPanel}
                                             >
                                                 <ul className={styles.submenu}>
-                                                    {item.children.map((child) => (
-                                                        <li
-                                                            key={child.id}
-                                                            className={`${styles.submenuItem} ${isActive(child.url) ? styles.active : ''}`}
-                                                        >
-                                                            <Link to={child.url}>
-                                                                <i className={child.icon}></i>
-                                                                <span>{child.text}</span>
-                                                            </Link>
-                                                        </li>
-                                                    ))}
+                                                    {item.children.map((child) => {
+                                                        if (child.role.includes(profileState.role_name)) {
+                                                            return (
+                                                                <li
+                                                                    key={child.id}
+                                                                    className={`${styles.submenuItem} ${isActive(child.url) ? styles.active : ''}`}
+                                                                >
+                                                                    <Link to={child.url}>
+                                                                        <i className={child.icon}></i>
+                                                                        <span>{child.text}</span>
+                                                                    </Link>
+                                                                </li>
+                                                            )
+                                                        }
+                                                    })}
                                                 </ul>
                                             </Panel>
                                         </Collapse>
                                     </li>
-                                </Tooltip>
-                            );
-                        }
+                                );
+                            }
 
-                        // Nếu không có children, hiển thị bình thường
-                        return (
-                            <Tooltip title={item.text} key={item.id}>
-                                <li className={`${styles.menuItem} ${isActive(item.url) ? styles.active : ''} text-truncate`}>
+                            // Nếu không có children, hiển thị bình thường
+                            return (
+                                <li className={`${styles.menuItem} ${isActive(item.url) ? styles.active : ''} text-truncate`} key={item.id}>
                                     <Link to={item.url}>
                                         <i className={item.icon}></i>
                                         <span className={styles.menuText}>{item.text}</span>
                                     </Link>
                                 </li>
-                            </Tooltip>
-                        );
+                            )
+                        }
+                        ;
                     })}
                 </ul>
             </nav>
