@@ -168,6 +168,10 @@ export default class Constants {
         label: 'Liên hệ',
         value: "CONTACT"
       },
+      {
+        label: 'Chính sách',
+        value: "POLICY"
+      },
     ]
   }
   static AdminStatusConfig = class {

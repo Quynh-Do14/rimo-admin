@@ -19,7 +19,7 @@ const ButtonHref = (props: Props) => {
             href={href}
             className={`${styles.btnCommon} ${variant}`}
             style={{
-                width: width ? width : '100%',
+                width: width ? width : '',
                 whiteSpace: "nowrap"
             }}>
             {title}
