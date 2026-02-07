@@ -75,7 +75,7 @@ const SlugBannerManagement = () => {
             setDataRequest({
                 image: configImageURL(detail.image),
                 name: detail.name,
-                // type: detail.type,
+                type: detail.type,
 
             });
         };
@@ -88,7 +88,7 @@ const SlugBannerManagement = () => {
             try {
                 const payload: any = {
                     name: dataRequest.name,
-                    type: "",
+                    type: dataRequest.type,
                 };
 
                 if (dataRequest.image !== originalImage) {
