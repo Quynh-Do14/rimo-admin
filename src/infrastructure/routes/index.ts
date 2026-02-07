@@ -47,11 +47,6 @@ export const privateRoutes = [
         role: ["ADMIN", 'SELLER', 'ARTICLE']
     },
     {
-        path: ROUTE_PATH.LOGIN,
-        component: LoginPage,
-        private: false,
-    },
-    {
         path: ROUTE_PATH.USER_MANAGEMENT,
         component: UserListPage,
         private: true,
