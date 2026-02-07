@@ -67,7 +67,7 @@ const AddAgencyManagement = () => {
                     lat: dataRequest.lat,
                     phone_number: dataRequest.phone_number,
                     star_rate: dataRequest.star_rate,
-                    agency_category_type: JSON.stringify(dataRequest.agency_category_type)
+                    agency_categories_type: JSON.stringify(dataRequest.agency_categories_type)
                 },
                     onBack,
                     setLoading
@@ -232,9 +232,9 @@ const AddAgencyManagement = () => {
                             <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                                 <ComboBoxCommon
                                     label={"Dòng sản phầm"}
-                                    attribute={"agency_category_type"}
+                                    attribute={"agency_categories_type"}
                                     isRequired={true}
-                                    dataAttribute={dataRequest.agency_category_type}
+                                    dataAttribute={dataRequest.agency_categories_type}
                                     setData={setDataRequest}
                                     disabled={false}
                                     validate={validate}

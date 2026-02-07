@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Input, Pagination, Space, Button } from 'antd';
+import { Table, Input, Pagination, Space, Button, Row, Col } from 'antd';
 import styles from '../../asset/css/admin/admin-component.module.css';
 import { useNavigate } from 'react-router-dom';
 import productService from '../../infrastructure/repository/product/product.service';
@@ -12,6 +12,10 @@ import { ActionCommon } from '../../infrastructure/common/action/action-common';
 import { PaginationCommon } from '../../infrastructure/common/pagination/PaginationPageSize';
 import DialogConfirmCommon from '../../infrastructure/common/modal/dialogConfirm';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
+import SelectSearchCommon from '../../infrastructure/common/input/select-search-common';
+import { useRecoilValue } from 'recoil';
+import { BrandState } from '../../core/atoms/brand/brandState';
+import { CategoryProductState } from '../../core/atoms/category/categoryState';
 
 let timeout: any
 const ProductListPage = () => {
@@ -20,6 +24,8 @@ const ProductListPage = () => {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [pageSize, setPageSize] = useState<number>(10);
     const [searchText, setSearchText] = useState<string>("");
+    const [categoryId, setCategoryId] = useState<string>("");
+    const [brandId, setBrandId] = useState<string>("");
 
     const [idSelected, setIdSelected] = useState<string>("");
 
@@ -28,12 +34,15 @@ const ProductListPage = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const router = useNavigate();
-
-    const onGetListAsync = async ({ search = "", size = pageSize, page = currentPage }) => {
+    const brandState = useRecoilValue(BrandState).data;
+    const categoryProductState = useRecoilValue(CategoryProductState).data;
+    const onGetListAsync = async ({ search = "", category_id = "", brand_id = "", size = pageSize, page = currentPage }) => {
         const param = {
             page: page,
             limit: size,
             search: search,
+            category_id: category_id,
+            brand_id: brand_id
         }
         try {
             await productService.GetProduct(
@@ -48,15 +57,15 @@ const ProductListPage = () => {
             console.error(error)
         }
     }
-    const onSearch = async (search = "", size = pageSize, page = 1) => {
-        await onGetListAsync({ search: search, size: size, page: page });
+    const onSearch = async (search = "", category_id = "", brand_id = "", size = pageSize, page = 1) => {
+        await onGetListAsync({ search: search, category_id: category_id, brand_id: brand_id, size: size, page: page });
     };
 
     const onChangeSearchText = (e: any) => {
         setSearchText(e.target.value);
         clearTimeout(timeout);
         timeout = setTimeout(() => {
-            onSearch(e.target.value, pageSize, currentPage,).then((_) => { });
+            onSearch(e.target.value, categoryId, brandId, pageSize, currentPage,).then((_) => { });
         }, Constants.DEBOUNCE_SEARCH);
     };
 
@@ -66,13 +75,13 @@ const ProductListPage = () => {
 
     const onChangePage = async (value: any) => {
         setCurrentPage(value)
-        await onSearch(searchText, pageSize, value).then(_ => { });
+        await onSearch(searchText, categoryId, brandId, pageSize, value).then(_ => { });
     };
 
     const onPageSizeChanged = async (value: any) => {
         setPageSize(value)
         setCurrentPage(1)
-        await onSearch(searchText, value, 1).then(_ => { });
+        await onSearch(searchText, categoryId, brandId, value, 1).then(_ => { });
     };
     // Xóa bài
     const onOpenModalDelete = (id: any) => {
@@ -101,6 +110,12 @@ const ProductListPage = () => {
         }
     };
 
+
+    const onChangeCategory = async (value: any) => {
+        setCategoryId(value)
+        await onSearch(searchText, value, brandId, pageSize, currentPage).then(_ => { });
+    };
+
     const onNavigate = (id: any) => {
         router(`${(ROUTE_PATH.VIEW_PRODUCT_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
     }
@@ -113,21 +128,33 @@ const ProductListPage = () => {
         >
             <div className={styles.manage_container}>
                 <h2>Quản lý sản phẩm</h2>
-                <div className={styles.searchBar}>
-                    <Input
-                        className="form-control"
-                        placeholder="Tìm kiếm theo tên"
-                        value={searchText}
-                        onChange={onChangeSearchText}
-                    />
-                    <ButtonHref
-                        href={ROUTE_PATH.ADD_PRODUCT_MANAGEMENT}
-                        title={'Thêm mới'}
-                        width={150}
-                        variant={'ps-btn--fullwidth'}
-                    />
-                </div>
-                <div className={styles.table_container}>
+                <Row gutter={[15, 15]}>
+                    <Col xs={24} md={10}>
+                        <Input
+                            className="form-control"
+                            placeholder="Tìm kiếm theo tên"
+                            value={searchText}
+                            onChange={onChangeSearchText}
+                        />
+                    </Col>
+                    <Col xs={24} md={10}>
+                        <SelectSearchCommon
+                            listDataOfItem={categoryProductState}
+                            onChange={onChangeCategory}
+                            value={categoryId}
+                            label={'Danh mục'}
+                        />
+                    </Col>
+                    <Col xs={24} md={4}>
+                        <ButtonHref
+                            href={ROUTE_PATH.ADD_PRODUCT_MANAGEMENT}
+                            title={'Thêm mới'}
+                            width={150}
+                            variant={'ps-btn--fullwidth'}
+                        />
+                    </Col>
+                </Row>
+               <div className={styles.table_container}>
                     <Table
                         dataSource={listResponse}
                         loading={loading}
@@ -166,7 +193,7 @@ const ProductListPage = () => {
                             key={"category_name"}
                             dataIndex={"category_name"}
                         />
-                        {/* <Table.Column
+                        <Table.Column
                             title={
                                 <TitleTableCommon
                                     title="Thương hiệu"
@@ -175,7 +202,7 @@ const ProductListPage = () => {
                             }
                             key={"brand_name"}
                             dataIndex={"brand_name"}
-                        /> */}
+                        />
                         <Table.Column
                             title={
                                 <TitleTableCommon

@@ -153,24 +153,22 @@ export default class Constants {
   static BannerType = class {
     static List = [
       {
-        label: 'Banner chính',
-        value: "MAIN_BANNER"
+        label: 'Trang chủ',
+        value: "HOMEPAGE"
       },
       {
-        label: 'Banner phụ',
-        value: "SUB_BANNER"
-      }
+        label: 'Giới thiệu',
+        value: "INTRODUCE"
+      },
+      {
+        label: 'Đại lý',
+        value: "AGENCY"
+      },
+      {
+        label: 'Liên hệ',
+        value: "CONTACT"
+      },
     ]
-    static BannerTypeConfig = class {
-      static Main = {
-        label: 'Banner chính',
-        value: "MAIN_BANNER"
-      }
-      static Sub = {
-        label: 'Banner phụ',
-        value: "SUB_BANNER"
-      }
-    }
   }
   static AdminStatusConfig = class {
     static Show = [

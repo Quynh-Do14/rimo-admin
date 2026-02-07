@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Input, Pagination, Space, Button } from 'antd';
+import { Table, Input, Pagination, Space, Button, Row, Col } from 'antd';
 import styles from '../../asset/css/admin/admin-component.module.css';
 import { useNavigate } from 'react-router-dom';
 import bannerService from '../../infrastructure/repository/banner/banner.service';
@@ -13,6 +13,7 @@ import { ActionCommon } from '../../infrastructure/common/action/action-common';
 import { PaginationCommon } from '../../infrastructure/common/pagination/PaginationPageSize';
 import DialogConfirmCommon from '../../infrastructure/common/modal/dialogConfirm';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
+import SelectSearchCommon from '../../infrastructure/common/input/select-search-common';
 
 let timeout: any
 const BannerListPage = () => {
@@ -21,6 +22,7 @@ const BannerListPage = () => {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [pageSize, setPageSize] = useState<number>(10);
     const [searchText, setSearchText] = useState<string>("");
+    const [type, setType] = useState<string>("");
 
     const [idSelected, setIdSelected] = useState<string>("");
 
@@ -30,11 +32,12 @@ const BannerListPage = () => {
 
     const router = useNavigate();
 
-    const onGetListAsync = async ({ search = "", size = pageSize, page = currentPage }) => {
+    const onGetListAsync = async ({ search = "", type = "", size = pageSize, page = currentPage }) => {
         const param = {
             page: page,
             limit: size,
             search: search,
+            type: type
         }
         try {
             await bannerService.GetBanner(
@@ -49,15 +52,15 @@ const BannerListPage = () => {
             console.error(error)
         }
     }
-    const onSearch = async (search = "", size = pageSize, page = 1) => {
-        await onGetListAsync({ search: search, size: size, page: page });
+    const onSearch = async (search = "", type = "", size = pageSize, page = 1) => {
+        await onGetListAsync({ search: search, type: type, size: size, page: page });
     };
 
     const onChangeSearchText = (e: any) => {
         setSearchText(e.target.value);
         clearTimeout(timeout);
         timeout = setTimeout(() => {
-            onSearch(e.target.value, pageSize, currentPage,).then((_) => { });
+            onSearch(e.target.value, type, pageSize, currentPage,).then((_) => { });
         }, Constants.DEBOUNCE_SEARCH);
     };
 
@@ -67,7 +70,12 @@ const BannerListPage = () => {
 
     const onChangePage = async (value: any) => {
         setCurrentPage(value)
-        await onSearch(searchText, pageSize, value).then(_ => { });
+        await onSearch(searchText, type, pageSize, value).then(_ => { });
+    };
+
+    const onChangeType = async (value: any) => {
+        setType(value)
+        await onSearch(searchText, value, pageSize, currentPage).then(_ => { });
     };
 
     const onPageSizeChanged = async (value: any) => {
@@ -114,20 +122,34 @@ const BannerListPage = () => {
         >
             <div className={styles.manage_container}>
                 <h2>Quản lý banner</h2>
-                <div className={styles.searchBar}>
-                    {/* <Input
-                        className="form-control"
-                        placeholder="Tìm kiếm theo tên"
-                        value={searchText}
-                        onChange={onChangeSearchText}
-                    /> */}
-                    <ButtonHref
-                        href={ROUTE_PATH.ADD_BANNER_MANAGEMENT}
-                        title={'Thêm mới'}
-                        width={150}
-                        variant={'ps-btn--fullwidth'}
-                    />
-                </div>
+                <Row gutter={[15, 15]}>
+                    <Col xs={24} md={10}>
+                        <Input
+                            className="form-control"
+                            placeholder="Tìm kiếm theo tên"
+                            value={searchText}
+                            onChange={onChangeSearchText}
+                        />
+                    </Col>
+                    <Col xs={24} md={10}>
+                        <SelectSearchCommon
+                            listDataOfItem={Constants.BannerType.List}
+                            onChange={onChangeType}
+                            value={type}
+                            label={'Loại ảnh'}
+                            labelName='label'
+                            valueName='value'
+                        />
+                    </Col>
+                    <Col xs={24} md={4}>
+                        <ButtonHref
+                            href={ROUTE_PATH.ADD_BANNER_MANAGEMENT}
+                            title={'Thêm mới'}
+                            variant={'ps-btn--fullwidth'}
+                        />
+                    </Col>
+                </Row>
+
                 <div className={styles.table_container}>
                     <Table
                         dataSource={listResponse}
@@ -172,7 +194,7 @@ const BannerListPage = () => {
                             key={"name"}
                             dataIndex={"name"}
                         />
-                        {/* <Table.Column
+                        <Table.Column
                             title={
                                 <TitleTableCommon
                                     title="Loại ảnh"
@@ -181,7 +203,11 @@ const BannerListPage = () => {
                             }
                             key={"type"}
                             dataIndex={"type"}
-                        /> */}
+                            render={(val, _record) => {
+                                const result = Constants.BannerType.List.find(item => item.value == val)
+                                return <div>{result?.label || ""}</div>
+                            }}
+                        />
                         <Table.Column
                             title={
                                 <TitleTableCommon
@@ -222,7 +248,7 @@ const BannerListPage = () => {
                 />
             </div>
             <FullPageLoading isLoading={loading} />
-        </AdminLayout>
+        </AdminLayout >
 
     );
 }

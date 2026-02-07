@@ -157,7 +157,7 @@ const SlugBannerManagement = () => {
                                     submittedTime={submittedTime}
                                 />
                             </Col>
-                            {/* <Col span={24}>
+                            <Col span={24}>
                                 <InputSelectCommon
                                     label={"Loại ảnh"}
                                     attribute={"type"}
@@ -172,7 +172,7 @@ const SlugBannerManagement = () => {
                                     labelName='label'
                                     valueName='value'
                                 />
-                            </Col> */}
+                            </Col>
                         </Row>
                     </Col>
                 </Row>
