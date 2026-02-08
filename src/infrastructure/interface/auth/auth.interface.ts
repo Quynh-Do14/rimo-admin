@@ -2,7 +2,7 @@ export interface AuthInterface {
     id?: number;
     name: string;
     email: string;
-    role_name: "ADMIN" | "SELLER" | "ARTICLE";
+    role_name: "ADMIN" | "SELLER" | "WRITTER";
     role_id: number;
 }
 

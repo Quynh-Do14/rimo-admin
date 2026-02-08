@@ -11,9 +11,12 @@ import InputTextCommon from '../../infrastructure/common/input/input-text-common
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
 import TextAreaCommon from '../../infrastructure/common/input/textarea-common';
 import videoService from '../../infrastructure/repository/video/video.service';
+import InputSelectStatus from '../../infrastructure/common/input/select-status';
+import Constants from '../../core/common/constants';
+import { VideoInterface } from '../../infrastructure/interface/video/video.interface';
 
 const SlugVideoManagement = () => {
-    const [detail, setDetail] = useState<any>({});
+    const [detail, setDetail] = useState<VideoInterface>();
     const [loading, setLoading] = useState<boolean>(false);
     const [validate, setValidate] = useState<any>({});
     const [submittedTime, setSubmittedTime] = useState<any>();
@@ -69,6 +72,7 @@ const SlugVideoManagement = () => {
                 name: detail.name,
                 link_url: detail.link_url,
                 description: detail.description,
+                active: detail.active
             });
         };
     }, [detail]);
@@ -83,6 +87,7 @@ const SlugVideoManagement = () => {
                         name: dataRequest.name,
                         link_url: dataRequest.link_url,
                         description: dataRequest.description,
+                        active: dataRequest.active
                     },
                     onBack,
                     setLoading
@@ -135,7 +140,7 @@ const SlugVideoManagement = () => {
                                     submittedTime={submittedTime}
                                 />
                             </Col>
-                            <Col span={24}>
+                            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                                 <InputTextCommon
                                     label={"URL"}
                                     attribute={"link_url"}
@@ -146,6 +151,22 @@ const SlugVideoManagement = () => {
                                     validate={validate}
                                     setValidate={setValidate}
                                     submittedTime={submittedTime}
+                                />
+                            </Col>
+                            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                <InputSelectStatus
+                                    label={"Trạng thái"}
+                                    attribute={"active"}
+                                    isRequired={true}
+                                    dataAttribute={dataRequest.active}
+                                    setData={setDataRequest}
+                                    disabled={false}
+                                    validate={validate}
+                                    setValidate={setValidate}
+                                    submittedTime={submittedTime}
+                                    listDataOfItem={Constants.DisplayConfig.List}
+                                    valueName='value'
+                                    labelName='label'
                                 />
                             </Col>
                             <Col span={24}>

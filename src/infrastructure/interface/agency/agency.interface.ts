@@ -9,6 +9,7 @@ export interface AgencyInterface {
     province: string;
     district: string;
     star_rate: number;
+    active: boolean;
     agency_categories_type: AgencyCategory[]
 }
 

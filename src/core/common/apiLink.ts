@@ -6,15 +6,15 @@ export class Endpoint {
         static RefreshToken = "/auth/refresh-token"
     }
     static Banner = class {
-        static Get = "/banner"
-        static GetById = "/banner"
+        static Get = "/banner/private"
+        static GetById = "/banner/private"
         static Add = "/banner"
         static Update = "/banner"
         static Delete = "/banner"
     }
     static Product = class {
-        static Get = "/product"
-        static GetById = "/product"
+        static Get = "/product/private"
+        static GetById = "/product/private"
         static Add = "/product"
         static Update = "/product"
         static Delete = "/product"
@@ -41,8 +41,8 @@ export class Endpoint {
         static Delete = "/category"
     }
     static Blog = class {
-        static Get = "/blog"
-        static GetById = "/blog"
+        static Get = "/blog/private"
+        static GetById = "/blog/private"
         static Add = "/blog"
         static Update = "/blog"
         static Delete = "/blog"
@@ -77,8 +77,8 @@ export class Endpoint {
     }
 
     static Agency = class {
-        static Get = "/agency"
-        static GetById = "/agency"
+        static Get = "/agency/private"
+        static GetById = "/agency/private"
         static Add = "/agency"
         static Update = "/agency"
         static Delete = "/agency"
@@ -89,8 +89,8 @@ export class Endpoint {
     }
 
     static Video = class {
-        static Get = "/video"
-        static GetById = "/video"
+        static Get = "/video/private"
+        static GetById = "/video/private"
         static Add = "/video"
         static Update = "/video"
         static Delete = "/video"

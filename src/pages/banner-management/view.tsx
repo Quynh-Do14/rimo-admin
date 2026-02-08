@@ -14,6 +14,7 @@ import InputTextCommon from '../../infrastructure/common/input/input-text-common
 import InputSelectCommon from '../../infrastructure/common/input/select-common';
 import Constants from '../../core/common/constants';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
+import InputSelectStatus from '../../infrastructure/common/input/select-status';
 
 
 const SlugBannerManagement = () => {
@@ -76,6 +77,7 @@ const SlugBannerManagement = () => {
                 image: configImageURL(detail.image),
                 name: detail.name,
                 type: detail.type,
+                active: detail.active,
 
             });
         };
@@ -89,6 +91,7 @@ const SlugBannerManagement = () => {
                 const payload: any = {
                     name: dataRequest.name,
                     type: dataRequest.type,
+                    active: dataRequest.active,
                 };
 
                 if (dataRequest.image !== originalImage) {
@@ -157,7 +160,7 @@ const SlugBannerManagement = () => {
                                     submittedTime={submittedTime}
                                 />
                             </Col>
-                            <Col span={24}>
+                            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                                 <InputSelectCommon
                                     label={"Loại ảnh"}
                                     attribute={"type"}
@@ -171,6 +174,22 @@ const SlugBannerManagement = () => {
                                     listDataOfItem={Constants.BannerType.List}
                                     labelName='label'
                                     valueName='value'
+                                />
+                            </Col>
+                            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                <InputSelectStatus
+                                    label={"Trạng thái"}
+                                    attribute={"active"}
+                                    isRequired={true}
+                                    dataAttribute={dataRequest.active}
+                                    setData={setDataRequest}
+                                    disabled={false}
+                                    validate={validate}
+                                    setValidate={setValidate}
+                                    submittedTime={submittedTime}
+                                    listDataOfItem={Constants.DisplayConfig.List}
+                                    valueName='value'
+                                    labelName='label'
                                 />
                             </Col>
                         </Row>

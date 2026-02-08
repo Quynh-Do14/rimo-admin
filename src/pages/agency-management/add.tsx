@@ -19,6 +19,8 @@ import ComboBoxCommon from '../../infrastructure/common/input/combo-box-common';
 import { useRecoilValue } from 'recoil';
 import { CategoryAgencyState } from '../../core/atoms/category/categoryState';
 import InputNumberCommon from '../../infrastructure/common/input/input-number';
+import InputSelectStatus from '../../infrastructure/common/input/select-status';
+import Constants from '../../core/common/constants';
 
 
 const AddAgencyManagement = () => {
@@ -66,6 +68,7 @@ const AddAgencyManagement = () => {
                     long: dataRequest.long,
                     lat: dataRequest.lat,
                     phone_number: dataRequest.phone_number,
+                    active: dataRequest.active,
                     star_rate: dataRequest.star_rate,
                     agency_categories_type: JSON.stringify(dataRequest.agency_categories_type)
                 },
@@ -199,7 +202,7 @@ const AddAgencyManagement = () => {
                             </Col>
                             <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                                 <InputSelectProvince
-                                    label={"Tỉnh"}
+                                    label={"Tỉnh/TP"}
                                     attribute={"province"}
                                     isRequired={true}
                                     dataAttribute={dataRequest.province}
@@ -245,17 +248,20 @@ const AddAgencyManagement = () => {
                                     labelName='name'
                                 />
                             </Col>
-                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                <InputNumberCommon
-                                    label={"Đánh giá sao"}
-                                    attribute={"star_rate"}
+                            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                <InputSelectStatus
+                                    label={"Trạng thái"}
+                                    attribute={"active"}
                                     isRequired={true}
-                                    dataAttribute={dataRequest.star_rate}
+                                    dataAttribute={dataRequest.active}
                                     setData={setDataRequest}
                                     disabled={false}
                                     validate={validate}
                                     setValidate={setValidate}
                                     submittedTime={submittedTime}
+                                    listDataOfItem={Constants.DisplayConfig.List}
+                                    valueName='value'
+                                    labelName='label'
                                 />
                             </Col>
                             <Col xs={24} sm={24} md={24} lg={12} xl={12}>
@@ -277,6 +283,19 @@ const AddAgencyManagement = () => {
                                     attribute={"lat"}
                                     isRequired={true}
                                     dataAttribute={dataRequest.lat}
+                                    setData={setDataRequest}
+                                    disabled={false}
+                                    validate={validate}
+                                    setValidate={setValidate}
+                                    submittedTime={submittedTime}
+                                />
+                            </Col>
+                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                <InputNumberCommon
+                                    label={"Đánh giá sao"}
+                                    attribute={"star_rate"}
+                                    isRequired={true}
+                                    dataAttribute={dataRequest.star_rate}
                                     setData={setDataRequest}
                                     disabled={false}
                                     validate={validate}

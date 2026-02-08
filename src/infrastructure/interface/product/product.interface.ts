@@ -15,6 +15,7 @@ export interface ProductInterface {
     brand_name?: string | null;
     images: string[];
     productFigure: ProductFigure[]
+    active: boolean;
     sameCategoryProducts: ProductInterface[]
 }
 

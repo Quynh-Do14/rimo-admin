@@ -12,6 +12,8 @@ import ButtonCommon from '../../infrastructure/common/button/ButtonCommon';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
 import videoService from '../../infrastructure/repository/video/video.service';
 import TextAreaCommon from '../../infrastructure/common/input/textarea-common';
+import InputSelectStatus from '../../infrastructure/common/input/select-status';
+import Constants from '../../core/common/constants';
 
 const AddVideoManagement = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -49,6 +51,7 @@ const AddVideoManagement = () => {
                     name: dataRequest.name,
                     link_url: dataRequest.link_url,
                     description: dataRequest.description,
+                    active: dataRequest.active,
                 },
                     onBack,
                     setLoading
@@ -104,7 +107,7 @@ const AddVideoManagement = () => {
                                     submittedTime={submittedTime}
                                 />
                             </Col>
-                            <Col span={24}>
+                            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                                 <InputTextCommon
                                     label={"URL"}
                                     attribute={"link_url"}
@@ -115,6 +118,22 @@ const AddVideoManagement = () => {
                                     validate={validate}
                                     setValidate={setValidate}
                                     submittedTime={submittedTime}
+                                />
+                            </Col>
+                            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                <InputSelectStatus
+                                    label={"Trạng thái"}
+                                    attribute={"active"}
+                                    isRequired={true}
+                                    dataAttribute={dataRequest.active}
+                                    setData={setDataRequest}
+                                    disabled={false}
+                                    validate={validate}
+                                    setValidate={setValidate}
+                                    submittedTime={submittedTime}
+                                    listDataOfItem={Constants.DisplayConfig.List}
+                                    valueName='value'
+                                    labelName='label'
                                 />
                             </Col>
                             <Col span={24}>

@@ -17,6 +17,8 @@ import InputSelectCommon from '../../infrastructure/common/input/select-common';
 import TextAreaCommon from '../../infrastructure/common/input/textarea-common';
 import TextEditorCommon from '../../infrastructure/common/input/text-editor-common';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
+import InputSelectStatus from '../../infrastructure/common/input/select-status';
+import Constants from '../../core/common/constants';
 
 
 const SlugBlogManagement = () => {
@@ -82,7 +84,7 @@ const SlugBlogManagement = () => {
                 short_description: detail.short_description,
                 blog_category_id: detail.blog_category_id,
                 description: detail.description,
-
+                active: detail.active,
             });
         };
     }, [detail]);
@@ -97,6 +99,7 @@ const SlugBlogManagement = () => {
                     short_description: dataRequest.short_description,
                     blog_category_id: dataRequest.blog_category_id,
                     description: dataRequest.description,
+                    active: dataRequest.active,
                 };
 
                 if (dataRequest.image !== originalImage) {
@@ -166,8 +169,8 @@ const SlugBlogManagement = () => {
                                         submittedTime={submittedTime}
                                     />
                                 </Col>
-                                <Col span={24}>
-                                    <InputSelectCommon
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputSelectStatus
                                         label={"Danh mục"}
                                         attribute={"blog_category_id"}
                                         isRequired={true}
@@ -178,6 +181,22 @@ const SlugBlogManagement = () => {
                                         setValidate={setValidate}
                                         submittedTime={submittedTime}
                                         listDataOfItem={categoryBlog}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputSelectStatus
+                                        label={"Trạng thái"}
+                                        attribute={"active"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.active}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                        listDataOfItem={Constants.DisplayConfig.List}
+                                        valueName='value'
+                                        labelName='label'
                                     />
                                 </Col>
                                 <Col span={24}>

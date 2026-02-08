@@ -1,0 +1,95 @@
+/* StatusCommon.module.css */
+.statusContainer {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 14px;
+  border-radius: 99px;
+  font-size: 13px; /* Giảm nhẹ font size để trông gọn hơn */
+  font-weight: 600; /* Tăng độ dày chữ để màu chữ rõ hơn */
+  border: 1px solid transparent; /* Tạo khung sẵn */
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+/* Style cho trạng thái Active - Xanh Teal đậm đà */
+.statusActive {
+  background-color: #ccfbf1; /* Nền xanh rõ hơn */
+  color: #0369a1; /* Chữ xanh biển đậm sâu */
+  border-color: #99f6e4; /* Viền nhẹ giúp tách khối */
+}
+
+.statusActive .statusDot {
+  background-color: #0d9488;
+  box-shadow: 0 0 0 2px #f0fdfa; /* Tạo vòng trắng nhỏ quanh chấm */
+}
+
+/* Style cho trạng thái Inactive - Xám tro rõ nét */
+.statusInactive {
+  background-color: #f1f5f9; /* Nền xám xanh rõ ràng */
+  color: #475569; /* Chữ xám Slate đậm */
+  border-color: #e2e8f0;
+}
+
+.statusInactive .statusDot {
+  background-color: #64748b;
+}
+
+.whiteSpaceNowrap {
+  white-space: nowrap;
+}
+
+.badgeContainer {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 6px; /* Bo góc nhẹ nhìn hiện đại hơn */
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.indicatorDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+/* 1. Quản trị viên */
+.statusAdmin {
+  background-color: #f3e8ff;
+  color: #6b21a8;
+  border-color: #d8b4fe;
+}
+.statusAdmin .indicatorDot {
+  background-color: #9333ea;
+}
+
+/* 2. Seller */
+.statusSeller {
+  background-color: #e0f2fe;
+  color: #075985;
+  border-color: #bae6fd;
+}
+.statusSeller .indicatorDot {
+  background-color: #0284c7;
+}
+
+/* 3. Viết bài */
+.statusEditor {
+  background-color: #ffedd5;
+  color: #9a3412;
+  border-color: #fed7aa;
+}
+.statusEditor .indicatorDot {
+  background-color: #ea580c;
+}
+
+.textTruncate {
+  white-space: nowrap;
+}

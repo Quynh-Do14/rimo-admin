@@ -21,6 +21,8 @@ const SelectSearchProvince = (props: Props) => {
 
     return (
         <Select
+            allowClear
+            showSearch
             onChange={onChange}
             className="form-control"
             value={value}

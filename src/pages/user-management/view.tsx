@@ -12,6 +12,7 @@ import InputTextCommon from '../../infrastructure/common/input/input-text-common
 import InputSelectCommon from '../../infrastructure/common/input/select-common';
 import Constants from '../../core/common/constants';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
+import InputSelectStatus from '../../infrastructure/common/input/select-status';
 
 
 const SlugUserManagement = () => {
@@ -71,8 +72,9 @@ const SlugUserManagement = () => {
             setDataRequest({
                 name: detail.name,
                 email: detail.email,
+                active: detail.active,
+                phone_number: detail.phone_number,
                 role_id: detail.role_id,
-
             });
         };
     }, [detail]);
@@ -80,12 +82,15 @@ const SlugUserManagement = () => {
     const onUpdateAsync = async () => {
         await setSubmittedTime(Date.now());
         if (isValidData()) {
+            const active = dataRequest.active === 'true';
             try {
                 await userService.UpdateUser(
                     String(param.id),
                     {
                         name: dataRequest.name,
                         email: dataRequest.email,
+                        active: active,
+                        phone_number: dataRequest.phone_number,
                         role_id: dataRequest.role_id,
                     },
                     onBack,
@@ -154,7 +159,7 @@ const SlugUserManagement = () => {
                         />
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                        <InputSelectCommon
+                        <InputSelectStatus
                             label={"Phân quyền"}
                             attribute={"role_id"}
                             isRequired={true}
@@ -165,6 +170,35 @@ const SlugUserManagement = () => {
                             setValidate={setValidate}
                             submittedTime={submittedTime}
                             listDataOfItem={Constants.Roles.List}
+                            valueName='value'
+                            labelName='label'
+                        />
+                    </Col>
+                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                        <InputTextCommon
+                            label={"Số điện thoại"}
+                            attribute={"phone_number"}
+                            isRequired={false}
+                            dataAttribute={dataRequest.phone_number}
+                            setData={setDataRequest}
+                            disabled={false}
+                            validate={validate}
+                            setValidate={setValidate}
+                            submittedTime={submittedTime}
+                        />
+                    </Col>
+                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                        <InputSelectStatus
+                            label={"Khóa tài khoản"}
+                            attribute={"active"}
+                            isRequired={true}
+                            dataAttribute={dataRequest.active}
+                            setData={setDataRequest}
+                            disabled={false}
+                            validate={validate}
+                            setValidate={setValidate}
+                            submittedTime={submittedTime}
+                            listDataOfItem={Constants.DisableAccount.List}
                             valueName='value'
                             labelName='label'
                         />

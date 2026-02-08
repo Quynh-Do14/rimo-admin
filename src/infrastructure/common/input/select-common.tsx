@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { MessageError } from '../controls/MessageError';
 import { validateFields } from '../../helper/helper';
-import styles from "../../../asset/css/common/input.module.css"
+import "../../../asset/css/common/input-custom.css"
+import { Select } from 'antd';
 type Props = {
     label: string;
     attribute: string;
@@ -41,8 +42,8 @@ const InputSelectCommon = ({
         }
     };
 
-    const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const selectedValue = e.target.value;
+    const onChange = (e: string) => {
+        const selectedValue = e;
         setValue(selectedValue);
         setData({ [attribute]: selectedValue });
     };
@@ -62,31 +63,34 @@ const InputSelectCommon = ({
     }, [submittedTime]);
 
     return (
-        <div className={styles.inputCommon}>
+        <div className='input-custom'>
             <label htmlFor={`${attribute}-input`}>
                 <span>
                     {label} {isRequired && <span className="required">*</span>}
                 </span>
             </label>
 
-            <select
+            <Select
                 id={`${attribute}-input`}
+                showSearch={true}
                 value={value}
+                style={{ width: '100%' }}
                 onChange={onChange}
                 onBlur={() => validateBlur(false)}
                 disabled={disabled}
+
             >
-                <option value="">-- Chọn {labelLower} --</option>
+                <Select.Option value="">-- Chọn {labelLower} --</Select.Option>
                 {listDataOfItem?.map((item, index) => (
-                    <option
+                    <Select.Option
                         key={index}
                         value={item[valueName]}
                         title={item[labelName]}
                     >
                         {item[labelName]}
-                    </option>
+                    </Select.Option>
                 ))}
-            </select>
+            </Select>
 
             <MessageError
                 isError={validate[attribute]?.isError || false}

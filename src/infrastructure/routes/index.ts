@@ -44,7 +44,7 @@ export const privateRoutes = [
         path: ROUTE_PATH.MAIN_LAYOUT,
         component: AdminLayout,
         private: true,
-        role: ["ADMIN", 'SELLER', 'ARTICLE']
+        role: ["ADMIN", 'SELLER', 'WRITTER']
     },
     {
         path: ROUTE_PATH.USER_MANAGEMENT,
@@ -88,38 +88,38 @@ export const privateRoutes = [
         path: ROUTE_PATH.CATEGORY_BLOG_MANAGEMENT,
         component: BlogCategoryListPage,
         private: true,
-        role: ["ADMIN", 'ARTICLE']
+        role: ["ADMIN", 'WRITTER']
     },
     {
         path: ROUTE_PATH.ADD_CATEGORY_BLOG_MANAGEMENT,
         component: AddCategoryBlogManagement,
         private: true,
-        role: ["ADMIN", 'ARTICLE']
+        role: ["ADMIN", 'WRITTER']
     },
     {
         path: ROUTE_PATH.VIEW_CATEGORY_BLOG_MANAGEMENT,
         component: SlugCategoryBlogManagement,
         private: true,
-        role: ["ADMIN", 'ARTICLE']
+        role: ["ADMIN", 'WRITTER']
     },
 
     {
         path: ROUTE_PATH.BLOG_MANAGEMENT,
         component: BlogListPage,
         private: true,
-        role: ["ADMIN", 'ARTICLE']
+        role: ["ADMIN", 'WRITTER']
     },
     {
         path: ROUTE_PATH.ADD_BLOG_MANAGEMENT,
         component: AddBlogManagement,
         private: true,
-        role: ["ADMIN", 'ARTICLE']
+        role: ["ADMIN", 'WRITTER']
     },
     {
         path: ROUTE_PATH.VIEW_BLOG_MANAGEMENT,
         component: SlugBlogManagement,
         private: true,
-        role: ["ADMIN", 'ARTICLE']
+        role: ["ADMIN", 'WRITTER']
     },
 
     {

@@ -3,6 +3,7 @@ export interface VideoInterface {
     name: string;
     description?: string;
     link_url: string;
+    active: boolean;
 }
 
 export interface VideoParams {

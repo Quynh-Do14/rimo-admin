@@ -21,7 +21,8 @@ import InputArrayTextCommon from '../../infrastructure/common/input/input-array/
 import TextAreaCommon from '../../infrastructure/common/input/textarea-common';
 import TextEditorCommon from '../../infrastructure/common/input/text-editor-common';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
-
+import InputSelectStatus from '../../infrastructure/common/input/select-status';
+import Constants from '../../core/common/constants';
 
 const AddProductManagement = () => {
     const [figureList, setFigureList] = useState<any[]>([
@@ -80,10 +81,11 @@ const AddProductManagement = () => {
             formData.append('category_id', dataRequest.category_id);
             // formData.append('brand_id', dataRequest.brand_id);
             formData.append('price', dataRequest.price);
+            formData.append('active', dataRequest.active);
             formData.append('price_sale', dataRequest.price_sale || 0);
             formData.append('short_description', dataRequest.short_description);
             formData.append('description', dataRequest.description);
-            formData.append('productFigure', JSON.stringify(figureList));
+            formData.append('productFigure', JSON.stringify(figureList.filter(item => item.key && item.value)));
 
             try {
                 await productService.AddProductAdmin(formData, onBack, setLoading);
@@ -163,7 +165,7 @@ const AddProductManagement = () => {
                                     />
                                 </Col>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                    <InputSelectCommon
+                                    <InputSelectStatus
                                         label={"Danh mục"}
                                         attribute={"category_id"}
                                         isRequired={true}
@@ -216,6 +218,22 @@ const AddProductManagement = () => {
                                         submittedTime={submittedTime}
                                     />
                                 </Col>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputSelectStatus
+                                        label={"Trạng thái"}
+                                        attribute={"active"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.active}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                        listDataOfItem={Constants.DisplayConfig.List}
+                                        valueName='value'
+                                        labelName='label'
+                                    />
+                                </Col>
                                 {/* <Col xs={24} sm={24} md={12}>
                                     <InputTextCommon
                                         label={"Bảo hành"}
@@ -246,7 +264,7 @@ const AddProductManagement = () => {
                                     <UploadListImage
                                         label={"Hình ảnh"}
                                         attribute={"images"}
-                                        isRequired={true}
+                                        isRequired={false}
                                         dataAttribute={dataRequest.images}
                                         dataAttributeImageFiles={[]}
                                         setData={setDataRequest}
@@ -279,7 +297,7 @@ const AddProductManagement = () => {
                                         {figureList.map((item, index) => (
                                             <div key={index} className={styles.figureBox}>
                                                 <div className={styles.figureIndex}>
-                                                    <span>Ưu điểm {index + 1}</span>
+                                                    <span>Thông số {index + 1}</span>
                                                     <div onClick={() => onDeleteOption(index)}>
                                                         <i className="fa fa-trash-o" aria-hidden="true"></i>
                                                     </div>
@@ -289,7 +307,7 @@ const AddProductManagement = () => {
                                                         <InputArrayTextCommon
                                                             label={"Tên thông số"}
                                                             attribute={"key"}
-                                                            isRequired={true}
+                                                            isRequired={false}
                                                             dataAttribute={item.key}
                                                             setData={setFigureList}
                                                             disabled={false}
@@ -304,7 +322,7 @@ const AddProductManagement = () => {
                                                         <InputArrayTextCommon
                                                             label={"Giá trị"}
                                                             attribute={"value"}
-                                                            isRequired={true}
+                                                            isRequired={false}
                                                             dataAttribute={item.value}
                                                             setData={setFigureList}
                                                             disabled={false}

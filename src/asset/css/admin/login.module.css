@@ -1,7 +1,7 @@
 /* ===== Main Container ===== */
 .loginPage {
   min-height: 100vh;
-  background: #0A0A0A;
+  background: #0a0a0a;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -16,9 +16,16 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
-    radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.02) 0%, transparent 50%);
+  background-image: radial-gradient(
+      circle at 20% 30%,
+      rgba(255, 215, 0, 0.03) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(255, 215, 0, 0.02) 0%,
+      transparent 50%
+    );
   pointer-events: none;
 }
 
@@ -28,7 +35,11 @@
   right: -200px;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 215, 0, 0.1) 0%,
+    transparent 70%
+  );
   filter: blur(60px);
   pointer-events: none;
 }
@@ -45,19 +56,18 @@
   grid-template-columns: 1fr 1fr;
   min-height: 700px;
   backdrop-filter: blur(10px);
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255, 215, 0, 0.05);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 215, 0, 0.05);
 }
 
 /* ===== Left Panel - Branding ===== */
 .brandPanel {
-  background: linear-gradient(135deg, #111111 0%, #0A0A0A 100%);
+  background: linear-gradient(135deg, #111111 0%, #0a0a0a 100%);
   padding: 60px 40px;
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .brandPanel::before {
@@ -67,7 +77,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #FFD700, transparent);
+  background: linear-gradient(90deg, transparent, #ffd700, transparent);
 }
 
 .brandContent {
@@ -87,23 +97,22 @@
 .logoIcon {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #1A1A1A 0%, #0F0F0F 100%);
-  border: 2px solid #FFD700;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+  border: 2px solid #ffd700;
   border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   z-index: 2;
-  box-shadow: 
-    0 10px 30px rgba(255, 215, 0, 0.15),
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .logoText {
   font-size: 36px;
   font-weight: 800;
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -116,7 +125,11 @@
   transform: translate(-50%, -50%);
   width: 120px;
   height: 120px;
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 215, 0, 0.2) 0%,
+    transparent 70%
+  );
   filter: blur(20px);
   z-index: 1;
 }
@@ -130,7 +143,7 @@
 }
 
 .brandGradient {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+  background: linear-gradient(135deg, #ffd700 0%, #ffa500 50%, #ffd700 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -139,8 +152,13 @@
 }
 
 @keyframes gradientFlow {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .brandSubtitle {
@@ -199,24 +217,26 @@
 .formWrapper {
   width: 100%;
   max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
 
 /* Form Header */
 .formHeader {
-  margin-bottom: 40px;
   text-align: center;
 }
 
 .formTitle {
   font-size: 32px;
   font-weight: 700;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0 0 10px;
   line-height: 1.2;
 }
 
 .highlight {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -252,7 +272,7 @@
 }
 
 .labelIcon {
-  color: #FFD700;
+  color: #ffd700;
   opacity: 0.8;
 }
 
@@ -266,7 +286,7 @@
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 15px;
   font-weight: 500;
   transition: all 0.3s ease;
@@ -279,7 +299,7 @@
 .textInput:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.08);
-  border-color: #FFD700;
+  border-color: #ffd700;
 }
 
 .inputBorder {
@@ -290,15 +310,13 @@
   bottom: 0;
   border-radius: 12px;
   pointer-events: none;
-  box-shadow: 
-    0 0 0 0 rgba(255, 215, 0, 0),
+  box-shadow: 0 0 0 0 rgba(255, 215, 0, 0),
     inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
 }
 
 .textInput:focus ~ .inputBorder {
-  box-shadow: 
-    0 0 0 3px rgba(255, 215, 0, 0.1),
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1),
     inset 0 0 0 1px rgba(255, 215, 0, 0.3);
 }
 
@@ -316,7 +334,7 @@
 }
 
 .passwordToggle:hover {
-  color: #FFD700;
+  color: #ffd700;
 }
 
 /* Form Options */
@@ -350,8 +368,8 @@
 }
 
 .checkboxInput:checked + .checkboxCheckmark {
-  background: #FFD700;
-  border-color: #FFD700;
+  background: #ffd700;
+  border-color: #ffd700;
 }
 
 .checkboxInput:checked + .checkboxCheckmark::after {
@@ -369,21 +387,21 @@
 
 .forgotPassword {
   font-size: 14px;
-  color: #FFD700;
+  color: #ffd700;
   text-decoration: none;
   font-weight: 500;
   transition: all 0.3s ease;
 }
 
 .forgotPassword:hover {
-  color: #FFA500;
+  color: #ffa500;
   text-decoration: underline;
 }
 
 /* Submit Button */
 .submitButton {
   position: relative;
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
   color: #000000;
   border: none;
   padding: 18px 24px;
@@ -396,14 +414,12 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  margin-top: 8px;
   overflow: hidden;
 }
 
 .submitButton:hover {
   transform: translateY(-2px);
-  box-shadow: 
-    0 10px 30px rgba(255, 215, 0, 0.3),
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3),
     0 0 0 1px rgba(255, 215, 0, 0.5);
 }
 
@@ -417,7 +433,12 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
   transition: left 0.5s ease;
 }
 
@@ -439,7 +460,12 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 215, 0, 0.2),
+    transparent
+  );
 }
 
 .dividerText {
@@ -505,14 +531,14 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: #FFD700;
+  color: #ffd700;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
 .registerLink:hover {
-  color: #FFA500;
+  color: #ffa500;
   gap: 10px;
 }
 
@@ -545,7 +571,7 @@
 }
 
 .footerLink:hover {
-  color: #FFD700;
+  color: #ffd700;
 }
 
 .linkSeparator {
@@ -560,11 +586,11 @@
     max-width: 500px;
     min-height: auto;
   }
-  
+
   .brandPanel {
     padding: 40px;
   }
-  
+
   .formPanel {
     padding: 40px;
   }
@@ -574,20 +600,20 @@
   .loginPage {
     padding: 10px;
   }
-  
+
   .brandPanel,
   .formPanel {
     padding: 30px 20px;
   }
-  
+
   .brandTitle {
     font-size: 32px;
   }
-  
+
   .formTitle {
     font-size: 26px;
   }
-  
+
   .socialButtons {
     grid-template-columns: 1fr;
   }
@@ -596,83 +622,87 @@
 /* ===== Dark/Light Mode Support ===== */
 @media (prefers-color-scheme: light) {
   .loginPage {
-    background: #FAFAFA;
+    background: #fafafa;
   }
-  
+
   .backgroundPattern {
-    background-image: 
-      radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.03) 0%, transparent 50%);
+    background-image: radial-gradient(
+        circle at 20% 30%,
+        rgba(255, 215, 0, 0.05) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 80% 70%,
+        rgba(255, 215, 0, 0.03) 0%,
+        transparent 50%
+      );
   }
-  
+
   .loginContainer {
     background: rgba(255, 255, 255, 0.95);
     border: 1px solid rgba(255, 215, 0, 0.2);
-    box-shadow: 
-      0 20px 60px rgba(0, 0, 0, 0.1),
-      0 0 0 1px rgba(255, 215, 0, 0.1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 215, 0, 0.1);
   }
-  
+
   .brandPanel {
-    background: linear-gradient(135deg, #FFFFFF 0%, #F5F5F5 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
   }
-  
+
   .brandPanel::before {
-    background: linear-gradient(90deg, transparent, #FFD700, transparent);
+    background: linear-gradient(90deg, transparent, #ffd700, transparent);
   }
-  
+
   .logoIcon {
-    background: linear-gradient(135deg, #FFFFFF 0%, #F0F0F0 100%);
-    box-shadow: 
-      0 10px 30px rgba(255, 215, 0, 0.1),
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1),
       inset 0 1px 0 rgba(255, 255, 255, 0.5);
   }
-  
+
   .brandSubtitle {
     color: rgba(0, 0, 0, 0.7);
   }
-  
+
   .featureItem {
     background: rgba(255, 215, 0, 0.08);
     border: 1px solid rgba(255, 215, 0, 0.2);
   }
-  
+
   .featureItem span {
     color: rgba(0, 0, 0, 0.9);
   }
-  
+
   .formPanel {
-    background: #FFFFFF;
+    background: #ffffff;
   }
-  
+
   .formTitle,
   .inputLabel {
     color: #000000;
   }
-  
+
   .formSubtitle {
     color: rgba(0, 0, 0, 0.6);
   }
-  
+
   .textInput {
     background: rgba(0, 0, 0, 0.02);
     border: 1px solid rgba(0, 0, 0, 0.1);
     color: #000000;
   }
-  
+
   .textInput::placeholder {
     color: rgba(0, 0, 0, 0.3);
   }
-  
+
   .checkboxLabel,
   .registerText {
     color: rgba(0, 0, 0, 0.8);
   }
-  
+
   .copyright {
     color: rgba(0, 0, 0, 0.4);
   }
-  
+
   .footerLink {
     color: rgba(0, 0, 0, 0.5);
   }

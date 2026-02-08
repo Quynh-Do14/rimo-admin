@@ -1,0 +1,51 @@
+.input-custom label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.input-custom .required {
+  color: #e74c3c;
+  margin-left: 4px;
+}
+
+.input-custom input::placeholder,
+.input-custom textarea::placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+/* Thêm styles cho trạng thái lỗi nếu cần */
+.input-custom .error {
+  border-color: #e74c3c;
+}
+
+.input-custom .error-message {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 4px;
+  display: none;
+}
+
+.input-custom .error + .error-message {
+  display: block;
+}
+
+/* Căn lề container nếu có */
+.input-custom {
+  margin-bottom: 20px;
+}
+
+.ant-select.ant-select-outlined.ant-select-css-var.ant-select-single.ant-select-show-arrow.ant-select-show-search,
+.ant-select.ant-select-outlined.ant-select-multiple.ant-select-show-arrow.ant-select-show-search {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  line-height: 1.5;
+  box-sizing: border-box;
+  border-radius: 0;
+}

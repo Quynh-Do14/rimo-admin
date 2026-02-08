@@ -1,9 +1,10 @@
 import { Endpoint } from "../../../core/common/apiLink";
 import { FailMessage, SuccessMessage } from "../../common/toast/message";
+import { ProductParams } from "../../interface/product/product.interface";
 import { RequestService } from "../../utilities/response";
 
 class ProductService {
-    async GetProduct(params: any, setLoading: Function) {
+    async GetProduct(params: ProductParams, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService

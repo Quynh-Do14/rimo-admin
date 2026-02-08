@@ -13,6 +13,7 @@ import InputPasswordCommon from '../../infrastructure/common/input/input-passwor
 import InputSelectCommon from '../../infrastructure/common/input/select-common';
 import Constants from '../../core/common/constants';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
+import InputSelectStatus from '../../infrastructure/common/input/select-status';
 
 
 const AddUserManagement = () => {
@@ -51,6 +52,7 @@ const AddUserManagement = () => {
                     name: dataRequest.name,
                     email: dataRequest.email,
                     password: dataRequest.password,
+                    phone_number: dataRequest.phone_number,
                     role_id: dataRequest.role_id,
                 },
                     onBack,
@@ -132,7 +134,7 @@ const AddUserManagement = () => {
                         />
                     </Col>
                     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                        <InputSelectCommon
+                        <InputSelectStatus
                             label={"Phân quyền"}
                             attribute={"role_id"}
                             isRequired={true}
@@ -145,6 +147,19 @@ const AddUserManagement = () => {
                             listDataOfItem={Constants.Roles.List}
                             valueName='value'
                             labelName='label'
+                        />
+                    </Col>
+                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                        <InputTextCommon
+                            label={"Số điện thoại"}
+                            attribute={"phone_number"}
+                            isRequired={false}
+                            dataAttribute={dataRequest.phone_number}
+                            setData={setDataRequest}
+                            disabled={false}
+                            validate={validate}
+                            setValidate={setValidate}
+                            submittedTime={submittedTime}
                         />
                     </Col>
                 </Row>

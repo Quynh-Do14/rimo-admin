@@ -14,6 +14,7 @@ import { PaginationCommon } from '../../infrastructure/common/pagination/Paginat
 import DialogConfirmCommon from '../../infrastructure/common/modal/dialogConfirm';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
 import SelectSearchCommon from '../../infrastructure/common/input/select-search-common';
+import { StatusCommon } from '../../infrastructure/common/controls/Status';
 
 let timeout: any
 const BannerListPage = () => {
@@ -23,6 +24,7 @@ const BannerListPage = () => {
     const [pageSize, setPageSize] = useState<number>(10);
     const [searchText, setSearchText] = useState<string>("");
     const [type, setType] = useState<string>("");
+    const [active, setActive] = useState<string>("");
 
     const [idSelected, setIdSelected] = useState<string>("");
 
@@ -32,12 +34,13 @@ const BannerListPage = () => {
 
     const router = useNavigate();
 
-    const onGetListAsync = async ({ search = "", type = "", size = pageSize, page = currentPage }) => {
+    const onGetListAsync = async ({ search = "", type = "", active = "", size = pageSize, page = currentPage }) => {
         const param = {
             page: page,
             limit: size,
             search: search,
-            type: type
+            type: type,
+            active: active
         }
         try {
             await bannerService.GetBanner(
@@ -52,15 +55,15 @@ const BannerListPage = () => {
             console.error(error)
         }
     }
-    const onSearch = async (search = "", type = "", size = pageSize, page = 1) => {
-        await onGetListAsync({ search: search, type: type, size: size, page: page });
+    const onSearch = async (search = "", type = "", active = "", size = pageSize, page = 1) => {
+        await onGetListAsync({ search: search, type: type, active: active, size: size, page: page });
     };
 
     const onChangeSearchText = (e: any) => {
         setSearchText(e.target.value);
         clearTimeout(timeout);
         timeout = setTimeout(() => {
-            onSearch(e.target.value, type, pageSize, currentPage,).then((_) => { });
+            onSearch(e.target.value, type, active, pageSize, currentPage,).then((_) => { });
         }, Constants.DEBOUNCE_SEARCH);
     };
 
@@ -70,19 +73,24 @@ const BannerListPage = () => {
 
     const onChangePage = async (value: any) => {
         setCurrentPage(value)
-        await onSearch(searchText, type, pageSize, value).then(_ => { });
+        await onSearch(searchText, type, active, pageSize, value).then(_ => { });
     };
 
     const onChangeType = async (value: any) => {
         setType(value)
-        await onSearch(searchText, value, pageSize, currentPage).then(_ => { });
+        await onSearch(searchText, value, active, pageSize, currentPage).then(_ => { });
     };
 
     const onPageSizeChanged = async (value: any) => {
         setPageSize(value)
         setCurrentPage(1)
-        await onSearch(searchText, value, 1).then(_ => { });
+        await onSearch(searchText, type, active, value, 1).then(_ => { });
     };
+    const onChangeActive = async (value: any) => {
+        setActive(value)
+        await onSearch(searchText, type, value, pageSize, currentPage).then(_ => { });
+    };
+
     // Xóa bài
     const onOpenModalDelete = (id: any) => {
         setIsDeleteModal(true);
@@ -123,7 +131,7 @@ const BannerListPage = () => {
             <div className={styles.manage_container}>
                 <h2>Quản lý banner</h2>
                 <Row gutter={[15, 15]}>
-                    <Col xs={24} md={10}>
+                    <Col xs={24} md={7}>
                         <Input
                             className="form-control"
                             placeholder="Tìm kiếm theo tên"
@@ -131,7 +139,7 @@ const BannerListPage = () => {
                             onChange={onChangeSearchText}
                         />
                     </Col>
-                    <Col xs={24} md={10}>
+                    <Col xs={24} md={7}>
                         <SelectSearchCommon
                             listDataOfItem={Constants.BannerType.List}
                             onChange={onChangeType}
@@ -141,7 +149,17 @@ const BannerListPage = () => {
                             valueName='value'
                         />
                     </Col>
-                    <Col xs={24} md={4}>
+                    <Col xs={24} md={7}>
+                        <SelectSearchCommon
+                            listDataOfItem={Constants.DisplayConfig.List}
+                            onChange={onChangeActive}
+                            value={active}
+                            label={'Trạng thái'}
+                            labelName='label'
+                            valueName='value'
+                        />
+                    </Col>
+                    <Col xs={24} md={3}>
                         <ButtonHref
                             href={ROUTE_PATH.ADD_BANNER_MANAGEMENT}
                             title={'Thêm mới'}
@@ -206,6 +224,23 @@ const BannerListPage = () => {
                             render={(val, _record) => {
                                 const result = Constants.BannerType.List.find(item => item.value == val)
                                 return <div>{result?.label || ""}</div>
+                            }}
+                        />
+                        <Table.Column
+                            title={
+                                <TitleTableCommon
+                                    title="Trạng thái"
+                                    width={'100px'}
+                                />
+                            }
+                            key={"active"}
+                            dataIndex={"active"}
+                            render={(val) => {
+                                const result = Constants.DisplayConfig.List.find(item => item.value == val)
+                                if (result) {
+                                    return <StatusCommon title={result.label} status={result.value} />
+                                }
+                                return
                             }}
                         />
                         <Table.Column

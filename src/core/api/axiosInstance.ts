@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import { notification } from 'antd';
 import { ROUTE_PATH } from '../common/appRouter';
 import { Endpoint } from '../common/apiLink';
@@ -50,69 +49,69 @@ axiosInstance.interceptors.request.use(
 );
 
 // Interceptor xử lý phản hồi từ server
-axiosInstance.interceptors.response.use(
-    (response) => {
-        return response;
-    },
-    async (error) => {
-        const originalRequest = error.config;
+// axiosInstance.interceptors.response.use(
+//     (response) => {
+//         return response;
+//     },
+//     async (error) => {
+//         const originalRequest = error.config;
 
-        // Kiểm tra nếu token hết hạn và chưa được retry
-        if (error.response?.status === 401 && !originalRequest._retry) {
-            originalRequest._retry = true;
+//         // Kiểm tra nếu token hết hạn và chưa được retry
+//         if (error.response?.status === 401 && !originalRequest._retry) {
+//             originalRequest._retry = true;
 
-            if (!isRefreshing) {
-                isRefreshing = true;
+//             if (!isRefreshing) {
+//                 isRefreshing = true;
 
-                try {
-                    const token = getToken();
+//                 try {
+//                     const token = getToken();
 
-                    const response = await axios.post(`${baseURL}${Endpoint.Auth.RefreshToken}`, {
-                        refreshToken: token?.refreshToken,
-                    });
+//                     const response = await axios.post(`${baseURL}${Endpoint.Auth.RefreshToken}`, {
+//                         refreshToken: token?.refreshToken,
+//                     });
 
-                    if (!response) {
-                        throw new Error('Refresh token failed');
-                    }
+//                     if (!response) {
+//                         throw new Error('Refresh token failed');
+//                     }
 
-                    const { refreshToken, accessToken } = response.data;
+//                     const { refreshToken, accessToken } = response.data;
 
-                    // Lưu token mới vào cookie
-                    sessionStorage.setItem('token', JSON.stringify({ refreshToken, accessToken }));
+//                     // Lưu token mới vào cookie
+//                     sessionStorage.setItem('token', JSON.stringify({ refreshToken, accessToken }));
 
-                    processQueue(null, accessToken);
-                    originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-                    return axiosInstance(originalRequest);
-                } catch (error) {
-                    processQueue(error, null);
-                    sessionStorage.removeItem('token');
-                    // notification.error({
-                    //     message: 'Thông báo',
-                    //     description: 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.',
-                    // });
-                    window.location.href = ROUTE_PATH.LOGIN;
-                    return Promise.reject(error);
-                } finally {
-                    isRefreshing = false;
-                }
-            }
+//                     processQueue(null, accessToken);
+//                     originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+//                     return axiosInstance(originalRequest);
+//                 } catch (error) {
+//                     processQueue(error, null);
+//                     sessionStorage.removeItem('token');
+//                     // notification.error({
+//                     //     message: 'Thông báo',
+//                     //     description: 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.',
+//                     // });
+//                     window.location.href = ROUTE_PATH.LOGIN;
+//                     return Promise.reject(error);
+//                 } finally {
+//                     isRefreshing = false;
+//                 }
+//             }
 
-            // Thêm request vào hàng đợi nếu đang refresh token
-            return new Promise((resolve, reject) => {
-                failedQueue.push({
-                    resolve: (token: string) => {
-                        originalRequest.headers.Authorization = `Bearer ${token}`;
-                        resolve(axiosInstance(originalRequest));
-                    },
-                    reject: (err: any) => {
-                        reject(err);
-                    },
-                });
-            });
-        }
+//             // Thêm request vào hàng đợi nếu đang refresh token
+//             return new Promise((resolve, reject) => {
+//                 failedQueue.push({
+//                     resolve: (token: string) => {
+//                         originalRequest.headers.Authorization = `Bearer ${token}`;
+//                         resolve(axiosInstance(originalRequest));
+//                     },
+//                     reject: (err: any) => {
+//                         reject(err);
+//                     },
+//                 });
+//             });
+//         }
 
-        return Promise.reject(error);
-    }
-);
+//         return Promise.reject(error);
+//     }
+// );
 
 export default axiosInstance;

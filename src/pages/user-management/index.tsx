@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Input, Pagination, Space, Button } from 'antd';
+import { Table, Input, Pagination, Space, Button, Col, Row } from 'antd';
 import styles from '../../asset/css/admin/admin-component.module.css';
 import { useNavigate } from 'react-router-dom';
 import userService from '../../infrastructure/repository/user/user.service';
@@ -12,6 +12,8 @@ import { ActionCommon } from '../../infrastructure/common/action/action-common';
 import { PaginationCommon } from '../../infrastructure/common/pagination/PaginationPageSize';
 import DialogConfirmCommon from '../../infrastructure/common/modal/dialogConfirm';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
+import SelectSearchCommon from '../../infrastructure/common/input/select-search-common';
+import { RoleCommon, StatusCommon } from '../../infrastructure/common/controls/Status';
 
 let timeout: any
 const UserListPage = () => {
@@ -20,6 +22,8 @@ const UserListPage = () => {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [pageSize, setPageSize] = useState<number>(10);
     const [searchText, setSearchText] = useState<string>("");
+    const [role, setRole] = useState<string>("");
+    const [active, setActive] = useState<string>("");
 
     const [idSelected, setIdSelected] = useState<string>("");
 
@@ -29,11 +33,13 @@ const UserListPage = () => {
 
     const router = useNavigate();
 
-    const onGetListAsync = async ({ search = "", size = pageSize, page = currentPage }) => {
+    const onGetListAsync = async ({ search = "", role = "", active = "", size = pageSize, page = currentPage }) => {
         const param = {
             page: page,
             limit: size,
             search: search,
+            role_id: role,
+            active: active
         }
         try {
             await userService.GetUser(
@@ -48,15 +54,15 @@ const UserListPage = () => {
             console.error(error)
         }
     }
-    const onSearch = async (search = "", size = pageSize, page = 1) => {
-        await onGetListAsync({ search: search, size: size, page: page });
+    const onSearch = async (search = "", role = "", active = "", size = pageSize, page = 1) => {
+        await onGetListAsync({ search: search, role: role, active: active, size: size, page: page });
     };
 
     const onChangeSearchText = (e: any) => {
         setSearchText(e.target.value);
         clearTimeout(timeout);
         timeout = setTimeout(() => {
-            onSearch(e.target.value, pageSize, currentPage,).then((_) => { });
+            onSearch(e.target.value, role, active, pageSize, currentPage,).then((_) => { });
         }, Constants.DEBOUNCE_SEARCH);
     };
 
@@ -66,13 +72,23 @@ const UserListPage = () => {
 
     const onChangePage = async (value: any) => {
         setCurrentPage(value)
-        await onSearch(searchText, pageSize, value).then(_ => { });
+        await onSearch(searchText, role, active, pageSize, value).then(_ => { });
     };
 
     const onPageSizeChanged = async (value: any) => {
         setPageSize(value)
         setCurrentPage(1)
-        await onSearch(searchText, value, 1).then(_ => { });
+        await onSearch(searchText, role, active, value, 1).then(_ => { });
+    };
+
+    const onChangeRole = async (value: any) => {
+        setRole(value)
+        await onSearch(searchText, value, active, pageSize, currentPage).then(_ => { });
+    };
+
+    const onChangeActive = async (value: any) => {
+        setActive(value)
+        await onSearch(searchText, role, value, pageSize, currentPage).then(_ => { });
     };
     // Xóa bài
     const onOpenModalDelete = (id: any) => {
@@ -113,20 +129,43 @@ const UserListPage = () => {
         >
             <div className={styles.manage_container}>
                 <h2>Quản lý người dùng</h2>
-                <div className={styles.searchBar}>
-                    <Input
-                        className="form-control"
-                        placeholder="Tìm kiếm theo tên"
-                        value={searchText}
-                        onChange={onChangeSearchText}
-                    />
-                    <ButtonHref
-                        href={ROUTE_PATH.ADD_USER_MANAGEMENT}
-                        title={'Thêm mới'}
-                        width={150}
-                        variant={'ps-btn--fullwidth'}
-                    />
-                </div>
+                <Row gutter={[15, 15]}>
+                    <Col xs={24} md={7}>
+                        <Input
+                            className="form-control"
+                            placeholder="Tìm kiếm theo tên"
+                            value={searchText}
+                            onChange={onChangeSearchText}
+                        />
+                    </Col>
+                    <Col xs={24} md={7}>
+                        <SelectSearchCommon
+                            listDataOfItem={Constants.Roles.List}
+                            onChange={onChangeRole}
+                            value={role}
+                            label={'Danh mục'}
+                            labelName='label'
+                            valueName='value'
+                        />
+                    </Col>
+                    <Col xs={24} md={7}>
+                        <SelectSearchCommon
+                            listDataOfItem={Constants.DisableAccount.List}
+                            onChange={onChangeActive}
+                            value={active}
+                            label={'Trạng thái'}
+                            labelName='label'
+                            valueName='value'
+                        />
+                    </Col>
+                    <Col xs={24} md={3}>
+                        <ButtonHref
+                            href={ROUTE_PATH.ADD_USER_MANAGEMENT}
+                            title={'Thêm mới'}
+                            variant={'ps-btn--fullwidth'}
+                        />
+                    </Col>
+                </Row>
                 <div className={styles.table_container}>
                     <Table
                         dataSource={listResponse}
@@ -173,8 +212,32 @@ const UserListPage = () => {
                                     width={'100px'}
                                 />
                             }
-                            key={"role_name"}
-                            dataIndex={"role_name"}
+                            key={"role_id"}
+                            dataIndex={"role_id"}
+                            render={(val) => {
+                                const result = Constants.Roles.List.find(item => item.value == val)
+                                if (result) {
+                                    return <RoleCommon title={result.label} roleId={result.value} />
+                                }
+                                return
+                            }}
+                        />
+                        <Table.Column
+                            title={
+                                <TitleTableCommon
+                                    title="Trạng thái"
+                                    width={'100px'}
+                                />
+                            }
+                            key={"active"}
+                            dataIndex={"active"}
+                            render={(val) => {
+                                const result = Constants.DisableAccount.List.find(item => item.value == val)
+                                if (result) {
+                                    return <StatusCommon title={result.label} status={result.value} />
+                                }
+                                return
+                            }}
                         />
 
                         <Table.Column

@@ -24,12 +24,11 @@ export const PrivateRoute = ({ component: RoutePath, role }: any) => {
         onGetProfileAsync().then(_ => { });
     }, []);
     const isRole: boolean = role && profileState && role?.includes(profileState.role_name);
+    if (!storage) {
+        // Không có token → chưa đăng nhập
+        return <Navigate to={ROUTE_PATH.LOGIN} />
+    }
     if (profileState) {
-        if (!storage) {
-            // Không có token → chưa đăng nhập
-            return <Navigate to={ROUTE_PATH.LOGIN} />
-        }
-
         if (role && !isRole) {
             // Có token nhưng không đúng role → không có quyền
             return <Navigate to={ROUTE_PATH.MAIN_LAYOUT} />

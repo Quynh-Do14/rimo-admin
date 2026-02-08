@@ -6,7 +6,7 @@ export interface MenuInterface {
   url: string
   icon: string
   children?: MenuInterface[]
-  role: Array<"ADMIN" | "SELLER" | "ARTICLE">
+  role: Array<"ADMIN" | "SELLER" | "WRITTER">
 }
 
 export default class Constants {
@@ -32,7 +32,7 @@ export default class Constants {
         text: 'Quản lý danh mục',
         url: '#',
         icon: 'fas fa-folder-tree',
-        role: ["ADMIN", "ARTICLE", 'SELLER'],
+        role: ["ADMIN", "WRITTER", 'SELLER'],
         children: [
           {
             id: 'category-product',
@@ -46,7 +46,7 @@ export default class Constants {
             text: 'Danh mục tin tức',
             url: ROUTE_PATH.CATEGORY_BLOG_MANAGEMENT,
             icon: 'fas fa-folder-open',
-            role: ["ADMIN", 'ARTICLE']
+            role: ["ADMIN", 'WRITTER']
           },
           {
             id: 'series',
@@ -76,14 +76,14 @@ export default class Constants {
         text: 'Quản lý tin tức',
         url: ROUTE_PATH.BLOG_MANAGEMENT,
         icon: 'fas fa-newspaper',
-        role: ["ADMIN", 'ARTICLE']
+        role: ["ADMIN", 'WRITTER']
       },
       {
         id: 'video-management',
         text: 'Quản lý video',
         url: ROUTE_PATH.VIDEO_MANAGEMENT,
         icon: 'fas fa-video',
-        role: ["ADMIN", 'ARTICLE']
+        role: ["ADMIN", 'WRITTER']
       },
       {
         id: 'contact-management',
@@ -147,6 +147,31 @@ export default class Constants {
       {
         label: 'Viết bài',
         value: 3
+      },
+    ]
+  }
+
+  static DisableAccount = class {
+    static List = [
+      {
+        label: 'Khả dụng',
+        value: true
+      },
+      {
+        label: 'Vô hiệu hóa',
+        value: false
+      },
+    ]
+  }
+  static DisplayConfig = class {
+    static List = [
+      {
+        label: 'Hiển thị',
+        value: true
+      },
+      {
+        label: 'Không hiển thị',
+        value: false
       },
     ]
   }

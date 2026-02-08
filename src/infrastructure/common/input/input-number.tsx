@@ -101,7 +101,10 @@ const InputNumberCommon = (props: Props) => {
                 type='text'
                 inputMode='numeric'
             />
-            <MessageError isError={validate[attribute]?.isError || false} message={validate[attribute]?.message || ""} />
+            <MessageError
+                isError={validate[attribute]?.isError || false}
+                message={validate[attribute]?.message || ''}
+            />
         </div>
     );
 };

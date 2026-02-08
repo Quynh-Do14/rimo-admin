@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MessageError } from '../controls/MessageError';
 import { validateFields } from '../../helper/helper';
-import "../../../asset/css/common/input-custom.css"
-import { Select } from 'antd';
+import styles from "../../../asset/css/common/input.module.css"
 type Props = {
     label: string;
     attribute: string;
@@ -18,7 +17,7 @@ type Props = {
     labelName?: string;
 };
 
-const ComboBoxCommon = ({
+const InputSelectStatus = ({
     dataAttribute,
     setData,
     attribute,
@@ -32,7 +31,7 @@ const ComboBoxCommon = ({
     valueName = 'id',
     labelName = 'name'
 }: Props) => {
-    const [value, setValue] = useState<string[]>([]);
+    const [value, setValue] = useState<string>("");
 
     const labelLower = label.toLowerCase();
 
@@ -42,17 +41,17 @@ const ComboBoxCommon = ({
         }
     };
 
-    const onChange = (value: string[]) => {
-        const selectedValue = value;
+    const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedValue = e.target.value;
         setValue(selectedValue);
         setData({ [attribute]: selectedValue });
     };
 
     useEffect(() => {
         if (dataAttribute !== undefined && dataAttribute !== null) {
-            setValue(dataAttribute);
+            setValue(String(dataAttribute));
         } else {
-            setValue([]);
+            setValue('');
         }
     }, [dataAttribute]);
 
@@ -63,14 +62,14 @@ const ComboBoxCommon = ({
     }, [submittedTime]);
 
     return (
-        <div className='input-custom'>
+        <div className={styles.inputCommon}>
             <label htmlFor={`${attribute}-input`}>
                 <span>
                     {label} {isRequired && <span className="required">*</span>}
                 </span>
             </label>
 
-            {/* <Select
+            <select
                 id={`${attribute}-input`}
                 value={value}
                 onChange={onChange}
@@ -87,28 +86,7 @@ const ComboBoxCommon = ({
                         {item[labelName]}
                     </option>
                 ))}
-            </select> */}
-
-            <Select
-                mode="multiple"
-                allowClear
-                showSearch={true}
-                style={{ width: '100%' }}
-                placeholder={`Chọn ${labelLower}`}
-                onChange={onChange}
-                onBlur={() => validateBlur(false)}
-                value={value}
-            >
-                {listDataOfItem?.map((item, index) => (
-                    <Select.Option
-                        key={index}
-                        value={item[valueName]}
-                        title={item[labelName]}
-                    >
-                        {item[labelName]}
-                    </Select.Option>
-                ))}
-            </Select>
+            </select>
 
             <MessageError
                 isError={validate[attribute]?.isError || false}
@@ -118,4 +96,4 @@ const ComboBoxCommon = ({
     );
 };
 
-export default ComboBoxCommon;
+export default InputSelectStatus;
