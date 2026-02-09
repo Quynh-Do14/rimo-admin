@@ -17,7 +17,7 @@ import districtService from '../../infrastructure/repository/district/district.s
 import agencyService from '../../infrastructure/repository/agency/agency.service';
 import ComboBoxCommon from '../../infrastructure/common/input/combo-box-common';
 import { useRecoilValue } from 'recoil';
-import { CategoryAgencyState } from '../../core/atoms/category/categoryState';
+import { CategoryAgencyState, CategoryProductState } from '../../core/atoms/category/categoryState';
 import { AgencyInterface } from '../../infrastructure/interface/agency/agency.interface';
 import InputSelectStatus from '../../infrastructure/common/input/select-status';
 import Constants from '../../core/common/constants';
@@ -33,7 +33,7 @@ const SlugAgencyManagement = () => {
     const dataRequest = _data;
     const [listProvince, setListProvince] = useState<Array<any>>([])
     const [listDistrict, setListDistrict] = useState<Array<any>>([])
-    const categoryAgencyState = useRecoilValue(CategoryAgencyState).data;
+    const categoryProduct = useRecoilValue(CategoryProductState).data;
 
     const setDataRequest = (data: any) => {
         Object.assign(dataRequest, { ...data });
@@ -293,7 +293,7 @@ const SlugAgencyManagement = () => {
                                     validate={validate}
                                     setValidate={setValidate}
                                     submittedTime={submittedTime}
-                                    listDataOfItem={categoryAgencyState}
+                                    listDataOfItem={categoryProduct}
                                     valueName='id'
                                     labelName='name'
                                 />
@@ -306,7 +306,7 @@ const SlugAgencyManagement = () => {
                                     dataAttribute={dataRequest.active}
                                     setData={setDataRequest}
                                     disabled={false}
-                                    validate={validate}
+                                    validate={validate} 
                                     setValidate={setValidate}
                                     submittedTime={submittedTime}
                                     listDataOfItem={Constants.DisplayConfig.List}

@@ -153,7 +153,7 @@ export default function AdminLayout({ breadcrumb, title, redirect, children }: a
         onGetListBlogCategoryAsync().then(_ => { });
         onGetListBrandAsync().then(_ => { });
         onGetListProductAsync().then(_ => { });
-        onGetListAgencyCategoryAsync().then(_ => { });
+        // onGetListAgencyCategoryAsync().then(_ => { });
         onGetProfileAsync().then(_ => { });
     }, []);
 

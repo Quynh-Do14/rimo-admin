@@ -48,13 +48,13 @@ export default class Constants {
             icon: 'fas fa-folder-open',
             role: ["ADMIN", 'WRITTER']
           },
-          {
-            id: 'series',
-            text: 'Dòng sản phẩm',
-            url: ROUTE_PATH.CATEGORY_AGENCY_MANAGEMENT,
-            icon: 'fas fa-layer-group',
-            role: ["ADMIN", 'SELLER']
-          }
+          // {
+          //   id: 'series',
+          //   text: 'Dòng sản phẩm',
+          //   url: ROUTE_PATH.CATEGORY_AGENCY_MANAGEMENT,
+          //   icon: 'fas fa-layer-group',
+          //   role: ["ADMIN", 'SELLER']
+          // }
         ]
       },
       {

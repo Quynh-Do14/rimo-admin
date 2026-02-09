@@ -17,7 +17,7 @@ import InputSelectCommon from '../../infrastructure/common/input/select-common';
 import InputSelectProvince from '../../infrastructure/common/input/select-province';
 import ComboBoxCommon from '../../infrastructure/common/input/combo-box-common';
 import { useRecoilValue } from 'recoil';
-import { CategoryAgencyState } from '../../core/atoms/category/categoryState';
+import { CategoryAgencyState, CategoryProductState } from '../../core/atoms/category/categoryState';
 import InputNumberCommon from '../../infrastructure/common/input/input-number';
 import InputSelectStatus from '../../infrastructure/common/input/select-status';
 import Constants from '../../core/common/constants';
@@ -31,7 +31,7 @@ const AddAgencyManagement = () => {
     const dataRequest = _data;
     const [listProvince, setListProvince] = useState<Array<any>>([])
     const [listDistrict, setListDistrict] = useState<Array<any>>([])
-    const categoryAgencyState = useRecoilValue(CategoryAgencyState).data;
+    const categoryProduct = useRecoilValue(CategoryProductState).data;
 
     const setDataRequest = (data: any) => {
         Object.assign(dataRequest, { ...data });
@@ -243,7 +243,7 @@ const AddAgencyManagement = () => {
                                     validate={validate}
                                     setValidate={setValidate}
                                     submittedTime={submittedTime}
-                                    listDataOfItem={categoryAgencyState}
+                                    listDataOfItem={categoryProduct}
                                     valueName='id'
                                     labelName='name'
                                 />

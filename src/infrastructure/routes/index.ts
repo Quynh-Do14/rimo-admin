@@ -198,24 +198,24 @@ export const privateRoutes = [
         role: ["ADMIN", 'SELLER']
     },
 
-    {
-        path: ROUTE_PATH.CATEGORY_AGENCY_MANAGEMENT,
-        component: AgencyCategoryListPage,
-        private: true,
-        role: ["ADMIN", 'SELLER']
-    },
-    {
-        path: ROUTE_PATH.ADD_CATEGORY_AGENCY_MANAGEMENT,
-        component: AddCategoryAgencyManagement,
-        private: true,
-        role: ["ADMIN", 'SELLER']
-    },
-    {
-        path: ROUTE_PATH.VIEW_CATEGORY_AGENCY_MANAGEMENT,
-        component: SlugCategoryAgencyManagement,
-        private: true,
-        role: ["ADMIN", 'SELLER']
-    },
+    // {
+    //     path: ROUTE_PATH.CATEGORY_AGENCY_MANAGEMENT,
+    //     component: AgencyCategoryListPage,
+    //     private: true,
+    //     role: ["ADMIN", 'SELLER']
+    // },
+    // {
+    //     path: ROUTE_PATH.ADD_CATEGORY_AGENCY_MANAGEMENT,
+    //     component: AddCategoryAgencyManagement,
+    //     private: true,
+    //     role: ["ADMIN", 'SELLER']
+    // },
+    // {
+    //     path: ROUTE_PATH.VIEW_CATEGORY_AGENCY_MANAGEMENT,
+    //     component: SlugCategoryAgencyManagement,
+    //     private: true,
+    //     role: ["ADMIN", 'SELLER']
+    // },
 
     {
         path: ROUTE_PATH.VIDEO_MANAGEMENT,
