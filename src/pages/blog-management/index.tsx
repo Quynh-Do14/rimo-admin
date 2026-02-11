@@ -16,10 +16,13 @@ import SelectSearchCommon from '../../infrastructure/common/input/select-search-
 import { CategoryBlogState } from '../../core/atoms/category/categoryState';
 import { useRecoilValue } from 'recoil';
 import { StatusCommon } from '../../infrastructure/common/controls/Status';
+import { ActionAdvangeCommon } from '../../infrastructure/common/action/action-approve-common';
+import { BlogInterface } from '../../infrastructure/interface/blog/blog.interface';
+import BlogDetailModal from './view';
 
 let timeout: any
 const BlogListPage = () => {
-    const [listResponse, setListResponse] = useState<Array<any>>([])
+    const [listResponse, setListResponse] = useState<Array<BlogInterface>>([])
     const [total, setTotal] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [pageSize, setPageSize] = useState<number>(10);
@@ -28,7 +31,9 @@ const BlogListPage = () => {
     const [active, setActive] = useState<string>("");
 
     const [idSelected, setIdSelected] = useState<string>("");
+    const [selectedItem, setSelectedItem] = useState<BlogInterface | null>()
 
+    const [isModalView, setIsModalView] = useState<boolean>(false);
     const [isDeleteModal, setIsDeleteModal] = useState<boolean>(false);
 
     const [loading, setLoading] = useState<boolean>(false);
@@ -122,8 +127,12 @@ const BlogListPage = () => {
     };
 
     const onNavigate = (id: any) => {
+        router(`${(ROUTE_PATH.EDIT_BLOG_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
+    };
+
+    const onView = (id: any) => {
         router(`${(ROUTE_PATH.VIEW_BLOG_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
-    }
+    };
 
     return (
         <AdminLayout
@@ -245,8 +254,14 @@ const BlogListPage = () => {
                             align='center'
                             width={"60px"}
                             render={(action, record: any) => (
-                                <ActionCommon
+                                <ActionAdvangeCommon
+                                    show='Xem chi tiết'
+                                    onClickShow={() => onView(record.id)}
+                                    detail={'Sửa'}
                                     onClickDetail={() => onNavigate(record.id)}
+                                    approve={''}
+                                    onClickApprove={() => { }}
+                                    remove={'Xóa'}
                                     onClickDelete={() => onOpenModalDelete(record.id)}
                                 />
                             )}

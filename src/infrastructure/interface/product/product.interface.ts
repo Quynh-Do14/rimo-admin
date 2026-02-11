@@ -11,7 +11,7 @@ export interface ProductInterface {
     created_at?: string;
     brand_id?: number | null;
     short_description: string;
-    category_name?: string;
+    category_name: string;
     brand_name?: string | null;
     images: string[];
     productFigure: ProductFigure[]

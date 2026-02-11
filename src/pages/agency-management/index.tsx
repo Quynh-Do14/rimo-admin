@@ -17,6 +17,7 @@ import districtService from '../../infrastructure/repository/district/district.s
 import SelectSearchCommon from '../../infrastructure/common/input/select-search-common';
 import SelectSearchProvince from '../../infrastructure/common/input/select-search-province';
 import { StatusCommon } from '../../infrastructure/common/controls/Status';
+import { ActionAdvangeCommon } from '../../infrastructure/common/action/action-approve-common';
 
 let timeout: any
 const AgencyListPage = () => {
@@ -129,8 +130,13 @@ const AgencyListPage = () => {
         }
     };
     const onNavigate = (id: any) => {
-        router(`${(ROUTE_PATH.VIEW_AGENCY_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
+        router(`${(ROUTE_PATH.EDIT_AGENCY_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
     }
+
+    const onView = (id: any) => {
+        router(`${(ROUTE_PATH.VIEW_AGENCY_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
+    };
+
 
     const onGetListProvinceAsync = async () => {
         const param = {
@@ -311,8 +317,14 @@ const AgencyListPage = () => {
                             align='center'
                             width={"60px"}
                             render={(action, record: any) => (
-                                <ActionCommon
+                                <ActionAdvangeCommon
+                                    show='Xem chi tiết'
+                                    onClickShow={() => onView(record.id)}
+                                    detail={'Sửa'}
                                     onClickDetail={() => onNavigate(record.id)}
+                                    approve={''}
+                                    onClickApprove={() => { }}
+                                    remove={'Xóa'}
                                     onClickDelete={() => onOpenModalDelete(record.id)}
                                 />
                             )}

@@ -79,14 +79,13 @@ const ContactListPage = () => {
         await onSearch(searchText, value, 1).then(_ => { });
     };
     // Xóa bài
-    const onOpenModalDelete = (id: any) => {
+    const onOpenModalView = (id: any) => {
         setIsModalView(false);
     };
 
-    const onView = (item: ContactInterface) => {
-        setIsModalView(true);
-        setSelectedItem(item)
-    };
+    const onView = (id: any) => {
+        router(`${(ROUTE_PATH.VIEW_CONTACT_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
+    }
 
     return (
         <AdminLayout
@@ -193,7 +192,7 @@ const ContactListPage = () => {
                             render={(action, record: any) => (
                                 <ActionAdvangeCommon
                                     show='Xem chi tiết'
-                                    onClickShow={() => onView(record)}
+                                    onClickShow={() => onView(record.id)}
                                     detail={''}
                                     onClickDetail={() => { }}
                                     approve={''}
@@ -223,13 +222,6 @@ const ContactListPage = () => {
                     handleOk={onDeleteAsync}
                     title={"Xác nhận"}
                 /> */}
-                <ContactDetailModal
-                    contact={selectedItem ? selectedItem : null}
-                    isOpen={isModalView}
-                    onClose={onOpenModalDelete}
-                    setLoading={setLoading}
-                    onSearch={onSearch}
-                />
             </div>
             <FullPageLoading isLoading={loading} />
         </AdminLayout >

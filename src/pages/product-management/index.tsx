@@ -18,6 +18,8 @@ import { BrandState } from '../../core/atoms/brand/brandState';
 import { CategoryProductState } from '../../core/atoms/category/categoryState';
 import { StatusCommon } from '../../infrastructure/common/controls/Status';
 import { ProductInterface } from '../../infrastructure/interface/product/product.interface';
+import { ActionAdvangeCommon } from '../../infrastructure/common/action/action-approve-common';
+import ProductDetailModal from './view';
 
 let timeout: any
 const ProductListPage = () => {
@@ -31,6 +33,8 @@ const ProductListPage = () => {
     const [active, setActive] = useState<string>("");
 
     const [idSelected, setIdSelected] = useState<string>("");
+    const [selectedItem, setSelectedItem] = useState<ProductInterface | null>()
+    const [isModalView, setIsModalView] = useState<boolean>(false);
 
     const [isDeleteModal, setIsDeleteModal] = useState<boolean>(false);
 
@@ -125,8 +129,13 @@ const ProductListPage = () => {
     };
 
     const onNavigate = (id: any) => {
+        router(`${(ROUTE_PATH.EDIT_PRODUCT_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
+    }
+
+    const onView = (id: any) => {
         router(`${(ROUTE_PATH.VIEW_PRODUCT_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
     }
+
 
     return (
         <AdminLayout
@@ -248,8 +257,14 @@ const ProductListPage = () => {
                             align='center'
                             width={"60px"}
                             render={(action, record: any) => (
-                                <ActionCommon
+                                <ActionAdvangeCommon
+                                    show='Xem chi tiết'
+                                    onClickShow={() => onView(record.id)}
+                                    detail={'Sửa'}
                                     onClickDetail={() => onNavigate(record.id)}
+                                    approve={''}
+                                    onClickApprove={() => { }}
+                                    remove={'Xóa'}
                                     onClickDelete={() => onOpenModalDelete(record.id)}
                                 />
                             )}

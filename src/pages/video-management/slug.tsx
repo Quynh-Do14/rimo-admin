@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import styles from '../../asset/css/admin/admin-component.module.css';
-import { Col, Row, Table } from 'antd';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Col, Row } from 'antd';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ROUTE_PATH } from '../../core/common/appRouter';
-import categoryBlogService from '../../infrastructure/repository/category/categoryBlog.service';
-import { configImageURL } from '../../infrastructure/helper/helper';
 import { WarningMessage } from '../../infrastructure/common/toast/message';
 import AdminLayout from '../../infrastructure/common/layout/admin/MainLayout';
 import ButtonHref from '../../infrastructure/common/button/ButtonHref';
 import ButtonCommon from '../../infrastructure/common/button/ButtonCommon';
 import InputTextCommon from '../../infrastructure/common/input/input-text-common';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
-import { CategoryBlogInterface } from '../../infrastructure/interface/category/categoryBlog.interface';
-import { TitleTableCommon } from '../../infrastructure/common/text/title-table-common';
+import TextAreaCommon from '../../infrastructure/common/input/textarea-common';
+import videoService from '../../infrastructure/repository/video/video.service';
+import InputSelectStatus from '../../infrastructure/common/input/select-status';
 import Constants from '../../core/common/constants';
-import { StatusCommon } from '../../infrastructure/common/controls/Status';
+import { VideoInterface } from '../../infrastructure/interface/video/video.interface';
 
-const SlugCategoryBlogManagement = () => {
-    const [detail, setDetail] = useState<CategoryBlogInterface>();
-    const [originalImage, setOriginalImage] = useState<string | null>(null);
+const SlugVideoManagement = () => {
+    const [detail, setDetail] = useState<VideoInterface>();
     const [loading, setLoading] = useState<boolean>(false);
     const [validate, setValidate] = useState<any>({});
     const [submittedTime, setSubmittedTime] = useState<any>();
@@ -45,13 +43,13 @@ const SlugCategoryBlogManagement = () => {
     const router = useNavigate();
     const param = useParams();
     const onBack = () => {
-        router(ROUTE_PATH.CATEGORY_BLOG_MANAGEMENT)
+        router(ROUTE_PATH.VIDEO_MANAGEMENT)
     }
 
     const onGetByIdAsync = async () => {
         if (param.id) {
             try {
-                await categoryBlogService.GetBlogCategoryById(
+                await videoService.GetVideoById(
                     String(param.id),
                     setLoading
                 ).then((res) => {
@@ -70,11 +68,11 @@ const SlugCategoryBlogManagement = () => {
 
     useEffect(() => {
         if (detail) {
-            const fullImage = configImageURL(detail.image);
-            setOriginalImage(fullImage);
             setDataRequest({
                 name: detail.name,
-
+                link_url: detail.link_url,
+                description: detail.description,
+                active: detail.active
             });
         };
     }, [detail]);
@@ -83,10 +81,13 @@ const SlugCategoryBlogManagement = () => {
         await setSubmittedTime(Date.now());
         if (isValidData()) {
             try {
-                await categoryBlogService.UpdateBlogCategoryAdmin(
+                await videoService.UpdateVideoAdmin(
                     String(param.id),
                     {
                         name: dataRequest.name,
+                        link_url: dataRequest.link_url,
+                        description: dataRequest.description,
+                        active: dataRequest.active
                     },
                     onBack,
                     setLoading
@@ -101,16 +102,16 @@ const SlugCategoryBlogManagement = () => {
 
     return (
         <AdminLayout
-            breadcrumb={"Quản lý danh mục tin tức"}
-            title={"Thêm danh mục tin tức"}
-            redirect={ROUTE_PATH.CATEGORY_BLOG_MANAGEMENT}
+            breadcrumb={"Quản lý video"}
+            title={"Thêm video"}
+            redirect={ROUTE_PATH.VIDEO_MANAGEMENT}
         >
             <div className={styles.manage_container}>
                 <div className={styles.headerPage}>
-                    <h2>Cập nhật danh mục tin tức</h2>
+                    <h2>Cập nhật video</h2>
                     <div className={styles.btn_container}>
                         <ButtonHref
-                            href={ROUTE_PATH.CATEGORY_BLOG_MANAGEMENT}
+                            href={ROUTE_PATH.VIDEO_MANAGEMENT}
                             title={'Quay lại'}
                             width={150}
                             variant={'ps-btn--gray'}
@@ -129,7 +130,7 @@ const SlugCategoryBlogManagement = () => {
                             <Row gutter={[16, 16]}>
                                 <Col span={24}>
                                     <InputTextCommon
-                                        label={"Tên danh mục"}
+                                        label={"Tiêu đề"}
                                         attribute={"name"}
                                         isRequired={true}
                                         dataAttribute={dataRequest.name}
@@ -140,63 +141,51 @@ const SlugCategoryBlogManagement = () => {
                                         submittedTime={submittedTime}
                                     />
                                 </Col>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputTextCommon
+                                        label={"URL"}
+                                        attribute={"link_url"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.link_url}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputSelectStatus
+                                        label={"Trạng thái"}
+                                        attribute={"active"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.active}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                        listDataOfItem={Constants.DisplayConfig.List}
+                                        valueName='value'
+                                        labelName='label'
+                                    />
+                                </Col>
+                                <Col span={24}>
+                                    <TextAreaCommon
+                                        label={"Mô tả"}
+                                        attribute={"description"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.description}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
                             </Row>
                         </Col>
                     </Row>
-                    <h2>Tin tức thuộc danh mục</h2>
-                    <Table
-                        dataSource={detail?.blog}
-                        loading={loading}
-                        rowKey="id"
-                        pagination={false}
-                        className='table-common'
-                    >
-                        <Table.Column
-                            title={"STT"}
-                            dataIndex="stt"
-                            key="stt"
-                            width={"5%"}
-                            render={(val, record, index) => (
-                                <div style={{ textAlign: "center" }}>
-                                    {index + 1}
-                                </div>
-                            )}
-                        />
-                        <Table.Column
-                            title={
-                                <TitleTableCommon
-                                    title="Tiêu đề"
-                                    width={'150px'}
-                                />
-                            }
-                            key={"title"}
-                            dataIndex={"title"}
-                            render={(val, record) => {
-                                return (
-                                    <Link to={`${(ROUTE_PATH.VIEW_BLOG_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${record.id}`}>
-                                        {val}
-                                    </Link>
-                                )
-                            }}
-                        />
-                        <Table.Column
-                            title={
-                                <TitleTableCommon
-                                    title="Trạng thái"
-                                    width={'100px'}
-                                />
-                            }
-                            key={"active"}
-                            dataIndex={"active"}
-                            render={(val) => {
-                                const result = Constants.DisplayConfig.List.find(item => item.value == val)
-                                if (result) {
-                                    return <StatusCommon title={result.label} status={result.value} />
-                                }
-                                return
-                            }}
-                        />
-                    </Table>
                 </div>
             </div>
             <FullPageLoading isLoading={loading} />
@@ -204,4 +193,4 @@ const SlugCategoryBlogManagement = () => {
     )
 }
 
-export default SlugCategoryBlogManagement
+export default SlugVideoManagement

@@ -2,12 +2,14 @@ import { ROUTE_PATH } from "../../core/common/appRouter";
 import AgencyListPage from "../../pages/agency-management";
 import AddAgencyManagement from "../../pages/agency-management/add";
 import SlugAgencyManagement from "../../pages/agency-management/slug";
+import ViewAgencyManagement from "../../pages/agency-management/view";
 import BannerListPage from "../../pages/banner-management";
 import AddBannerManagement from "../../pages/banner-management/add";
 import SlugBannerManagement from "../../pages/banner-management/view";
 import BlogListPage from "../../pages/blog-management";
 import AddBlogManagement from "../../pages/blog-management/add";
 import SlugBlogManagement from "../../pages/blog-management/slug";
+import ViewBlogManagement from "../../pages/blog-management/view";
 import BrandListPage from "../../pages/brand-management";
 import AddBrandManagement from "../../pages/brand-management/add";
 import SlugBrandManagement from "../../pages/brand-management/slug";
@@ -21,10 +23,12 @@ import ProductCategoryListPage from "../../pages/category-product-management";
 import AddProductCategoryManagement from "../../pages/category-product-management/add";
 import SlugProductCategoryManagement from "../../pages/category-product-management/slug";
 import ContactListPage from "../../pages/contact-management";
+import ViewContactMangement from "../../pages/contact-management/view";
 import LoginPage from "../../pages/login";
 import ProductListPage from "../../pages/product-management";
 import AddProductManagement from "../../pages/product-management/add";
 import SlugProductManagement from "../../pages/product-management/slug";
+import ViewProductManagement from "../../pages/product-management/view";
 import ProductSeriesListPage from "../../pages/product-series-management";
 import AddProductSeriesManagement from "../../pages/product-series-management/add";
 import SlugProductSeriesManagement from "../../pages/product-series-management/slug";
@@ -39,7 +43,8 @@ import AddUserManagement from "../../pages/user-management/add";
 import SlugUserManagement from "../../pages/user-management/view";
 import VideoListPage from "../../pages/video-management";
 import AddVideoManagement from "../../pages/video-management/add";
-import SlugVideoManagement from "../../pages/video-management/view";
+import SlugVideoManagement from "../../pages/video-management/slug";
+import ViewVideoManagement from "../../pages/video-management/view";
 import AdminLayout from "../common/layout/admin/MainLayout";
 
 export const privateRoutes = [
@@ -119,8 +124,14 @@ export const privateRoutes = [
         role: ["ADMIN", 'WRITTER']
     },
     {
-        path: ROUTE_PATH.VIEW_BLOG_MANAGEMENT,
+        path: ROUTE_PATH.EDIT_BLOG_MANAGEMENT,
         component: SlugBlogManagement,
+        private: true,
+        role: ["ADMIN", 'WRITTER']
+    },
+    {
+        path: ROUTE_PATH.VIEW_BLOG_MANAGEMENT,
+        component: ViewBlogManagement,
         private: true,
         role: ["ADMIN", 'WRITTER']
     },
@@ -157,8 +168,14 @@ export const privateRoutes = [
         role: ["ADMIN", 'SELLER']
     },
     {
-        path: ROUTE_PATH.VIEW_PRODUCT_MANAGEMENT,
+        path: ROUTE_PATH.EDIT_PRODUCT_MANAGEMENT,
         component: SlugProductManagement,
+        private: true,
+        role: ["ADMIN", 'SELLER']
+    },
+    {
+        path: ROUTE_PATH.VIEW_PRODUCT_MANAGEMENT,
+        component: ViewProductManagement,
         private: true,
         role: ["ADMIN", 'SELLER']
     },
@@ -195,8 +212,14 @@ export const privateRoutes = [
         role: ["ADMIN", 'SELLER']
     },
     {
-        path: ROUTE_PATH.VIEW_AGENCY_MANAGEMENT,
+        path: ROUTE_PATH.EDIT_AGENCY_MANAGEMENT,
         component: SlugAgencyManagement,
+        private: true,
+        role: ["ADMIN", 'SELLER']
+    },
+    {
+        path: ROUTE_PATH.VIEW_AGENCY_MANAGEMENT,
+        component: ViewAgencyManagement,
         private: true,
         role: ["ADMIN", 'SELLER']
     },
@@ -233,8 +256,14 @@ export const privateRoutes = [
         role: ["ADMIN", 'SELLER']
     },
     {
-        path: ROUTE_PATH.VIEW_VIDEO_MANAGEMENT,
+        path: ROUTE_PATH.EDIT_VIDEO_MANAGEMENT,
         component: SlugVideoManagement,
+        private: true,
+        role: ["ADMIN", 'SELLER']
+    },
+    {
+        path: ROUTE_PATH.VIEW_VIDEO_MANAGEMENT,
+        component: ViewVideoManagement,
         private: true,
         role: ["ADMIN", 'SELLER']
     },
@@ -261,6 +290,12 @@ export const privateRoutes = [
     {
         path: ROUTE_PATH.CONTACT_MANAGEMENT,
         component: ContactListPage,
+        private: true,
+        role: ["ADMIN", 'SELLER']
+    },
+    {
+        path: ROUTE_PATH.VIEW_CONTACT_MANAGEMENT,
+        component: ViewContactMangement,
         private: true,
         role: ["ADMIN", 'SELLER']
     },

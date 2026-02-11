@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from '../../asset/css/admin/admin-component.module.css';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ROUTE_PATH } from '../../core/common/appRouter';
 import categoryProductService from '../../infrastructure/repository/category/categoryProduct.service';
 import { configImageURL } from '../../infrastructure/helper/helper';
@@ -211,6 +211,13 @@ const SlugProductCategoryManagement = () => {
                             width={"80%"}
                             key={"name"}
                             dataIndex={"name"}
+                            render={(val, record) => {
+                                return (
+                                    <Link to={`${(ROUTE_PATH.VIEW_PRODUCT_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${record.id}`}>
+                                        {val}
+                                    </Link>
+                                )
+                            }}
                         />
                         <Table.Column
                             title={

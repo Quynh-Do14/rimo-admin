@@ -162,6 +162,7 @@ export default function AdminLayout({ breadcrumb, title, redirect, children }: a
             <Sidebar isOpen={isSidebarOpen} profileState={profileState.data} />
             <div className={`${styles.mainContent} ${!isSidebarOpen ? styles.full : ''}`}>
                 <Header
+                    isSidebarOpen={isSidebarOpen}
                     onToggleSidebar={() => setSidebarOpen(!isSidebarOpen)}
                     breadcrumb={breadcrumb}
                     title={title}

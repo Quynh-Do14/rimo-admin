@@ -1,37 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button, Image } from 'antd';
+import { Image, Modal } from 'antd';
 import Constants from '../../core/common/constants';
 import '../../asset/css/admin/view.css';
 import { StatusCommon } from '../../infrastructure/common/controls/Status';
 import ButtonCommon from '../../infrastructure/common/button/ButtonCommon';
 import { DetailRowCommon, DetailRowComponent } from '../../infrastructure/common/text/detail-row';
-import { convertDateShow } from '../../infrastructure/helper/helper';
-import { useNavigate, useParams } from 'react-router-dom';
-import { ROUTE_PATH } from '../../core/common/appRouter';
-import { FullPageLoading } from '../../infrastructure/common/loader/loading';
-import AdminLayout from '../../infrastructure/common/layout/admin/MainLayout';
-import { ContactInterface } from '../../infrastructure/interface/contact/contact.interface';
-import contactService from '../../infrastructure/repository/contact/contact.service';
-import styles from '../../asset/css/admin/admin-component.module.css';
-import { VideoInterface } from '../../infrastructure/interface/video/video.interface';
-import videoService from '../../infrastructure/repository/video/video.service';
+import { configImageURL, convertDateShow } from '../../infrastructure/helper/helper';
 import ButtonHref from '../../infrastructure/common/button/ButtonHref';
-import YouTubeThumbnail from '../../infrastructure/common/thumbnailYoutube/thumbnailYoutube';
-import YoutubeVideo from '../../infrastructure/common/thumbnailYoutube/youtube';
+import { ROUTE_PATH } from '../../core/common/appRouter';
+import AdminLayout from '../../infrastructure/common/layout/admin/MainLayout';
+import styles from '../../asset/css/admin/admin-component.module.css';
+import { useNavigate, useParams } from 'react-router-dom';
+import blogService from '../../infrastructure/repository/blog/blog.service';
+import { FullPageLoading } from '../../infrastructure/common/loader/loading';
+import agencyService from '../../infrastructure/repository/agency/agency.service';
+import { AgencyInterface } from '../../infrastructure/interface/agency/agency.interface';
+import GoogleMapView from '../../infrastructure/common/map/ggmap';
 
-const ViewVideoManagement = () => {
-    const [detail, setDetail] = useState<VideoInterface | null>();
+const ViewAgencyManagement = () => {
+    const [detail, setDetail] = useState<AgencyInterface>();
     const [loading, setLoading] = useState<boolean>(false);
-
     const router = useNavigate();
     const param = useParams();
     const onBack = () => {
-        router(ROUTE_PATH.CONTACT_MANAGEMENT)
+        router(ROUTE_PATH.AGENCY_MANAGEMENT)
     }
+
     const onGetByIdAsync = async () => {
         if (param.id) {
             try {
-                await videoService.GetVideoById(
+                await agencyService.GetAgencyById(
                     String(param.id),
                     setLoading
                 ).then((res) => {
@@ -47,22 +45,20 @@ const ViewVideoManagement = () => {
     useEffect(() => {
         onGetByIdAsync().then(() => { })
     }, [param.id])
-
-
     if (!detail) return null;
 
     // Tìm thông tin trạng thái
-    const statusResult = Constants.StatusConfig.List.find(item => item.value == detail.active)
-    const videoId = detail.link_url.split('v=')[1];
+    const statusResult = Constants.DisplayConfig.List.find(item => item.value == detail.active)
+
     return (
         <AdminLayout
-            breadcrumb={"Quản lý liên hệ"}
-            title={"Chi tiết liên hệ"}
+            breadcrumb={"Quản lý đại lý"}
+            title={"Chi tiết đại lý"}
             redirect={ROUTE_PATH.PRODUCT_MANAGEMENT}
         >
             <div className={styles.manage_container}>
                 <div className={styles.headerPage}>
-                    <h2>Chi tiết liên hệ</h2>
+                    <h2>Chi tiết đại lý</h2>
                     <div className={styles.btn_container}>
                         <ButtonCommon
                             key="close"
@@ -70,9 +66,9 @@ const ViewVideoManagement = () => {
                             title={'Đóng'}
                             width={150}
                             variant={'ps-btn--gray'}
-                        />
+                        />,
                         <ButtonHref
-                            href={`${(ROUTE_PATH.EDIT_VIDEO_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${detail.id}`}
+                            href={`${(ROUTE_PATH.EDIT_AGENCY_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${detail.id}`}
                             title={'Cập nhật'}
                             width={150}
                             variant={'ps-btn--fullwidth'}
@@ -83,32 +79,41 @@ const ViewVideoManagement = () => {
                     <DetailRowComponent
                         label={'Ảnh'}
                         value={
-                            <YouTubeThumbnail name={detail.name} url={detail.link_url} />
+                            <Image src={configImageURL(detail.image)} alt={detail.name} width={300} />
                         }
                     />
-
                     <DetailRowCommon
-                        label={'Tiêu đề'}
+                        label={'Tên đại lý'}
                         value={detail.name}
                     />
-                    <DetailRowComponent
-                        label={'Trạng thái'}
-                        value={
-                            statusResult
-                            &&
-                            <StatusCommon title={statusResult?.label} status={statusResult.value} />
-                        }
+                    <DetailRowCommon
+                        label={'Tỉnh/TP'}
+                        value={detail.province.split('-')[1]}
                     />
                     <DetailRowCommon
-                        label={'Mô tả'}
-                        value={detail.description}
+                        label={'Huyện'}
+                        value={detail.district}
                     />
                     <DetailRowComponent
-                        label={'Video'}
+                        label={'Tọa độ'}
                         value={
-                            <YoutubeVideo
-                                videoId={videoId}
-                            />
+                            <div>
+                                <DetailRowCommon
+                                    label={'Kinh độ'}
+                                    value={detail.long}
+                                />
+                                <DetailRowCommon
+                                    label={'Vĩ độ'}
+                                    value={detail.lat}
+                                />
+                            </div>
+                        }
+                    />
+                    <DetailRowComponent
+                        label='Bản đồ'
+                        value={
+                            <GoogleMapView selectedAgency={detail} />
+
                         }
                     />
                 </div>
@@ -118,4 +123,4 @@ const ViewVideoManagement = () => {
     );
 };
 
-export default ViewVideoManagement;
+export default ViewAgencyManagement;

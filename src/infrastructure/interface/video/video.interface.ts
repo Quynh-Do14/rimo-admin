@@ -1,7 +1,7 @@
 export interface VideoInterface {
     id?: number;
     name: string;
-    description?: string;
+    description: string;
     link_url: string;
     active: boolean;
 }

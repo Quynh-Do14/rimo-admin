@@ -24,6 +24,17 @@ export const ActionAdvangeCommon = (props: Props) => {
     return (
         <div className='action-common flex justify-center gap-1 whitespace-nowrap'>
             {
+                show
+                &&
+                <Tooltip color={'#fff'} overlayInnerStyle={{ color: "#475f7b" }} title={show}>
+                    <div onClick={() => onClickShow()} className='option p-1 cursor-pointer'>
+                        <div className='option-select'>
+                            <i className="fa fa-eye" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </Tooltip>
+            }
+            {
                 detail
                 &&
                 <Tooltip color={'#fff'} overlayInnerStyle={{ color: "#475f7b" }} title={detail}>
@@ -41,17 +52,6 @@ export const ActionAdvangeCommon = (props: Props) => {
                     <div onClick={() => onClickApprove()} className='option p-1 cursor-pointer'>
                         <div className='option-select'>
                             <i className="fa fa-check-square" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                </Tooltip>
-            }
-            {
-                show
-                &&
-                <Tooltip color={'#fff'} overlayInnerStyle={{ color: "#475f7b" }} title={show}>
-                    <div onClick={() => onClickShow()} className='option p-1 cursor-pointer'>
-                        <div className='option-select'>
-                            <i className="fa fa-eye" aria-hidden="true"></i>
                         </div>
                     </div>
                 </Tooltip>

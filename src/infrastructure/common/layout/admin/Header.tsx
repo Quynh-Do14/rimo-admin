@@ -10,13 +10,14 @@ type Props = {
     breadcrumb: string
     title: string
     redirect: string
+    isSidebarOpen: boolean;
     onToggleSidebar: () => void
     onLogout?: () => void
     profileState: AuthInterface
 }
 
 export default function Header(props: Props) {
-    const { breadcrumb, title, redirect, onToggleSidebar, onLogout, profileState } = props
+    const { breadcrumb, title, redirect, isSidebarOpen, onToggleSidebar, onLogout, profileState } = props
     const [showDropdown, setShowDropdown] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -47,8 +48,15 @@ export default function Header(props: Props) {
         <header className={styles.header}>
             <div className={styles.headerLeft}>
                 <button onClick={onToggleSidebar} className={styles.toggleBtn}>
-                    <i className="fa fa-bars" aria-hidden="true"></i>
+                    <i
+                        className={`fa ${isSidebarOpen
+                                ? 'fa fa-bars'
+                                : 'fa-arrow-right'
+                            }`}
+                        aria-hidden="true"
+                    ></i>
                 </button>
+
                 <BreadCrumb breadcrumb={breadCrumb} />
             </div>
 

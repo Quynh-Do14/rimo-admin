@@ -1,55 +1,60 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button } from 'antd';
-import { ContactInterface } from '../../infrastructure/interface/contact/contact.interface';
 import Constants from '../../core/common/constants';
 import '../../asset/css/admin/view.css';
 import { StatusCommon } from '../../infrastructure/common/controls/Status';
 import ButtonCommon from '../../infrastructure/common/button/ButtonCommon';
+import { DetailRowCommon, DetailRowComponent } from '../../infrastructure/common/text/detail-row';
+import { convertDateShow } from '../../infrastructure/helper/helper';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ROUTE_PATH } from '../../core/common/appRouter';
+import { FullPageLoading } from '../../infrastructure/common/loader/loading';
+import AdminLayout from '../../infrastructure/common/layout/admin/MainLayout';
+import { ContactInterface } from '../../infrastructure/interface/contact/contact.interface';
 import contactService from '../../infrastructure/repository/contact/contact.service';
+import styles from '../../asset/css/admin/admin-component.module.css';
 
-type Props = {
-    contact: ContactInterface | null,
-    isOpen: boolean,
-    onClose: Function,
-    setLoading: Function,
-    onSearch: Function,
-}
+const ViewContactMangement = () => {
+    const [detail, setDetail] = useState<ContactInterface | null>();
+    const [loading, setLoading] = useState<boolean>(false);
 
-const ContactDetailModal = (props: Props) => {
-    const {
-        contact,
-        isOpen,
-        onClose,
-        setLoading,
-        onSearch
-    } = props;
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    const router = useNavigate();
+    const param = useParams();
+    const onBack = () => {
+        router(ROUTE_PATH.CONTACT_MANAGEMENT)
+    }
+    const onGetByIdAsync = async () => {
+        if (param.id) {
+            try {
+                await contactService.GetContactById(
+                    String(param.id),
+                    setLoading
+                ).then((res) => {
+                    setDetail(res)
+                })
+            }
+            catch (error) {
+                console.error(error)
+            }
+        }
 
+    }
     useEffect(() => {
-        setIsModalVisible(isOpen);
-    }, [isOpen]);
+        onGetByIdAsync().then(() => { })
+    }, [param.id])
 
-    const handleClose = () => {
-        setIsModalVisible(false);
-        onClose();
-    };
 
-    if (!contact) return null;
-
-    // Tìm thông tin trạng thái
-    const statusResult = Constants.StatusConfig.List.find(item => item.value == contact.status)
 
     const updateStatus = async () => {
-        if (contact) {
+        if (detail) {
             try {
                 await contactService.UpdateStatusAdmin(
-                    contact.id ? contact.id : '',
+                    detail.id ? detail.id : '',
                     {
-                        status: !contact.status
+                        status: !detail.status
                     },
                     () => {
-                        onSearch();
-                        onClose();
+                        onGetByIdAsync().then(() => { })
                     },
                     setLoading,
                 )
@@ -60,90 +65,66 @@ const ContactDetailModal = (props: Props) => {
         }
 
     }
+    if (!detail) return null;
 
+    // Tìm thông tin trạng thái
+    const statusResult = Constants.StatusConfig.List.find(item => item.value == detail.status)
     return (
-        <Modal
-            title={<div className="contact-modal-title">Chi tiết liên hệ</div>}
-            open={isModalVisible}
-            onCancel={handleClose}
-            footer={[
-                <ButtonCommon
-                    key="close"
-                    onClick={handleClose}
-                    title={'Đóng'}
-                    width={150}
-                    variant={'ps-btn--gray'}
-                />,
-                <ButtonCommon
-                    key="action"
-                    onClick={updateStatus}
-                    title={!contact.status ? "Chuyển thành đã xử lý" : "Chuyển thành chưa xử lý"}
-                    width={300}
-                    variant={!contact.status ? 'ps-btn--fullwidth' : 'ps-btn--reverse'}
-                />
-            ]}
-            width={"70%"}
-            className="contact-modal"
+        <AdminLayout
+            breadcrumb={"Quản lý liên hệ"}
+            title={"Chi tiết liên hệ"}
+            redirect={ROUTE_PATH.PRODUCT_MANAGEMENT}
         >
-            <div className="modal-content">
-                <div className="contact-detail-section">
-                    <div className="detail-row">
-                        <div className="detail-label">
-                            <span>Email</span>
-                        </div>
-                        <div className="detail-value">
-                            <a href={`mailto:${contact.email}`} className="contact-link">
-                                {contact.email}
-                            </a>
-                        </div>
-                    </div>
-
-                    <div className="detail-row">
-                        <div className="detail-label">
-                            <span>Số điện thoại</span>
-                        </div>
-                        <div className="detail-value">
-                            <a href={`tel:${contact.phone_number}`} className="contact-link">
-                                {contact.phone_number}
-                            </a>
-                        </div>
-                    </div>
-
-                    <div className="detail-row">
-                        <div className="detail-label">
-                            <span>Ngày tạo</span>
-                        </div>
-                        <div className="detail-value">
-                            {new Date(contact.created_at).toLocaleString('vi-VN')}
-                        </div>
-                    </div>
-
-                    <div className="detail-row">
-                        <div className="detail-label">
-                            <span>Trạng thái</span>
-                        </div>
-                        <div className="detail-value">
-                            {
-                                statusResult
-                                &&
-                                <StatusCommon title={statusResult?.label} status={statusResult.value} />
-                            }
-
-                        </div>
-                    </div>
-
-                    <div className="detail-row">
-                        <div className="detail-label">
-                            <span>Nội dung</span>
-                        </div>
-                        <div className="detail-value">
-                            {contact.message}
-                        </div>
+            <div className={styles.manage_container}>
+                <div className={styles.headerPage}>
+                    <h2>Chi tiết liên hệ</h2>
+                    <div className={styles.btn_container}>
+                        <ButtonCommon
+                            key="close"
+                            onClick={onBack}
+                            title={'Đóng'}
+                            width={150}
+                            variant={'ps-btn--gray'}
+                        />,
+                        <ButtonCommon
+                            key="action"
+                            onClick={updateStatus}
+                            title={!detail.status ? "Chuyển thành đã xử lý" : "Chuyển thành chưa xử lý"}
+                            width={300}
+                            variant={!detail.status ? 'ps-btn--fullwidth' : 'ps-btn--reverse'}
+                        />
                     </div>
                 </div>
+                <div className={styles.table_container}>
+
+                    <DetailRowCommon
+                        label={'Email'}
+                        value={detail.email}
+                    />
+                    <DetailRowCommon
+                        label={'Số điện thoại'}
+                        value={detail.phone_number}
+                    />
+                    <DetailRowCommon
+                        label={'Ngày tạo'}
+                        value={convertDateShow(detail.created_at) || ""}
+                    />
+                    <DetailRowComponent
+                        label={'Trạng thái'}
+                        value={
+                            statusResult
+                            &&
+                            <StatusCommon title={statusResult?.label} status={statusResult.value} />
+                        } />
+                    <DetailRowCommon
+                        label={'Nội dung'}
+                        value={detail.message}
+                    />
+                </div>
             </div>
-        </Modal>
+            <FullPageLoading isLoading={loading} />
+        </AdminLayout >
     );
 };
 
-export default ContactDetailModal;
+export default ViewContactMangement;

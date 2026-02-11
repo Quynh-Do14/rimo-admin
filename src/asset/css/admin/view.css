@@ -1,8 +1,23 @@
 /* Modal chính */
+/* Modal chính - Full màn */
+.contact-modal {
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+/* Nội dung modal chiếm toàn bộ màn hình */
 .contact-modal .ant-modal-content {
-  border-radius: 12px;
+  width: 100%;
+  height: 100vh;
+  border-radius: 0 !important;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 
 /* Header modal */
@@ -11,23 +26,155 @@
   border-bottom: 1px solid #eaeaea;
   padding: 20px 24px;
   margin: 0;
+  flex-shrink: 0;
 }
 
 .contact-modal-title {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
   color: #2d3436;
   margin: 0;
 }
 
-/* Body modal */
+/* Body modal - chiếm hết không gian còn lại */
 .contact-modal .ant-modal-body {
   padding: 0;
+  flex: 1;
+  overflow: hidden;
 }
 
+/* Container nội dung với scroll */
 .modal-content {
   padding: 24px;
   background: #fff;
+  height: 73vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Section chi tiết liên hệ */
+.contact-detail-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+/* Footer modal */
+.contact-modal .ant-modal-footer {
+  background: #f8f9fa;
+  border-top: 1px solid #eaeaea;
+  padding: 16px 24px;
+  margin: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* Các dòng thông tin */
+.detail-row {
+  display: flex;
+  align-items: flex-start;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.detail-label {
+  flex: 0 0 160px;
+  min-width: 160px;
+  padding-right: 20px;
+}
+
+.detail-label span {
+  font-weight: 500;
+  color: #636e72;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.detail-value {
+  flex: 1;
+  font-size: 16px;
+  color: #2d3436;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+/* Link liên hệ */
+.contact-link {
+  color: #0984e3;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  font-weight: 500;
+}
+
+.contact-link:hover {
+  color: #0770c4;
+  text-decoration: underline;
+}
+
+/* Custom scrollbar cho đẹp */
+.modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+  .contact-modal-title {
+    font-size: 20px;
+  }
+
+  .modal-content {
+    padding: 16px;
+  }
+
+  .detail-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .detail-label {
+    flex: none;
+    padding-right: 0;
+  }
+
+  .detail-label span {
+    font-size: 14px;
+  }
+
+  .detail-value {
+    font-size: 15px;
+  }
+
+  .contact-modal .ant-modal-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contact-modal .ant-modal-footer button {
+    width: 100% !important;
+  }
 }
 
 /* Footer modal */
@@ -116,39 +263,39 @@
     width: 90% !important;
     max-width: 500px;
   }
-  
+
   .detail-row {
     flex-direction: column;
     gap: 8px;
     align-items: stretch;
   }
-  
+
   .detail-label {
     flex: none;
     padding-right: 0;
   }
-  
+
   .detail-label span {
     font-size: 13px;
   }
-  
+
   .detail-value {
     font-size: 14px;
   }
-  
+
   .contact-modal-title {
     font-size: 18px;
   }
-  
+
   .modal-content {
     padding: 20px;
   }
-  
+
   .contact-modal .ant-modal-footer {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .contact-modal .ant-modal-footer button {
     width: 100% !important;
   }
@@ -168,4 +315,26 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.main-image {
+  background: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 260px;
+  width: 100%;
+  min-height: 10vh;
+  max-height: 40vh;
+  overflow: hidden;
+  border: 1px solid #d3d3d3;
+  cursor: pointer;
+  position: relative;
+  border-radius: 8px;
+}
+
+.main-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
 }

@@ -193,6 +193,20 @@
   gap: 10px;
 }
 
+.toggleBtn {
+  
+  transition: all 0.3s ease;
+}
+
+.toggleBtn i {
+  transition: transform 0.3s ease;
+}
+
+/* Thêm hiệu ứng hover */
+.toggleBtn:hover i {
+  transform: scale(1.1);
+}
+
 .header img {
   border-radius: 50%;
 }

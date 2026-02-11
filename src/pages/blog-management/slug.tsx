@@ -19,10 +19,11 @@ import TextEditorCommon from '../../infrastructure/common/input/text-editor-comm
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
 import InputSelectStatus from '../../infrastructure/common/input/select-status';
 import Constants from '../../core/common/constants';
+import { BlogInterface } from '../../infrastructure/interface/blog/blog.interface';
 
 
 const SlugBlogManagement = () => {
-    const [detail, setDetail] = useState<any>({});
+    const [detail, setDetail] = useState<BlogInterface>();
     const [originalImage, setOriginalImage] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [validate, setValidate] = useState<any>({});

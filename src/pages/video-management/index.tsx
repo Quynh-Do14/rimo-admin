@@ -15,6 +15,7 @@ import videoService from '../../infrastructure/repository/video/video.service';
 import { StatusCommon } from '../../infrastructure/common/controls/Status';
 import SelectSearchCommon from '../../infrastructure/common/input/select-search-common';
 import { VideoInterface } from '../../infrastructure/interface/video/video.interface';
+import { ActionAdvangeCommon } from '../../infrastructure/common/action/action-approve-common';
 
 let timeout: any
 const VideoListPage = () => {
@@ -113,8 +114,13 @@ const VideoListPage = () => {
     };
 
     const onNavigate = (id: any) => {
+        router(`${(ROUTE_PATH.EDIT_VIDEO_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
+    }
+
+    const onView = (id: any) => {
         router(`${(ROUTE_PATH.VIEW_VIDEO_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
     }
+
 
     return (
         <AdminLayout
@@ -229,8 +235,14 @@ const VideoListPage = () => {
                             align='center'
                             width={"60px"}
                             render={(action, record: any) => (
-                                <ActionCommon
+                                <ActionAdvangeCommon
+                                    show='Xem chi tiết'
+                                    onClickShow={() => onView(record.id)}
+                                    detail={'Sửa'}
                                     onClickDetail={() => onNavigate(record.id)}
+                                    approve={''}
+                                    onClickApprove={() => { }}
+                                    remove={'Xóa'}
                                     onClickDelete={() => onOpenModalDelete(record.id)}
                                 />
                             )}
