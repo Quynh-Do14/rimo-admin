@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Input, Pagination, Space, Button } from 'antd';
+import { Table, Input, Pagination, Space, Button, Image } from 'antd';
 import styles from '../../asset/css/admin/admin-component.module.css';
-import categoryProductService from '../../infrastructure/repository/category/categoryProduct.service';
 import { useNavigate } from 'react-router-dom';
 import Constants from '../../core/common/constants';
 import AdminLayout from '../../infrastructure/common/layout/admin/MainLayout';
@@ -13,10 +12,13 @@ import { ActionCommon } from '../../infrastructure/common/action/action-common';
 import { PaginationCommon } from '../../infrastructure/common/pagination/PaginationPageSize';
 import DialogConfirmCommon from '../../infrastructure/common/modal/dialogConfirm';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
+import sloganService from '../../infrastructure/repository/slogan/slogan.service';
+import { SloganInterface } from '../../infrastructure/interface/slogan/slogan.interface';
+import { StatusCommon } from '../../infrastructure/common/controls/Status';
 
 let timeout: any
-const ProductCategoryListPage = () => {
-    const [listResponse, setListResponse] = useState<Array<any>>([])
+const SloganListPage = () => {
+    const [listResponse, setListResponse] = useState<Array<SloganInterface>>([])
     const [total, setTotal] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [pageSize, setPageSize] = useState<number>(10);
@@ -37,7 +39,7 @@ const ProductCategoryListPage = () => {
             search: search,
         }
         try {
-            await categoryProductService.GetCategory(
+            await sloganService.GetSlogan(
                 param,
                 setLoading
             ).then((res) => {
@@ -87,7 +89,7 @@ const ProductCategoryListPage = () => {
 
     const onDeleteAsync = async () => {
         try {
-            await categoryProductService.DeleteCategoryAdmin(
+            await sloganService.DeleteSloganAdmin(
                 idSelected,
                 setLoading
             ).then((res) => {
@@ -102,25 +104,25 @@ const ProductCategoryListPage = () => {
         }
     };
     const onNavigate = (id: any) => {
-        router(`${(ROUTE_PATH.VIEW_CATEGORY_PRODUCT_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
+        router(`${(ROUTE_PATH.VIEW_SLOGAN_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
     }
     return (
         <AdminLayout
-            breadcrumb={"Quản lý danh mục sản phẩm"}
+            breadcrumb={"Quản lý hình ảnh trong trang chủ"}
             title={""}
-            redirect={ROUTE_PATH.CATEGORY_PRODUCT_MANAGEMENT}
+            redirect={ROUTE_PATH.SLOGAN_MANAGEMENT}
         >
             <div className={styles.manage_container}>
-                <h2>Quản lý danh mục sản phẩm</h2>
+                <h2>Quản lý hình ảnh trong trang chủ</h2>
                 <div className={styles.searchBar}>
                     <Input
                         className="form-control"
-                        placeholder="Tìm kiếm theo tên"
+                        placeholder="Tìm kiếm theo tiêu đề"
                         value={searchText}
                         onChange={onChangeSearchText}
                     />
                     <ButtonHref
-                        href={ROUTE_PATH.ADD_CATEGORY_PRODUCT_MANAGEMENT}
+                        href={ROUTE_PATH.ADD_SLOGAN_MANAGEMENT}
                         title={'Thêm mới'}
                         width={150}
                         variant={'ps-btn--fullwidth'}
@@ -145,41 +147,58 @@ const ProductCategoryListPage = () => {
                                 </div>
                             )}
                         />
-                        {/* <Table.Column
+                        <Table.Column
                             title={
                                 <TitleTableCommon
                                     title="Ảnh"
-                                    width={'150px'}
+                                    width={'300px'}
                                 />
                             }
                             key={"image"}
                             dataIndex={"image"}
                             render={(val, record) => {
                                 return (
-                                    <img src={configImageURL(val)} alt="" width={150} height={150} />
+                                    <Image src={configImageURL(val)} alt="" width={300} />
                                 )
                             }}
-                        /> */}
+                        />
                         <Table.Column
                             title={
                                 <TitleTableCommon
-                                    title="Tên danh mục"
+                                    title="Tiêu đề"
                                     width={'150px'}
                                 />
                             }
                             key={"name"}
                             dataIndex={"name"}
                         />
-                        {/* <Table.Column
+                        <Table.Column
                             title={
                                 <TitleTableCommon
-                                    title="Mô tả"
+                                    title="Nội dung"
                                     width={'200px'}
                                 />
                             }
                             key={"description"}
                             dataIndex={"description"}
-                        /> */}
+                        />
+                        <Table.Column
+                            title={
+                                <TitleTableCommon
+                                    title="Trạng thái"
+                                    width={'100px'}
+                                />
+                            }
+                            key={"active"}
+                            dataIndex={"active"}
+                            render={(val) => {
+                                const result = Constants.DisplayConfig.List.find(item => item.value == val)
+                                if (result) {
+                                    return <StatusCommon title={result.label} status={result.value} />
+                                }
+                                return
+                            }}
+                        />
                         <Table.Column
                             title={
                                 <TitleTableCommon
@@ -210,7 +229,7 @@ const ProductCategoryListPage = () => {
                     />
                 </div>
                 <DialogConfirmCommon
-                    message={"Bạn có muốn xóa danh mục sản phẩm này ra khỏi hệ thống"}
+                    message={"Bạn có muốn xóa hình ảnh này ra khỏi hệ thống"}
                     titleCancel={"Bỏ qua"}
                     titleOk={"Xóa"}
                     visible={isDeleteModal}
@@ -224,4 +243,4 @@ const ProductCategoryListPage = () => {
 
     );
 }
-export default ProductCategoryListPage;
+export default SloganListPage;

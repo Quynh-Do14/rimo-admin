@@ -124,67 +124,69 @@ const SlugVideoManagement = () => {
                         />
                     </div>
                 </div>
-                <Row align="top">
-                    <Col span={24} className={styles.form_container}>
-                        <Row gutter={[16, 16]}>
-                            <Col span={24}>
-                                <InputTextCommon
-                                    label={"Tiêu đề"}
-                                    attribute={"name"}
-                                    isRequired={true}
-                                    dataAttribute={dataRequest.name}
-                                    setData={setDataRequest}
-                                    disabled={false}
-                                    validate={validate}
-                                    setValidate={setValidate}
-                                    submittedTime={submittedTime}
-                                />
-                            </Col>
-                            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                                <InputTextCommon
-                                    label={"URL"}
-                                    attribute={"link_url"}
-                                    isRequired={true}
-                                    dataAttribute={dataRequest.link_url}
-                                    setData={setDataRequest}
-                                    disabled={false}
-                                    validate={validate}
-                                    setValidate={setValidate}
-                                    submittedTime={submittedTime}
-                                />
-                            </Col>
-                            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                                <InputSelectStatus
-                                    label={"Trạng thái"}
-                                    attribute={"active"}
-                                    isRequired={true}
-                                    dataAttribute={dataRequest.active}
-                                    setData={setDataRequest}
-                                    disabled={false}
-                                    validate={validate}
-                                    setValidate={setValidate}
-                                    submittedTime={submittedTime}
-                                    listDataOfItem={Constants.DisplayConfig.List}
-                                    valueName='value'
-                                    labelName='label'
-                                />
-                            </Col>
-                            <Col span={24}>
-                                <TextAreaCommon
-                                    label={"Mô tả"}
-                                    attribute={"description"}
-                                    isRequired={true}
-                                    dataAttribute={dataRequest.description}
-                                    setData={setDataRequest}
-                                    disabled={false}
-                                    validate={validate}
-                                    setValidate={setValidate}
-                                    submittedTime={submittedTime}
-                                />
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
+                <div className={styles.table_container}>
+                    <Row align="top">
+                        <Col span={24} className={styles.form_container}>
+                            <Row gutter={[16, 16]}>
+                                <Col span={24}>
+                                    <InputTextCommon
+                                        label={"Tiêu đề"}
+                                        attribute={"name"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.name}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputTextCommon
+                                        label={"URL"}
+                                        attribute={"link_url"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.link_url}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputSelectStatus
+                                        label={"Trạng thái"}
+                                        attribute={"active"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.active}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                        listDataOfItem={Constants.DisplayConfig.List}
+                                        valueName='value'
+                                        labelName='label'
+                                    />
+                                </Col>
+                                <Col span={24}>
+                                    <TextAreaCommon
+                                        label={"Mô tả"}
+                                        attribute={"description"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.description}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </div>
             </div>
             <FullPageLoading isLoading={loading} />
         </AdminLayout >

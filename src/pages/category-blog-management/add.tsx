@@ -84,24 +84,30 @@ const AddCategoryBlogManagement = () => {
                         />
                     </div>
                 </div>
-                <Row gutter={[16, 16]} className={styles.form_container}>
-                    <Col span={24}>
-                        <InputTextCommon
-                            label={"Tên danh mục"}
-                            attribute={"name"}
-                            isRequired={true}
-                            dataAttribute={dataRequest.name}
-                            setData={setDataRequest}
-                            disabled={false}
-                            validate={validate}
-                            setValidate={setValidate}
-                            submittedTime={submittedTime}
-                        />
-                    </Col>
-                </Row>
+                <div className={styles.table_container}>
+                    <Row align="top">
+                        <Col span={24} className={styles.form_container}>
+                            <Row gutter={[16, 16]}>
+                                <Col span={24}>
+                                    <InputTextCommon
+                                        label={"Tên danh mục"}
+                                        attribute={"name"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.name}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </div>
             </div>
             <FullPageLoading isLoading={loading} />
-        </AdminLayout>
+        </AdminLayout >
     )
 }
 

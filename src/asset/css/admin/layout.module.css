@@ -1,4 +1,5 @@
 .wrapper {
+  position: relative;
   display: flex;
   height: 100vh;
   overflow: hidden;
@@ -7,8 +8,8 @@
 
 .sidebar {
   width: 220px;
-  background-color: #000000; /* Đổi nền sidebar thành đen */
-  color: #fbbf24; /* Đổi màu chữ thành vàng */
+  background-color: #000000;
+  color: #fbbf24;
   padding: 20px;
   position: fixed;
   top: 0;
@@ -16,7 +17,7 @@
   left: 0;
   z-index: 1000;
   transition: transform 0.3s ease;
-  border-right: 1px solid #fbbf24; /* Thêm viền vàng bên phải */
+  border-right: 1px solid #fbbf24;
 }
 
 .sidebar.closed {
@@ -32,7 +33,7 @@
   justify-content: center;
   background-color: #000;
   padding: 10px;
-  border-bottom: 1px solid #fbbf24; /* Thêm viền vàng dưới logo */
+  border-bottom: 1px solid #fbbf24;
 }
 
 .menu {
@@ -49,38 +50,46 @@
 }
 
 .menuItem:hover {
-  background-color: rgba(251, 191, 36, 0.1); /* Nền vàng nhạt khi hover */
-  border-color: #fbbf24; /* Viền vàng khi hover */
-}
-
-.menuItem.active {
-  background-color: rgba(251, 191, 36, 0.15); /* Nền vàng đậm hơn khi active */
+  background-color: rgba(251, 191, 36, 0.1);
   border-color: #fbbf24;
 }
 
-.menuItem a,
-.panelHeader {
-  display: flex;
-  align-items: center;
-  padding: 12px 15px;
-  color: #fbbf24; /* Chữ màu vàng */
-  text-decoration: none;
-  font-size: 16px;
-  width: 100%;
+.menuItem.active {
+  background-color: rgba(251, 191, 36, 0.15);
+  border-color: #fbbf24;
 }
 
-.menuItem a:hover {
+.menuItem.hasChildren {
+  border: none;
+}
+
+.menuItem a,
+.menuHeader {
+  display: flex;
+  align-items: center;
+  padding: 12px 4px;
+  color: #fbbf24;
   text-decoration: none;
-  color: #fcd34d; /* Chữ vàng sáng hơn khi hover */
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.menuItem a:hover,
+.menuHeader:hover {
+  text-decoration: none;
+  color: #fcd34d;
 }
 
 .menuText {
   margin-left: 10px;
   flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .menuItem i {
-  color: #fbbf24; /* Icon màu vàng */
+  color: #fbbf24;
   width: 20px;
   text-align: center;
 }
@@ -88,59 +97,48 @@
 .chevronIcon {
   transition: transform 0.3s;
   font-size: 12px;
-  color: #fbbf24; /* Icon chevron màu vàng */
+  color: #fbbf24;
 }
 
-.ant-collapse-item-active .chevronIcon {
+.chevronIcon.rotated {
   transform: rotate(180deg);
-}
-
-.collapseMenu {
-  background-color: transparent !important;
-  border: none !important;
-}
-
-.customPanel :global(.ant-collapse-content) {
-  background-color: rgba(251, 191, 36, 0.05) !important; /* Nền vàng rất nhạt */
-  border: none !important;
-}
-
-.customPanel :global(.ant-collapse-content-box) {
-  padding: 0 !important;
 }
 
 .submenu {
   list-style: none;
   padding: 0;
   margin: 0;
+  background-color: rgba(251, 191, 36, 0.05);
+  border-radius: 0 0 5px 5px;
+  overflow: hidden;
 }
 
 .submenuItem {
-  padding: 10px 0 10px 10px; /* Tăng padding-left để thụt vào */
+  padding: 10px 0 10px 40px; /* Tăng padding-left để thụt vào */
   transition: all 0.3s;
   border-left: 2px solid transparent;
 }
 
 .submenuItem:hover {
   background-color: rgba(251, 191, 36, 0.1);
-  border-left-color: #fbbf24; /* Viền vàng bên trái khi hover */
+  border-left-color: #fbbf24;
 }
 
 .submenuItem.active {
   background-color: rgba(251, 191, 36, 0.15);
   position: relative;
-  border-left-color: #fbbf24; /* Viền vàng bên trái khi active */
+  border-left-color: #fbbf24;
 }
 
 .submenuItem.active::before {
   content: '';
   position: absolute;
-  left: 20px;
+  left: 25px; /* Điều chỉnh vị trí cho phù hợp với padding-left mới */
   top: 50%;
   transform: translateY(-50%);
   width: 6px;
   height: 6px;
-  background-color: #fbbf24; /* Chấm tròn màu vàng */
+  background-color: #fbbf24;
   border-radius: 50%;
 }
 
@@ -149,18 +147,18 @@
   align-items: center;
   padding: 0;
   font-size: 14px;
-  color: #fbbf24; /* Chữ submenu màu vàng */
+  color: #fbbf24;
 }
 
 .submenuItem a:hover {
   text-decoration: none;
-  color: #fcd34d; /* Chữ vàng sáng hơn khi hover */
+  color: #fcd34d;
 }
 
 .submenuItem i {
   margin-right: 10px;
   font-size: 12px;
-  color: #fbbf24; /* Icon submenu màu vàng */
+  color: #fbbf24;
 }
 
 /* Phần còn lại giữ nguyên */

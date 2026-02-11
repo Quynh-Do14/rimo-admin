@@ -35,7 +35,7 @@ export class Endpoint {
     }
     static Category = class {
         static Get = "/category"
-        static GetById = "/category"
+        static GetById = "/category/private"
         static Add = "/category"
         static Update = "/category"
         static Delete = "/category"
@@ -49,7 +49,7 @@ export class Endpoint {
     }
     static BlogCategory = class {
         static Get = "/blog-category"
-        static GetById = "/blog-category"
+        static GetById = "/blog-category/private"
         static Add = "/blog-category"
         static Update = "/blog-category"
         static Delete = "/blog-category"
@@ -99,5 +99,13 @@ export class Endpoint {
         static Get = "/contact"
         static GetById = "/contact"
         static Add = "/contact"
+        static UpdateStatus = "/contact"
+    }
+    static Slogan = class {
+        static Get = "/slogan/private"
+        static GetById = "/slogan/private"
+        static Add = "/slogan"
+        static Update = "/slogan"
+        static Delete = "/slogan"
     }
 }

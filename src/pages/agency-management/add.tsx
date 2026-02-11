@@ -150,162 +150,165 @@ const AddAgencyManagement = () => {
                         />
                     </div>
                 </div>
-                <Row align="top">
-                    <Col xs={24} sm={24} md={10} lg={8} xl={6} xxl={5} className={styles.form_container}>
-                        <UploadAvatar
-                            dataAttribute={dataRequest.image}
-                            setData={setDataRequest}
-                            attribute={'image'}
-                            label={'Ảnh'}
-                        />
-                    </Col>
-                    <Col xs={24} sm={24} md={14} lg={16} xl={18} xxl={19} className={styles.form_container}>
-                        <Row gutter={[16, 16]}>
-                            <Col span={24}>
-                                <InputTextCommon
-                                    label={"Tên đại lý"}
-                                    attribute={"name"}
-                                    isRequired={true}
-                                    dataAttribute={dataRequest.name}
-                                    setData={setDataRequest}
-                                    disabled={false}
-                                    validate={validate}
-                                    setValidate={setValidate}
-                                    submittedTime={submittedTime}
-                                />
-                            </Col>
-                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                <InputTextCommon
-                                    label={"Địa chỉ"}
-                                    attribute={"address"}
-                                    isRequired={true}
-                                    dataAttribute={dataRequest.address}
-                                    setData={setDataRequest}
-                                    disabled={false}
-                                    validate={validate}
-                                    setValidate={setValidate}
-                                    submittedTime={submittedTime}
-                                />
-                            </Col>
-                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                <InputTextCommon
-                                    label={"Số điện thoại"}
-                                    attribute={"phone_number"}
-                                    isRequired={true}
-                                    dataAttribute={dataRequest.phone_number}
-                                    setData={setDataRequest}
-                                    disabled={false}
-                                    validate={validate}
-                                    setValidate={setValidate}
-                                    submittedTime={submittedTime}
-                                />
-                            </Col>
-                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                <InputSelectProvince
-                                    label={"Tỉnh/TP"}
-                                    attribute={"province"}
-                                    isRequired={true}
-                                    dataAttribute={dataRequest.province}
-                                    setData={setDataRequest}
-                                    disabled={false}
-                                    validate={validate}
-                                    setValidate={setValidate}
-                                    submittedTime={submittedTime}
-                                    listDataOfItem={listProvince}
-                                    valueName='code'
-                                    labelName='name'
-                                />
-                            </Col>
-                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                <InputSelectCommon
-                                    label={"Huyện"}
-                                    attribute={"district"}
-                                    isRequired={true}
-                                    dataAttribute={dataRequest.district}
-                                    setData={setDataRequest}
-                                    disabled={false}
-                                    validate={validate}
-                                    setValidate={setValidate}
-                                    submittedTime={submittedTime}
-                                    listDataOfItem={listDistrict}
-                                    valueName='name'
-                                    labelName='name'
-                                />
-                            </Col>
-                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                <ComboBoxCommon
-                                    label={"Dòng sản phầm"}
-                                    attribute={"agency_categories_type"}
-                                    isRequired={true}
-                                    dataAttribute={dataRequest.agency_categories_type}
-                                    setData={setDataRequest}
-                                    disabled={false}
-                                    validate={validate}
-                                    setValidate={setValidate}
-                                    submittedTime={submittedTime}
-                                    listDataOfItem={categoryProduct}
-                                    valueName='id'
-                                    labelName='name'
-                                />
-                            </Col>
-                            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                                <InputSelectStatus
-                                    label={"Trạng thái"}
-                                    attribute={"active"}
-                                    isRequired={true}
-                                    dataAttribute={dataRequest.active}
-                                    setData={setDataRequest}
-                                    disabled={false}
-                                    validate={validate}
-                                    setValidate={setValidate}
-                                    submittedTime={submittedTime}
-                                    listDataOfItem={Constants.DisplayConfig.List}
-                                    valueName='value'
-                                    labelName='label'
-                                />
-                            </Col>
-                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                <InputTextCommon
-                                    label={"Kinh độ trên bản đồ"}
-                                    attribute={"long"}
-                                    isRequired={true}
-                                    dataAttribute={dataRequest.long}
-                                    setData={setDataRequest}
-                                    disabled={false}
-                                    validate={validate}
-                                    setValidate={setValidate}
-                                    submittedTime={submittedTime}
-                                />
-                            </Col>
-                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                <InputTextCommon
-                                    label={"Vĩ độ trên bản đồ"}
-                                    attribute={"lat"}
-                                    isRequired={true}
-                                    dataAttribute={dataRequest.lat}
-                                    setData={setDataRequest}
-                                    disabled={false}
-                                    validate={validate}
-                                    setValidate={setValidate}
-                                    submittedTime={submittedTime}
-                                />
-                            </Col>
-                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                                <InputNumberCommon
-                                    label={"Đánh giá sao"}
-                                    attribute={"star_rate"}
-                                    isRequired={true}
-                                    dataAttribute={dataRequest.star_rate}
-                                    setData={setDataRequest}
-                                    disabled={false}
-                                    validate={validate}
-                                    setValidate={setValidate}
-                                    submittedTime={submittedTime}
-                                />
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
+                <div className={styles.table_container}>
+
+                    <Row align="top">
+                        <Col xs={24} sm={24} md={10} lg={8} xl={6} xxl={5} className={styles.form_container}>
+                            <UploadAvatar
+                                dataAttribute={dataRequest.image}
+                                setData={setDataRequest}
+                                attribute={'image'}
+                                label={'Ảnh'}
+                            />
+                        </Col>
+                        <Col xs={24} sm={24} md={14} lg={16} xl={18} xxl={19} className={styles.form_container}>
+                            <Row gutter={[16, 16]}>
+                                <Col span={24}>
+                                    <InputTextCommon
+                                        label={"Tên đại lý"}
+                                        attribute={"name"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.name}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                    <InputTextCommon
+                                        label={"Địa chỉ"}
+                                        attribute={"address"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.address}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                    <InputTextCommon
+                                        label={"Số điện thoại"}
+                                        attribute={"phone_number"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.phone_number}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                    <InputSelectProvince
+                                        label={"Tỉnh/TP"}
+                                        attribute={"province"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.province}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                        listDataOfItem={listProvince}
+                                        valueName='code'
+                                        labelName='name'
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                    <InputSelectCommon
+                                        label={"Huyện"}
+                                        attribute={"district"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.district}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                        listDataOfItem={listDistrict}
+                                        valueName='name'
+                                        labelName='name'
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                    <ComboBoxCommon
+                                        label={"Dòng sản phầm"}
+                                        attribute={"agency_categories_type"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.agency_categories_type}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                        listDataOfItem={categoryProduct}
+                                        valueName='id'
+                                        labelName='name'
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputSelectStatus
+                                        label={"Trạng thái"}
+                                        attribute={"active"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.active}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                        listDataOfItem={Constants.DisplayConfig.List}
+                                        valueName='value'
+                                        labelName='label'
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                    <InputTextCommon
+                                        label={"Kinh độ trên bản đồ"}
+                                        attribute={"long"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.long}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                    <InputTextCommon
+                                        label={"Vĩ độ trên bản đồ"}
+                                        attribute={"lat"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.lat}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                    <InputNumberCommon
+                                        label={"Đánh giá sao"}
+                                        attribute={"star_rate"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.star_rate}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </div>
             </div>
             <FullPageLoading isLoading={loading} />
         </AdminLayout>

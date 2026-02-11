@@ -31,6 +31,9 @@ import SlugProductSeriesManagement from "../../pages/product-series-management/s
 import SeriesListPage from "../../pages/series-management";
 import AddSeriesManagement from "../../pages/series-management/add";
 import SlugSeriesManagement from "../../pages/series-management/view";
+import SloganListPage from "../../pages/slogan-management";
+import AddSloganManagement from "../../pages/slogan-management/add";
+import SlugSloganManagement from "../../pages/slogan-management/slug";
 import UserListPage from "../../pages/user-management";
 import AddUserManagement from "../../pages/user-management/add";
 import SlugUserManagement from "../../pages/user-management/view";
@@ -232,6 +235,25 @@ export const privateRoutes = [
     {
         path: ROUTE_PATH.VIEW_VIDEO_MANAGEMENT,
         component: SlugVideoManagement,
+        private: true,
+        role: ["ADMIN", 'SELLER']
+    },
+
+    {
+        path: ROUTE_PATH.SLOGAN_MANAGEMENT,
+        component: SloganListPage,
+        private: true,
+        role: ["ADMIN", 'SELLER']
+    },
+    {
+        path: ROUTE_PATH.ADD_SLOGAN_MANAGEMENT,
+        component: AddSloganManagement,
+        private: true,
+        role: ["ADMIN", 'SELLER']
+    },
+    {
+        path: ROUTE_PATH.VIEW_SLOGAN_MANAGEMENT,
+        component: SlugSloganManagement,
         private: true,
         role: ["ADMIN", 'SELLER']
     },

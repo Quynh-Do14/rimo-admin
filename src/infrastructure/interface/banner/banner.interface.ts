@@ -1,7 +1,7 @@
 export interface BannerInterface {
     id?: number;
     name: string;
-    type: string;
+    type: "HOMEPAGE" | "INTRODUCE" | "AGENCY" | "CONTACT" | "POLICY";
     image: string;
 }
 

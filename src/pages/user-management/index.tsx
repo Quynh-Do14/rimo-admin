@@ -124,7 +124,7 @@ const UserListPage = () => {
     return (
         <AdminLayout
             breadcrumb={"Quản lý người dùng"}
-            title={"Quản lý người dùng"}
+            title={""}
             redirect={ROUTE_PATH.USER_MANAGEMENT}
         >
             <div className={styles.manage_container}>

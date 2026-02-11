@@ -1,14 +1,14 @@
 import { Endpoint } from "../../../core/common/apiLink";
 import { FailMessage, SuccessMessage } from "../../common/toast/message";
-import { ContactInterface, ContactParams, ContactStatusInterface } from "../../interface/contact/contact.interface";
+import { SloganInterface, SloganParams } from "../../interface/slogan/slogan.interface";
 import { RequestService } from "../../utilities/response";
 
-class ContactService {
-    async GetContact(params: ContactParams, setLoading: Function) {
+class SloganService {
+    async GetSlogan(params: SloganParams, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService
-                .get(Endpoint.Contact.Get, {
+                .get(Endpoint.Slogan.Get, {
                     ...params
                 })
                 .then(response => {
@@ -24,11 +24,11 @@ class ContactService {
             setLoading(false);
         }
     };
-    async GetContactById(id: string, setLoading: Function) {
+    async GetSloganById(id: string, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService
-                .get(`${Endpoint.Contact.GetById}/${id}`)
+                .get(`${Endpoint.Slogan.GetById}/${id}`)
                 .then(response => {
                     if (response) {
                         return response
@@ -44,54 +44,74 @@ class ContactService {
     };
 
 
-    async AddContactAdmin(data: ContactInterface, onBack: Function, setLoading: Function) {
+    async AddSloganAdmin(data: SloganInterface, onBack: Function, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService
-                .post(Endpoint.Contact.Add,
+                .postForm(Endpoint.Slogan.Add,
                     data
                 )
                 .then(response => {
                     if (response) {
                         onBack()
-                        SuccessMessage("Gửi liên hệ thành công", "")
+                        SuccessMessage("Thêm mới thành công", "")
                         return response
                     }
                     setLoading(false)
                     return response;
                 });
-        } catch (error) {
-            FailMessage("Gửi liên hệ không thành công", "Vui lòng kiểm tra thông tin")
+        } catch (error: any) {
+            FailMessage("Thêm mới không thành công", error.response.data.message || "Vui lòng kiểm tra thông tin")
             console.error(error)
         } finally {
             setLoading(false);
         }
-
     }
-    async UpdateStatusAdmin(id: string, data: ContactStatusInterface, onBack: Function, setLoading: Function) {
+    async UpdateSloganAdmin(id: string, data: SloganInterface, onBack: Function, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService
-                .put(`${Endpoint.Contact.UpdateStatus}/${id}`,
+                .putForm(`${Endpoint.Slogan.Update}/${id}`,
                     data
                 )
                 .then(response => {
                     if (response) {
                         onBack()
-                        SuccessMessage("Gửi liên hệ thành công", "")
+                        SuccessMessage("Cập nhật thành công", "")
                         return response
                     }
                     setLoading(false)
                     return response;
                 });
-        } catch (error) {
-            FailMessage("Gửi liên hệ không thành công", "Vui lòng kiểm tra thông tin")
+        } catch (error: any) {
+            FailMessage("Cập nhật không thành công", error.response.data.message || "Vui lòng kiểm tra thông tin")
+            console.error(error)
+        } finally {
+            setLoading(false);
+        }
+    }
+    async DeleteSloganAdmin(id: string, setLoading: Function) {
+        setLoading(true)
+        try {
+            return await RequestService
+                .delete(`${Endpoint.Slogan.Delete}/${id}`, {})
+                .then(response => {
+                    if (response) {
+                        SuccessMessage("Xóa thành công", "")
+                        return response
+                    }
+                    setLoading(false)
+                    return response;
+                });
+        } catch (error: any) {
+            FailMessage("Xóa không thành công", error.response.data.message || "Vui lòng kiểm tra thông tin")
             console.error(error)
         } finally {
             setLoading(false);
         }
     }
 }
-const contactService = new ContactService();
 
-export default contactService;
+const sloganService = new SloganService();
+
+export default sloganService;

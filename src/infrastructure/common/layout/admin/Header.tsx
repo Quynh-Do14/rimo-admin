@@ -22,10 +22,6 @@ export default function Header(props: Props) {
 
     const breadCrumb = [
         {
-            text: 'Trang chủ',
-            url: '/',
-        },
-        {
             text: breadcrumb,
             url: redirect,
         },

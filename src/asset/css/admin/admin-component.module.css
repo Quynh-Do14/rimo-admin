@@ -30,11 +30,11 @@
 .manage_container h2 {
   font-size: 24px;
   font-weight: 700;
-  margin: 0;
-  color: #fbbf24;
+  color: #1f2937; /* Màu xám đậm đẹp */
   letter-spacing: -0.5px;
   position: relative;
-  padding-left: 16px;
+  padding-left: 20px; /* Tăng padding để thanh dài hơn */
+  line-height: 1.3;
 }
 
 .manage_container h2::before {
@@ -44,9 +44,10 @@
   top: 50%;
   transform: translateY(-50%);
   width: 6px;
-  height: 24px;
-  background: linear-gradient(to bottom, #fbbf24, #f59e0b);
-  border-radius: 3px;
+  height: 28px; /* Cao hơn chút */
+  background: linear-gradient(135deg, #1f2937, #57739a);
+  border-radius: 4px; /* Bo góc nhiều hơn */
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.2);
 }
 
 .manage_container .headerPage .btn_container {
@@ -59,6 +60,7 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  gap: 12px;
 }
 
 .manage_container .pagination {

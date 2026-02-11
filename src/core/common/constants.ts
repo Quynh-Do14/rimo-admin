@@ -21,11 +21,27 @@ export default class Constants {
         role: ["ADMIN"]
       },
       {
-        id: 'banner-management',
-        text: 'Quản lý banner',
-        url: ROUTE_PATH.BANNER_MANAGEMENT,
-        icon: 'fas fa-images',
-        role: ["ADMIN", 'SELLER']
+        id: 'media-library',
+        text: 'Thư viện media',
+        url: '#',
+        icon: 'fas fa-photo-video',
+        role: ["ADMIN", 'SELLER'],
+        children: [
+          {
+            id: 'banner-management',
+            text: 'Quản lý banner',
+            url: ROUTE_PATH.BANNER_MANAGEMENT,
+            icon: 'fas fa-image',
+            role: ["ADMIN", 'SELLER']
+          },
+          {
+            id: 'homepage-images',
+            text: 'Hình ảnh trang chủ',
+            url: ROUTE_PATH.SLOGAN_MANAGEMENT,
+            icon: 'fas fa-images',
+            role: ["ADMIN", 'SELLER']
+          },
+        ]
       },
       {
         id: 'categories',
@@ -171,6 +187,18 @@ export default class Constants {
       },
       {
         label: 'Không hiển thị',
+        value: false
+      },
+    ]
+  }
+  static StatusConfig = class {
+    static List = [
+      {
+        label: 'Đã xử lí',
+        value: true
+      },
+      {
+        label: 'Chưa xử lí',
         value: false
       },
     ]

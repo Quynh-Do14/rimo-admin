@@ -131,79 +131,85 @@ const SlugUserManagement = () => {
                         />
                     </div>
                 </div>
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                        <InputTextCommon
-                            label={"Tên người dùng"}
-                            attribute={"name"}
-                            isRequired={true}
-                            dataAttribute={dataRequest.name}
-                            setData={setDataRequest}
-                            disabled={false}
-                            validate={validate}
-                            setValidate={setValidate}
-                            submittedTime={submittedTime}
-                        />
-                    </Col>
-                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                        <InputTextCommon
-                            label={"Email"}
-                            attribute={"email"}
-                            isRequired={false}
-                            dataAttribute={dataRequest.email}
-                            setData={setDataRequest}
-                            disabled={true}
-                            validate={validate}
-                            setValidate={setValidate}
-                            submittedTime={submittedTime}
-                        />
-                    </Col>
-                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                        <InputSelectStatus
-                            label={"Phân quyền"}
-                            attribute={"role_id"}
-                            isRequired={true}
-                            dataAttribute={dataRequest.role_id}
-                            setData={setDataRequest}
-                            disabled={false}
-                            validate={validate}
-                            setValidate={setValidate}
-                            submittedTime={submittedTime}
-                            listDataOfItem={Constants.Roles.List}
-                            valueName='value'
-                            labelName='label'
-                        />
-                    </Col>
-                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                        <InputTextCommon
-                            label={"Số điện thoại"}
-                            attribute={"phone_number"}
-                            isRequired={false}
-                            dataAttribute={dataRequest.phone_number}
-                            setData={setDataRequest}
-                            disabled={false}
-                            validate={validate}
-                            setValidate={setValidate}
-                            submittedTime={submittedTime}
-                        />
-                    </Col>
-                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                        <InputSelectStatus
-                            label={"Khóa tài khoản"}
-                            attribute={"active"}
-                            isRequired={true}
-                            dataAttribute={dataRequest.active}
-                            setData={setDataRequest}
-                            disabled={false}
-                            validate={validate}
-                            setValidate={setValidate}
-                            submittedTime={submittedTime}
-                            listDataOfItem={Constants.DisableAccount.List}
-                            valueName='value'
-                            labelName='label'
-                        />
-                    </Col>
-                </Row>
+                <div className={styles.table_container}>
+                    <Row align="top">
+                        <Col span={24} className={styles.form_container}>
+                            <Row gutter={[16, 16]}>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputTextCommon
+                                        label={"Tên người dùng"}
+                                        attribute={"name"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.name}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputTextCommon
+                                        label={"Email"}
+                                        attribute={"email"}
+                                        isRequired={false}
+                                        dataAttribute={dataRequest.email}
+                                        setData={setDataRequest}
+                                        disabled={true}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputSelectStatus
+                                        label={"Phân quyền"}
+                                        attribute={"role_id"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.role_id}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                        listDataOfItem={Constants.Roles.List}
+                                        valueName='value'
+                                        labelName='label'
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputTextCommon
+                                        label={"Số điện thoại"}
+                                        attribute={"phone_number"}
+                                        isRequired={false}
+                                        dataAttribute={dataRequest.phone_number}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputSelectStatus
+                                        label={"Khóa tài khoản"}
+                                        attribute={"active"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.active}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                        listDataOfItem={Constants.DisableAccount.List}
+                                        valueName='value'
+                                        labelName='label'
+                                    />
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </div>
             </div>
             <FullPageLoading isLoading={loading} />
         </AdminLayout >

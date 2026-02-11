@@ -108,7 +108,7 @@ const BrandListPage = () => {
     return (
         <AdminLayout
             breadcrumb={"Quản lý thương hiệu"}
-            title={"Quản lý thương hiệu"}
+            title={""}
             redirect={ROUTE_PATH.BRAND_MANAGEMENT}
         >
             <div className={styles.manage_container}>

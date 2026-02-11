@@ -53,6 +53,10 @@ export const ROUTE_PATH = {
     ADD_VIDEO_MANAGEMENT: `${PREFIX}/video-management/add`,
     VIEW_VIDEO_MANAGEMENT: `${PREFIX}/video-management/view/:id`,
 
+    SLOGAN_MANAGEMENT: `${PREFIX}/slogan-management`,
+    ADD_SLOGAN_MANAGEMENT: `${PREFIX}/slogan-management/add`,
+    VIEW_SLOGAN_MANAGEMENT: `${PREFIX}/slogan-management/view/:id`,
+
     CONTACT_MANAGEMENT: `${PREFIX}/contact-management`,
 
 }

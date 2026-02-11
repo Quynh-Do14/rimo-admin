@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from '../../asset/css/admin/admin-component.module.css';
-import { Col, Row } from 'antd';
+import { Col, Row, Table } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ROUTE_PATH } from '../../core/common/appRouter';
 import categoryBlogService from '../../infrastructure/repository/category/categoryBlog.service';
@@ -11,9 +11,13 @@ import ButtonHref from '../../infrastructure/common/button/ButtonHref';
 import ButtonCommon from '../../infrastructure/common/button/ButtonCommon';
 import InputTextCommon from '../../infrastructure/common/input/input-text-common';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
+import { CategoryBlogInterface } from '../../infrastructure/interface/category/categoryBlog.interface';
+import { TitleTableCommon } from '../../infrastructure/common/text/title-table-common';
+import Constants from '../../core/common/constants';
+import { StatusCommon } from '../../infrastructure/common/controls/Status';
 
 const SlugCategoryBlogManagement = () => {
-    const [detail, setDetail] = useState<any>({});
+    const [detail, setDetail] = useState<CategoryBlogInterface>();
     const [originalImage, setOriginalImage] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [validate, setValidate] = useState<any>({});
@@ -119,21 +123,74 @@ const SlugCategoryBlogManagement = () => {
                         />
                     </div>
                 </div>
-                <Row gutter={[16, 16]} className={styles.form_container}>
-                    <Col span={24}>
-                        <InputTextCommon
-                            label={"Tên danh mục"}
-                            attribute={"name"}
-                            isRequired={true}
-                            dataAttribute={dataRequest.name}
-                            setData={setDataRequest}
-                            disabled={false}
-                            validate={validate}
-                            setValidate={setValidate}
-                            submittedTime={submittedTime}
+                <div className={styles.table_container}>
+                    <Row align="top">
+                        <Col span={24} className={styles.form_container}>
+                            <Row gutter={[16, 16]}>
+                                <Col span={24}>
+                                    <InputTextCommon
+                                        label={"Tên danh mục"}
+                                        attribute={"name"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.name}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                    <h2>Tin tức thuộc danh mục</h2>
+                    <Table
+                        dataSource={detail?.blog}
+                        loading={loading}
+                        rowKey="id"
+                        pagination={false}
+                        className='table-common'
+                    >
+                        <Table.Column
+                            title={"STT"}
+                            dataIndex="stt"
+                            key="stt"
+                            width={"5%"}
+                            render={(val, record, index) => (
+                                <div style={{ textAlign: "center" }}>
+                                    {index + 1}
+                                </div>
+                            )}
                         />
-                    </Col>
-                </Row>
+                        <Table.Column
+                            title={
+                                <TitleTableCommon
+                                    title="Tiêu đề"
+                                    width={'150px'}
+                                />
+                            }
+                            key={"title"}
+                            dataIndex={"title"}
+                        />
+                        <Table.Column
+                            title={
+                                <TitleTableCommon
+                                    title="Trạng thái"
+                                    width={'100px'}
+                                />
+                            }
+                            key={"active"}
+                            dataIndex={"active"}
+                            render={(val) => {
+                                const result = Constants.DisplayConfig.List.find(item => item.value == val)
+                                if (result) {
+                                    return <StatusCommon title={result.label} status={result.value} />
+                                }
+                                return
+                            }}
+                        />
+                    </Table>
+                </div>
             </div>
             <FullPageLoading isLoading={loading} />
         </AdminLayout >

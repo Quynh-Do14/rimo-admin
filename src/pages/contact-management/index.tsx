@@ -12,18 +12,22 @@ import DialogConfirmCommon from '../../infrastructure/common/modal/dialogConfirm
 import { useNavigate } from 'react-router-dom';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
 import contactService from '../../infrastructure/repository/contact/contact.service';
+import { StatusCommon } from '../../infrastructure/common/controls/Status';
+import { ActionAdvangeCommon } from '../../infrastructure/common/action/action-approve-common';
+import ContactDetailModal from './view';
+import { ContactInterface } from '../../infrastructure/interface/contact/contact.interface';
 
 let timeout: any
 const ContactListPage = () => {
-    const [listResponse, setListResponse] = useState<Array<any>>([])
+    const [listResponse, setListResponse] = useState<Array<ContactInterface>>([])
     const [total, setTotal] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [pageSize, setPageSize] = useState<number>(10);
     const [searchText, setSearchText] = useState<string>("");
-
+    const [selectedItem, setSelectedItem] = useState<ContactInterface | null>()
     const [idSelected, setIdSelected] = useState<string>("");
 
-    const [isDeleteModal, setIsDeleteModal] = useState<boolean>(false);
+    const [isModalView, setIsModalView] = useState<boolean>(false);
 
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -76,23 +80,18 @@ const ContactListPage = () => {
     };
     // Xóa bài
     const onOpenModalDelete = (id: any) => {
-        setIsDeleteModal(true);
-        setIdSelected(id)
+        setIsModalView(false);
     };
 
-    const onCloseModalDelete = () => {
-        setIsDeleteModal(false);
+    const onView = (item: ContactInterface) => {
+        setIsModalView(true);
+        setSelectedItem(item)
     };
-
-    const onNavigate = (id: any) => {
-        router(`${(ROUTE_PATH.CONTACT_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")
-            }${id}`);
-    }
 
     return (
         <AdminLayout
             breadcrumb={"Quản lý liên hệ"}
-            title={"Quản lý liên hệ"}
+            title={""}
             redirect={ROUTE_PATH.CONTACT_MANAGEMENT}
         >
             <div className={styles.manage_container}>
@@ -164,7 +163,24 @@ const ContactListPage = () => {
                             key={"message"}
                             dataIndex={"message"}
                         />
-                        {/* <Table.Column
+                        <Table.Column
+                            title={
+                                <TitleTableCommon
+                                    title="Trạng thái"
+                                    width={'100px'}
+                                />
+                            }
+                            key={"status"}
+                            dataIndex={"status"}
+                            render={(val) => {
+                                const result = Constants.StatusConfig.List.find(item => item.value == val)
+                                if (result) {
+                                    return <StatusCommon title={result.label} status={result.value} />
+                                }
+                                return
+                            }}
+                        />
+                        <Table.Column
                             title={
                                 <TitleTableCommon
                                     title="Thao tác"
@@ -175,12 +191,17 @@ const ContactListPage = () => {
                             align='center'
                             width={"60px"}
                             render={(action, record: any) => (
-                                <ActionCommon
-                                    onClickDetail={() => onNavigate(record.id)}
-                                    onClickDelete={() => onOpenModalDelete(record.id)}
-                                />
+                                <ActionAdvangeCommon
+                                    show='Xem chi tiết'
+                                    onClickShow={() => onView(record)}
+                                    detail={''}
+                                    onClickDetail={() => { }}
+                                    approve={''}
+                                    onClickApprove={() => { }}
+                                    remove={''}
+                                    onClickDelete={() => { }} />
                             )}
-                        /> */}
+                        />
                     </Table>
                 </div>
                 <div className={styles.pagination}>
@@ -197,11 +218,18 @@ const ContactListPage = () => {
                     message={"Bạn có muốn xóa liên hệ này ra khỏi hệ thống"}
                     titleCancel={"Bỏ qua"}
                     titleOk={"Xóa"}
-                    visible={isDeleteModal}
+                    visible={isModalView}
                     handleCancel={onCloseModalDelete}
                     handleOk={onDeleteAsync}
                     title={"Xác nhận"}
                 /> */}
+                <ContactDetailModal
+                    contact={selectedItem ? selectedItem : null}
+                    isOpen={isModalView}
+                    onClose={onOpenModalDelete}
+                    setLoading={setLoading}
+                    onSearch={onSearch}
+                />
             </div>
             <FullPageLoading isLoading={loading} />
         </AdminLayout >

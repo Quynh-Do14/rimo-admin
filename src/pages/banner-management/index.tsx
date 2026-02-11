@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Input, Pagination, Space, Button, Row, Col } from 'antd';
+import { Table, Input, Pagination, Space, Button, Row, Col, Image } from 'antd';
 import styles from '../../asset/css/admin/admin-component.module.css';
 import { useNavigate } from 'react-router-dom';
 import bannerService from '../../infrastructure/repository/banner/banner.service';
@@ -125,7 +125,7 @@ const BannerListPage = () => {
     return (
         <AdminLayout
             breadcrumb={"Quản lý banner"}
-            title={"Quản lý banner"}
+            title={""}
             redirect={ROUTE_PATH.BANNER_MANAGEMENT}
         >
             <div className={styles.manage_container}>
@@ -191,14 +191,14 @@ const BannerListPage = () => {
                             title={
                                 <TitleTableCommon
                                     title="Ảnh"
-                                    width={'150px'}
+                                    width={'400px'}
                                 />
                             }
                             key={"image"}
                             dataIndex={"image"}
                             render={(val, record) => {
                                 return (
-                                    <img src={configImageURL(val)} alt="" width={300} height={150} />
+                                    <Image src={configImageURL(val)} alt="" width={400} />
                                 )
                             }}
                         />

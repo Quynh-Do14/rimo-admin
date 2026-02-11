@@ -108,7 +108,7 @@ const BlogCategoryListPage = () => {
     return (
         <AdminLayout
             breadcrumb={"Quản lý danh mục tin tức"}
-            title={"Quản lý danh mục tin tức"}
+            title={""}
             redirect={ROUTE_PATH.CATEGORY_BLOG_MANAGEMENT}
         >
             <div className={styles.manage_container}>

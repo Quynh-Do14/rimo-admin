@@ -128,7 +128,7 @@ const BlogListPage = () => {
     return (
         <AdminLayout
             breadcrumb={"Quản lý tin tức"}
-            title={"Quản lý tin tức"}
+            title={""}
             redirect={ROUTE_PATH.BLOG_MANAGEMENT}
         >
             <div className={styles.manage_container}>
@@ -137,7 +137,7 @@ const BlogListPage = () => {
                     <Col xs={24} md={7}>
                         <Input
                             className="form-control"
-                            placeholder="Tìm kiếm theo tên"
+                            placeholder="Tìm kiếm theo tiêu đề"
                             value={searchText}
                             onChange={onChangeSearchText}
                         />

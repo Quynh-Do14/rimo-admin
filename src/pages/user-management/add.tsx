@@ -93,79 +93,85 @@ const AddUserManagement = () => {
                         />
                     </div>
                 </div>
-                <Row gutter={[20, 20]}>
-                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                        <InputTextCommon
-                            label={"Tên người dùng"}
-                            attribute={"name"}
-                            isRequired={true}
-                            dataAttribute={dataRequest.name}
-                            setData={setDataRequest}
-                            disabled={false}
-                            validate={validate}
-                            setValidate={setValidate}
-                            submittedTime={submittedTime}
-                        />
-                    </Col>
-                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                        <InputTextCommon
-                            label={"Email"}
-                            attribute={"email"}
-                            isRequired={true}
-                            dataAttribute={dataRequest.email}
-                            setData={setDataRequest}
-                            disabled={false}
-                            validate={validate}
-                            setValidate={setValidate}
-                            submittedTime={submittedTime}
-                        />
-                    </Col>
-                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                        <InputPasswordCommon
-                            label={"Mật khẩu"}
-                            attribute={"password"}
-                            isRequired={true}
-                            dataAttribute={dataRequest.password}
-                            setData={setDataRequest}
-                            disabled={false}
-                            validate={validate}
-                            setValidate={setValidate}
-                            submittedTime={submittedTime}
-                        />
-                    </Col>
-                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                        <InputSelectStatus
-                            label={"Phân quyền"}
-                            attribute={"role_id"}
-                            isRequired={true}
-                            dataAttribute={dataRequest.role_id}
-                            setData={setDataRequest}
-                            disabled={false}
-                            validate={validate}
-                            setValidate={setValidate}
-                            submittedTime={submittedTime}
-                            listDataOfItem={Constants.Roles.List}
-                            valueName='value'
-                            labelName='label'
-                        />
-                    </Col>
-                    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                        <InputTextCommon
-                            label={"Số điện thoại"}
-                            attribute={"phone_number"}
-                            isRequired={false}
-                            dataAttribute={dataRequest.phone_number}
-                            setData={setDataRequest}
-                            disabled={false}
-                            validate={validate}
-                            setValidate={setValidate}
-                            submittedTime={submittedTime}
-                        />
-                    </Col>
-                </Row>
+                <div className={styles.table_container}>
+                    <Row align="top">
+                        <Col span={24} className={styles.form_container}>
+                            <Row gutter={[16, 16]}>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputTextCommon
+                                        label={"Tên người dùng"}
+                                        attribute={"name"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.name}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputTextCommon
+                                        label={"Email"}
+                                        attribute={"email"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.email}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputPasswordCommon
+                                        label={"Mật khẩu"}
+                                        attribute={"password"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.password}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputSelectStatus
+                                        label={"Phân quyền"}
+                                        attribute={"role_id"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.role_id}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                        listDataOfItem={Constants.Roles.List}
+                                        valueName='value'
+                                        labelName='label'
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputTextCommon
+                                        label={"Số điện thoại"}
+                                        attribute={"phone_number"}
+                                        isRequired={false}
+                                        dataAttribute={dataRequest.phone_number}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </div>
             </div>
             <FullPageLoading isLoading={loading} />
-        </AdminLayout>
+        </AdminLayout >
     )
 }
 

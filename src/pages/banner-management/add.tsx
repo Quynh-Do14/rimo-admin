@@ -92,65 +92,67 @@ const AddBannerManagement = () => {
                         />
                     </div>
                 </div>
-                <Row align="top">
-                    <Col xs={24} sm={24} md={10} lg={8} xl={6} xxl={5} className={styles.form_container}>
-                        <UploadAvatar
-                            dataAttribute={dataRequest.image}
-                            setData={setDataRequest}
-                            attribute={'image'}
-                            label={'Ảnh'}
-                        />
-                    </Col>
-                    <Col xs={24} sm={24} md={14} lg={16} xl={18} xxl={19} className={styles.form_container}>
-                        <Row gutter={[16, 16]}>
-                            <Col span={24}>
-                                <InputTextCommon
-                                    label={"Tên ảnh"}
-                                    attribute={"name"}
-                                    isRequired={true}
-                                    dataAttribute={dataRequest.name}
-                                    setData={setDataRequest}
-                                    disabled={false}
-                                    validate={validate}
-                                    setValidate={setValidate}
-                                    submittedTime={submittedTime}
-                                />
-                            </Col>
-                            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                                <InputSelectCommon
-                                    label={"Loại ảnh"}
-                                    attribute={"type"}
-                                    isRequired={true}
-                                    dataAttribute={dataRequest.type}
-                                    setData={setDataRequest}
-                                    disabled={false}
-                                    validate={validate}
-                                    setValidate={setValidate}
-                                    submittedTime={submittedTime}
-                                    listDataOfItem={Constants.BannerType.List}
-                                    labelName='label'
-                                    valueName='value'
-                                />
-                            </Col>
-                            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                                <InputSelectStatus
-                                    label={"Trạng thái"}
-                                    attribute={"active"}
-                                    isRequired={true}
-                                    dataAttribute={dataRequest.active}
-                                    setData={setDataRequest}
-                                    disabled={false}
-                                    validate={validate}
-                                    setValidate={setValidate}
-                                    submittedTime={submittedTime}
-                                    listDataOfItem={Constants.DisplayConfig.List}
-                                    valueName='value'
-                                    labelName='label'
-                                />
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
+                <div className={styles.table_container}>
+                    <Row align="top">
+                        <Col xs={24} sm={24} md={10} lg={8} xl={6} xxl={5} className={styles.form_container}>
+                            <UploadAvatar
+                                dataAttribute={dataRequest.image}
+                                setData={setDataRequest}
+                                attribute={'image'}
+                                label={'Ảnh'}
+                            />
+                        </Col>
+                        <Col xs={24} sm={24} md={14} lg={16} xl={18} xxl={19} className={styles.form_container}>
+                            <Row gutter={[16, 16]}>
+                                <Col span={24}>
+                                    <InputTextCommon
+                                        label={"Tên ảnh"}
+                                        attribute={"name"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.name}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputSelectCommon
+                                        label={"Loại ảnh"}
+                                        attribute={"type"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.type}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                        listDataOfItem={Constants.BannerType.List}
+                                        labelName='label'
+                                        valueName='value'
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                    <InputSelectStatus
+                                        label={"Trạng thái"}
+                                        attribute={"active"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.active}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                        listDataOfItem={Constants.DisplayConfig.List}
+                                        valueName='value'
+                                        labelName='label'
+                                    />
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </div>
             </div>
             <FullPageLoading isLoading={loading} />
         </AdminLayout>

@@ -1,24 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import styles from '../../asset/css/admin/admin-component.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ROUTE_PATH } from '../../core/common/appRouter';
-import { configImageURL } from '../../infrastructure/helper/helper';
-import bannerService from '../../infrastructure/repository/banner/banner.service';
+import categoryProductService from '../../infrastructure/repository/category/categoryProduct.service';
 import { WarningMessage } from '../../infrastructure/common/toast/message';
 import AdminLayout from '../../infrastructure/common/layout/admin/MainLayout';
 import ButtonHref from '../../infrastructure/common/button/ButtonHref';
 import ButtonCommon from '../../infrastructure/common/button/ButtonCommon';
 import UploadAvatar from '../../infrastructure/common/input/upload-image';
-import { Col, Row } from 'antd';
+import { Col, Row, Table } from 'antd';
 import InputTextCommon from '../../infrastructure/common/input/input-text-common';
-import InputSelectCommon from '../../infrastructure/common/input/select-common';
-import Constants from '../../core/common/constants';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
+import { TitleTableCommon } from '../../infrastructure/common/text/title-table-common';
+import Constants from '../../core/common/constants';
+import { StatusCommon } from '../../infrastructure/common/controls/Status';
+import { SloganInterface } from '../../infrastructure/interface/slogan/slogan.interface';
+import sloganService from '../../infrastructure/repository/slogan/slogan.service';
+import { configImageURL } from '../../infrastructure/helper/helper';
+import TextAreaCommon from '../../infrastructure/common/input/textarea-common';
 import InputSelectStatus from '../../infrastructure/common/input/select-status';
 
-
-const SlugBannerManagement = () => {
-    const [detail, setDetail] = useState<any>({});
+const SlugSloganManagement = () => {
+    const [detail, setDetail] = useState<SloganInterface>();
     const [originalImage, setOriginalImage] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [validate, setValidate] = useState<any>({});
@@ -46,13 +49,13 @@ const SlugBannerManagement = () => {
     const router = useNavigate();
     const param = useParams();
     const onBack = () => {
-        router(ROUTE_PATH.BANNER_MANAGEMENT)
+        router(ROUTE_PATH.SLOGAN_MANAGEMENT)
     }
 
     const onGetByIdAsync = async () => {
         if (param.id) {
             try {
-                await bannerService.GetBannerById(
+                await sloganService.GetSloganById(
                     String(param.id),
                     setLoading
                 ).then((res) => {
@@ -76,9 +79,8 @@ const SlugBannerManagement = () => {
             setDataRequest({
                 image: configImageURL(detail.image),
                 name: detail.name,
-                type: detail.type,
+                description: detail.description,
                 active: detail.active,
-
             });
         };
     }, [detail]);
@@ -90,7 +92,7 @@ const SlugBannerManagement = () => {
             try {
                 const payload: any = {
                     name: dataRequest.name,
-                    type: dataRequest.type,
+                    description: dataRequest.description,
                     active: dataRequest.active,
                 };
 
@@ -98,7 +100,7 @@ const SlugBannerManagement = () => {
                     payload.image = dataRequest.image;
                 }
 
-                await bannerService.UpdateBannerAdmin(
+                await sloganService.UpdateSloganAdmin(
                     String(param.id),
                     payload,
                     onBack,
@@ -114,16 +116,16 @@ const SlugBannerManagement = () => {
 
     return (
         <AdminLayout
-            breadcrumb={"Quản lý banner"}
-            title={"Thêm banner"}
-            redirect={ROUTE_PATH.BANNER_MANAGEMENT}
+            breadcrumb={"Quản lý hình ảnh trong trang chủ"}
+            title={"Thêm hình ảnh trong trang chủ"}
+            redirect={ROUTE_PATH.SLOGAN_MANAGEMENT}
         >
             <div className={styles.manage_container}>
                 <div className={styles.headerPage}>
-                    <h2>Cập nhật banner</h2>
+                    <h2>Cập nhật hình ảnh trong trang chủ</h2>
                     <div className={styles.btn_container}>
                         <ButtonHref
-                            href={ROUTE_PATH.BANNER_MANAGEMENT}
+                            href={ROUTE_PATH.SLOGAN_MANAGEMENT}
                             title={'Quay lại'}
                             width={150}
                             variant={'ps-btn--gray'}
@@ -150,7 +152,7 @@ const SlugBannerManagement = () => {
                             <Row gutter={[16, 16]}>
                                 <Col span={24}>
                                     <InputTextCommon
-                                        label={"Tên ảnh"}
+                                        label={"Tiêu đề"}
                                         attribute={"name"}
                                         isRequired={true}
                                         dataAttribute={dataRequest.name}
@@ -161,23 +163,7 @@ const SlugBannerManagement = () => {
                                         submittedTime={submittedTime}
                                     />
                                 </Col>
-                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                                    <InputSelectCommon
-                                        label={"Loại ảnh"}
-                                        attribute={"type"}
-                                        isRequired={true}
-                                        dataAttribute={dataRequest.type}
-                                        setData={setDataRequest}
-                                        disabled={false}
-                                        validate={validate}
-                                        setValidate={setValidate}
-                                        submittedTime={submittedTime}
-                                        listDataOfItem={Constants.BannerType.List}
-                                        labelName='label'
-                                        valueName='value'
-                                    />
-                                </Col>
-                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                                <Col span={24}>
                                     <InputSelectStatus
                                         label={"Trạng thái"}
                                         attribute={"active"}
@@ -193,6 +179,19 @@ const SlugBannerManagement = () => {
                                         labelName='label'
                                     />
                                 </Col>
+                                <Col span={24}>
+                                    <TextAreaCommon
+                                        label={"Nội dung"}
+                                        attribute={"description"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.description}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
                             </Row>
                         </Col>
                     </Row>
@@ -203,4 +202,4 @@ const SlugBannerManagement = () => {
     )
 }
 
-export default SlugBannerManagement
+export default SlugSloganManagement

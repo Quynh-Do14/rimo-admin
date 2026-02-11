@@ -119,7 +119,7 @@ const VideoListPage = () => {
     return (
         <AdminLayout
             breadcrumb={"Quản lý video"}
-            title={"Quản lý video"}
+            title={""}
             redirect={ROUTE_PATH.VIDEO_MANAGEMENT}
         >
             <div className={styles.manage_container}>
