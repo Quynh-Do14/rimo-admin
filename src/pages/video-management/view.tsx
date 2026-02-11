@@ -56,13 +56,13 @@ const ViewVideoManagement = () => {
     const videoId = detail.link_url.split('v=')[1];
     return (
         <AdminLayout
-            breadcrumb={"Quản lý liên hệ"}
-            title={"Chi tiết liên hệ"}
+            breadcrumb={"Quản lý video"}
+            title={"Chi tiết video"}
             redirect={ROUTE_PATH.PRODUCT_MANAGEMENT}
         >
             <div className={styles.manage_container}>
                 <div className={styles.headerPage}>
-                    <h2>Chi tiết liên hệ</h2>
+                    <h2>Chi tiết video</h2>
                     <div className={styles.btn_container}>
                         <ButtonCommon
                             key="close"

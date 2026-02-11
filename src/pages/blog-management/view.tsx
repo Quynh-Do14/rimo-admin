@@ -50,13 +50,13 @@ const ViewBlogManagement = () => {
 
     return (
         <AdminLayout
-            breadcrumb={"Quản lý sản phẩm"}
-            title={"Chi tiết sản phẩm"}
+            breadcrumb={"Quản lý tin tức"}
+            title={"Chi tiết tin tức"}
             redirect={ROUTE_PATH.PRODUCT_MANAGEMENT}
         >
             <div className={styles.manage_container}>
                 <div className={styles.headerPage}>
-                    <h2>Chi tiết sản phẩm</h2>
+                    <h2>Chi tiết tin tức</h2>
                     <div className={styles.btn_container}>
                         <ButtonCommon
                             key="close"
