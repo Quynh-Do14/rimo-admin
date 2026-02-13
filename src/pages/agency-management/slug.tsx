@@ -174,7 +174,7 @@ const SlugAgencyManagement = () => {
 
     useEffect(() => {
         onGetListDistrictAsync().then(_ => { });
-    }, [dataRequest]);
+    }, [dataRequest.province]);
 
     return (
         <AdminLayout
