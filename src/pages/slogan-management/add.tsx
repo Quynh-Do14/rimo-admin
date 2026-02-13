@@ -14,6 +14,7 @@ import { FullPageLoading } from '../../infrastructure/common/loader/loading';
 import sloganService from '../../infrastructure/repository/slogan/slogan.service';
 import InputSelectStatus from '../../infrastructure/common/input/select-status';
 import Constants from '../../core/common/constants';
+import InputNumberCommon from '../../infrastructure/common/input/input-number';
 
 
 const AddSloganManagement = () => {
@@ -52,8 +53,8 @@ const AddSloganManagement = () => {
                     image: dataRequest.image,
                     name: dataRequest.name,
                     description: dataRequest.description,
-                    index: 0,
-                    type: 'HOMEPAGE',
+                    index: dataRequest.index,
+                    type: 'SLOGAN_SECTION',
                     active: dataRequest.active
                 },
                     onBack,
@@ -119,7 +120,20 @@ const AddSloganManagement = () => {
                                         submittedTime={submittedTime}
                                     />
                                 </Col>
-                                <Col span={24}>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                    <InputNumberCommon
+                                        label={"Số thứ tự"}
+                                        attribute={"index"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.index}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                                     <InputSelectStatus
                                         label={"Trạng thái"}
                                         attribute={"active"}

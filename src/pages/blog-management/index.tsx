@@ -200,7 +200,7 @@ const BlogListPage = () => {
                             title={
                                 <TitleTableCommon
                                     title="Tiêu đề"
-                                    width={'150px'}
+                                    width={'100px'}
                                 />
                             }
                             key={"title"}
@@ -210,7 +210,7 @@ const BlogListPage = () => {
                             title={
                                 <TitleTableCommon
                                     title="Danh mục"
-                                    width={'150px'}
+                                    width={'80px'}
                                 />
                             }
                             key={"category_name"}
@@ -220,7 +220,7 @@ const BlogListPage = () => {
                             title={
                                 <TitleTableCommon
                                     title="Mô tả"
-                                    width={'200px'}
+                                    width={'100px'}
                                 />
                             }
                             key={"short_description"}
@@ -239,6 +239,23 @@ const BlogListPage = () => {
                                 const result = Constants.DisplayConfig.List.find(item => item.value == val)
                                 if (result) {
                                     return <StatusCommon title={result.label} status={result.value} />
+                                }
+                                return
+                            }}
+                        />
+                        <Table.Column
+                            title={
+                                <TitleTableCommon
+                                    title="Bản nháp"
+                                    width={'100px'}
+                                />
+                            }
+                            key={"is_draft"}
+                            dataIndex={"is_draft"}
+                            render={(val) => {
+                                const result = Constants.DraftConfig.List.find(item => item.value == val)
+                                if (result) {
+                                    return <StatusCommon title={result.label} status={!result.value} />
                                 }
                                 return
                             }}

@@ -180,7 +180,7 @@ const VideoListPage = () => {
                             title={
                                 <TitleTableCommon
                                     title="Tiêu đề"
-                                    width={'150px'}
+                                    width={'100px'}
                                 />
                             }
                             key={"name"}
@@ -201,7 +201,7 @@ const VideoListPage = () => {
                             title={
                                 <TitleTableCommon
                                     title="Mô tả"
-                                    width={'250px'}
+                                    width={'100px'}
                                 />
                             }
                             key={"description"}

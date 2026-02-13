@@ -72,8 +72,6 @@ const SlugProductCategoryManagement = () => {
 
     useEffect(() => {
         if (detail) {
-            console.log('detail', detail);
-
             // const fullImage = configImageURL(detail.image);
             // setOriginalImage(fullImage);
             setDataRequest({
@@ -120,7 +118,7 @@ const SlugProductCategoryManagement = () => {
     return (
         <AdminLayout
             breadcrumb={"Quản lý danh mục sản phẩm"}
-            title={"Thêm danh mục sản phẩm"}
+            title={"Cập nhật danh mục sản phẩm"}
             redirect={ROUTE_PATH.CATEGORY_PRODUCT_MANAGEMENT}
         >
             <div className={styles.manage_container}>

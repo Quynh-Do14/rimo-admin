@@ -1,6 +1,6 @@
 import { Endpoint } from "../../../core/common/apiLink";
 import { FailMessage, SuccessMessage } from "../../common/toast/message";
-import { SloganInterface, SloganParams } from "../../interface/slogan/slogan.interface";
+import { SloganInterface, SloganParams, UpdateIndexSloganInterface, UpdateIndexSloganRequestInterface } from "../../interface/slogan/slogan.interface";
 import { RequestService } from "../../utilities/response";
 
 class SloganService {
@@ -72,6 +72,30 @@ class SloganService {
         try {
             return await RequestService
                 .putForm(`${Endpoint.Slogan.Update}/${id}`,
+                    data
+                )
+                .then(response => {
+                    if (response) {
+                        onBack()
+                        SuccessMessage("Cập nhật thành công", "")
+                        return response
+                    }
+                    setLoading(false)
+                    return response;
+                });
+        } catch (error: any) {
+            FailMessage("Cập nhật không thành công", error.response.data.message || "Vui lòng kiểm tra thông tin")
+            console.error(error)
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    async UpdateIndexSloganAdmin(data: UpdateIndexSloganRequestInterface, onBack: Function, setLoading: Function) {
+        setLoading(true)
+        try {
+            return await RequestService
+                .put(Endpoint.Slogan.UpdateIndex,
                     data
                 )
                 .then(response => {

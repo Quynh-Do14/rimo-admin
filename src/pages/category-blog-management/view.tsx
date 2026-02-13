@@ -102,7 +102,7 @@ const SlugCategoryBlogManagement = () => {
     return (
         <AdminLayout
             breadcrumb={"Quản lý danh mục tin tức"}
-            title={"Thêm danh mục tin tức"}
+            title={"Cập nhật danh mục tin tức"}
             redirect={ROUTE_PATH.CATEGORY_BLOG_MANAGEMENT}
         >
             <div className={styles.manage_container}>

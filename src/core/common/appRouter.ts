@@ -59,6 +59,8 @@ export const ROUTE_PATH = {
 
     SLOGAN_MANAGEMENT: `${PREFIX}/slogan-management`,
     ADD_SLOGAN_MANAGEMENT: `${PREFIX}/slogan-management/add`,
+    EDIT_SLOGAN_MANAGEMENT: `${PREFIX}/slogan-management/edit/:id`,
+    EDIT_INDEX_SLOGAN_MANAGEMENT: `${PREFIX}/slogan-management/edit-index`,
     VIEW_SLOGAN_MANAGEMENT: `${PREFIX}/slogan-management/view/:id`,
 
     CONTACT_MANAGEMENT: `${PREFIX}/contact-management`,

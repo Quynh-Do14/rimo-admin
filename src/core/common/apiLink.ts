@@ -106,6 +106,7 @@ export class Endpoint {
         static GetById = "/slogan/private"
         static Add = "/slogan"
         static Update = "/slogan"
+        static UpdateIndex = "/slogan/update-index"
         static Delete = "/slogan"
     }
 }

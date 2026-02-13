@@ -191,6 +191,18 @@ export default class Constants {
       },
     ]
   }
+  static DraftConfig = class {
+    static List = [
+      {
+        label: 'Lưu nháp',
+        value: true
+      },
+      {
+        label: 'Hoàn thiện',
+        value: false
+      },
+    ]
+  }
   static StatusConfig = class {
     static List = [
       {

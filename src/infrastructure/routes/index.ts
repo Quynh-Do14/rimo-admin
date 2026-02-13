@@ -38,6 +38,8 @@ import SlugSeriesManagement from "../../pages/series-management/view";
 import SloganListPage from "../../pages/slogan-management";
 import AddSloganManagement from "../../pages/slogan-management/add";
 import SlugSloganManagement from "../../pages/slogan-management/slug";
+import UpdateIndexSloganManagement from "../../pages/slogan-management/update-index";
+import ViewSloganManagement from "../../pages/slogan-management/view";
 import UserListPage from "../../pages/user-management";
 import AddUserManagement from "../../pages/user-management/add";
 import SlugUserManagement from "../../pages/user-management/view";
@@ -281,8 +283,20 @@ export const privateRoutes = [
         role: ["ADMIN", 'SELLER']
     },
     {
-        path: ROUTE_PATH.VIEW_SLOGAN_MANAGEMENT,
+        path: ROUTE_PATH.EDIT_SLOGAN_MANAGEMENT,
         component: SlugSloganManagement,
+        private: true,
+        role: ["ADMIN", 'SELLER']
+    },
+    {
+        path: ROUTE_PATH.EDIT_INDEX_SLOGAN_MANAGEMENT,
+        component: UpdateIndexSloganManagement,
+        private: true,
+        role: ["ADMIN", 'SELLER']
+    },
+    {
+        path: ROUTE_PATH.VIEW_SLOGAN_MANAGEMENT,
+        component: ViewSloganManagement,
         private: true,
         role: ["ADMIN", 'SELLER']
     },

@@ -75,6 +75,28 @@ const AddBlogManagement = () => {
 
     };
 
+
+    const onCreateDraftAsync = async () => {
+        try {
+            await blogService.AddBlogAdmin({
+                image: dataRequest.image,
+                title: dataRequest.title,
+                short_description: dataRequest.short_description,
+                blog_category_id: dataRequest.blog_category_id,
+                description: dataRequest.description,
+                active: false,
+                is_draft: true
+            },
+                onBack,
+                setLoading
+            )
+        }
+        catch (error) {
+            console.error(error)
+        }
+    };
+
+
     return (
         <AdminLayout
             breadcrumb={"Quản lý tin tức"}
@@ -90,6 +112,12 @@ const AddBlogManagement = () => {
                             title={'Quay lại'}
                             width={150}
                             variant={'ps-btn--gray'}
+                        />
+                        <ButtonCommon
+                            onClick={onCreateDraftAsync}
+                            title={'Lưu nháp'}
+                            width={150}
+                            variant={'ps-btn--fullwidth'}
                         />
                         <ButtonCommon
                             onClick={onCreateAsync}

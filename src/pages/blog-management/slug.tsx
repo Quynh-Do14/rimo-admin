@@ -101,6 +101,7 @@ const SlugBlogManagement = () => {
                     blog_category_id: dataRequest.blog_category_id,
                     description: dataRequest.description,
                     active: dataRequest.active,
+                    is_draft: false
                 };
 
                 if (dataRequest.image !== originalImage) {
@@ -121,6 +122,32 @@ const SlugBlogManagement = () => {
         }
     };
 
+    const onUpdateDraftAsync = async () => {
+        try {
+            const payload: any = {
+                title: dataRequest.title,
+                short_description: dataRequest.short_description,
+                blog_category_id: dataRequest.blog_category_id,
+                description: dataRequest.description,
+                active: false,
+                is_draft: true
+            };
+
+            if (dataRequest.image !== originalImage) {
+                payload.image = dataRequest.image;
+            }
+
+            await blogService.UpdateBlogAdmin(
+                String(param.id),
+                payload,
+                onBack,
+                setLoading
+            );
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <AdminLayout
             breadcrumb={"Quản lý tin tức"}
@@ -136,6 +163,12 @@ const SlugBlogManagement = () => {
                             title={'Quay lại'}
                             width={150}
                             variant={'ps-btn--gray'}
+                        />
+                        <ButtonCommon
+                            onClick={onUpdateDraftAsync}
+                            title={'Cập nhật bản nháp'}
+                            width={200}
+                            variant={'ps-btn--fullwidth'}
                         />
                         <ButtonCommon
                             onClick={onUpdateAsync}

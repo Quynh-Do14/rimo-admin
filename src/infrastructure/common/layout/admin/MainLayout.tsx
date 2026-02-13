@@ -149,10 +149,10 @@ export default function AdminLayout({ breadcrumb, title, redirect, children }: a
     }
     useEffect(() => {
         onGetListCategoryAsync().then(_ => { });
-        onGetListSeriesAsync().then(_ => { });
+        // onGetListSeriesAsync().then(_ => { });
         onGetListBlogCategoryAsync().then(_ => { });
-        onGetListBrandAsync().then(_ => { });
-        onGetListProductAsync().then(_ => { });
+        // onGetListBrandAsync().then(_ => { });
+        // onGetListProductAsync().then(_ => { });
         // onGetListAgencyCategoryAsync().then(_ => { });
         onGetProfileAsync().then(_ => { });
     }, []);

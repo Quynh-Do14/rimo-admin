@@ -19,6 +19,7 @@ import sloganService from '../../infrastructure/repository/slogan/slogan.service
 import { configImageURL } from '../../infrastructure/helper/helper';
 import TextAreaCommon from '../../infrastructure/common/input/textarea-common';
 import InputSelectStatus from '../../infrastructure/common/input/select-status';
+import InputNumberCommon from '../../infrastructure/common/input/input-number';
 
 const SlugSloganManagement = () => {
     const [detail, setDetail] = useState<SloganInterface>();
@@ -80,6 +81,7 @@ const SlugSloganManagement = () => {
                 image: configImageURL(detail.image),
                 name: detail.name,
                 description: detail.description,
+                index: detail.index,
                 active: detail.active,
             });
         };
@@ -93,6 +95,7 @@ const SlugSloganManagement = () => {
                 const payload: any = {
                     name: dataRequest.name,
                     description: dataRequest.description,
+                    index: dataRequest.index,
                     active: dataRequest.active,
                 };
 
@@ -117,7 +120,7 @@ const SlugSloganManagement = () => {
     return (
         <AdminLayout
             breadcrumb={"Quản lý hình ảnh trong trang chủ"}
-            title={"Thêm hình ảnh trong trang chủ"}
+            title={"Cập nhật hình ảnh trong trang chủ"}
             redirect={ROUTE_PATH.SLOGAN_MANAGEMENT}
         >
             <div className={styles.manage_container}>
@@ -163,7 +166,20 @@ const SlugSloganManagement = () => {
                                         submittedTime={submittedTime}
                                     />
                                 </Col>
-                                <Col span={24}>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                    <InputNumberCommon
+                                        label={"Số thứ tự"}
+                                        attribute={"index"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.index}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                                     <InputSelectStatus
                                         label={"Trạng thái"}
                                         attribute={"active"}

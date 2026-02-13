@@ -93,7 +93,7 @@ const SlugCategoryAgencyManagement = () => {
     return (
         <AdminLayout
             breadcrumb={"Quản lý dòng sản phẩm"}
-            title={"Thêm dòng sản phẩm"}
+            title={"Cập nhật dòng sản phẩm"}
             redirect={ROUTE_PATH.CATEGORY_AGENCY_MANAGEMENT}
         >
             <div className={styles.manage_container}>
