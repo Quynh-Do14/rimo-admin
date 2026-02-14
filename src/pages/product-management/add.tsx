@@ -14,7 +14,6 @@ import ButtonHref from '../../infrastructure/common/button/ButtonHref';
 import ButtonCommon from '../../infrastructure/common/button/ButtonCommon';
 import UploadAvatar from '../../infrastructure/common/input/upload-image';
 import InputTextCommon from '../../infrastructure/common/input/input-text-common';
-import InputSelectCommon from '../../infrastructure/common/input/select-common';
 import InputNumberCommon from '../../infrastructure/common/input/input-number';
 import UploadListImage from '../../infrastructure/common/input/upload-list-image';
 import InputArrayTextCommon from '../../infrastructure/common/input/input-array/input-array-text-common';
@@ -84,6 +83,7 @@ const AddProductManagement = () => {
             formData.append('active', dataRequest.active);
             formData.append('price_sale', dataRequest.price_sale || 0);
             formData.append('short_description', dataRequest.short_description);
+            formData.append('index', dataRequest.index);
             formData.append('description', dataRequest.description);
             formData.append('productFigure', JSON.stringify(figureList.filter(item => item.key && item.value)));
 
@@ -192,6 +192,19 @@ const AddProductManagement = () => {
                                         listDataOfItem={brandState}
                                     />
                                 </Col> */}
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                    <InputNumberCommon
+                                        label={"Số thứ tự"}
+                                        attribute={"index"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.index}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
                                 <Col xs={24} sm={24} md={12}>
                                     <InputNumberCommon
                                         label={"Giá"}

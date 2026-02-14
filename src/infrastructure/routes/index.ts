@@ -22,12 +22,14 @@ import SlugCategoryBlogManagement from "../../pages/category-blog-management/vie
 import ProductCategoryListPage from "../../pages/category-product-management";
 import AddProductCategoryManagement from "../../pages/category-product-management/add";
 import SlugProductCategoryManagement from "../../pages/category-product-management/slug";
+import UpdateIndexCategoryManagement from "../../pages/category-product-management/update-index";
 import ContactListPage from "../../pages/contact-management";
 import ViewContactMangement from "../../pages/contact-management/view";
 import LoginPage from "../../pages/login";
 import ProductListPage from "../../pages/product-management";
 import AddProductManagement from "../../pages/product-management/add";
 import SlugProductManagement from "../../pages/product-management/slug";
+import UpdateIndexProductManagement from "../../pages/product-management/update-index";
 import ViewProductManagement from "../../pages/product-management/view";
 import ProductSeriesListPage from "../../pages/product-series-management";
 import AddProductSeriesManagement from "../../pages/product-series-management/add";
@@ -181,6 +183,12 @@ export const privateRoutes = [
         private: true,
         role: ["ADMIN", 'SELLER']
     },
+    {
+        path: ROUTE_PATH.EDIT_INDEX_PRODUCT_MANAGEMENT,
+        component: UpdateIndexProductManagement,
+        private: true,
+        role: ["ADMIN", 'SELLER']
+    },
 
     {
         path: ROUTE_PATH.CATEGORY_PRODUCT_MANAGEMENT,
@@ -197,6 +205,12 @@ export const privateRoutes = [
     {
         path: ROUTE_PATH.VIEW_CATEGORY_PRODUCT_MANAGEMENT,
         component: SlugProductCategoryManagement,
+        private: true,
+        role: ["ADMIN", 'SELLER']
+    },
+    {
+        path: ROUTE_PATH.EDIT_INDEX_CATEGORY_PRODUCT_MANAGEMENT,
+        component: UpdateIndexCategoryManagement,
         private: true,
         role: ["ADMIN", 'SELLER']
     },

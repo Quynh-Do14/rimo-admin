@@ -1,6 +1,6 @@
 import { Endpoint } from "../../../core/common/apiLink";
 import { FailMessage, SuccessMessage } from "../../common/toast/message";
-import { ProductParams } from "../../interface/product/product.interface";
+import { ProductParams, UpdateIndexProductInterface, UpdateIndexProductRequestInterface } from "../../interface/product/product.interface";
 import { RequestService } from "../../utilities/response";
 
 class ProductService {
@@ -72,6 +72,29 @@ class ProductService {
         try {
             return await RequestService
                 .putForm(`${Endpoint.Product.Update}/${id}`,
+                    data
+                )
+                .then(response => {
+                    if (response) {
+                        onBack()
+                        SuccessMessage("Cập nhật thành công", "")
+                        return response
+                    }
+                    setLoading(false)
+                    return response;
+                });
+        } catch (error: any) {
+            FailMessage("Cập nhật không thành công", error.response.data.message || "Vui lòng kiểm tra thông tin")
+            console.error(error)
+        } finally {
+            setLoading(false);
+        }
+    }
+    async UpdateIndexProductAdmin(data: UpdateIndexProductRequestInterface, onBack: Function, setLoading: Function) {
+        setLoading(true)
+        try {
+            return await RequestService
+                .put(Endpoint.Product.UpdateIndex,
                     data
                 )
                 .then(response => {

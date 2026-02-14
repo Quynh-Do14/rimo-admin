@@ -17,6 +17,7 @@ import { CategoryProductInterface } from '../../infrastructure/interface/categor
 import { TitleTableCommon } from '../../infrastructure/common/text/title-table-common';
 import Constants from '../../core/common/constants';
 import { StatusCommon } from '../../infrastructure/common/controls/Status';
+import InputNumberCommon from '../../infrastructure/common/input/input-number';
 
 const SlugProductCategoryManagement = () => {
     const [detail, setDetail] = useState<CategoryProductInterface>();
@@ -77,6 +78,7 @@ const SlugProductCategoryManagement = () => {
             setDataRequest({
                 // image: configImageURL(detail.image),
                 name: detail.name,
+                index: detail.index,
                 // description: detail.description,
 
             });
@@ -103,6 +105,7 @@ const SlugProductCategoryManagement = () => {
                         image: "",
                         name: dataRequest.name,
                         description: "",
+                        index: dataRequest.index
                     },
                     onBack,
                     setLoading
@@ -157,6 +160,19 @@ const SlugProductCategoryManagement = () => {
                                         attribute={"name"}
                                         isRequired={true}
                                         dataAttribute={dataRequest.name}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col span={24}>
+                                    <InputNumberCommon
+                                        label={"Số thứ tự"}
+                                        attribute={"index"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.index}
                                         setData={setDataRequest}
                                         disabled={false}
                                         validate={validate}

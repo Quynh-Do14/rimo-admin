@@ -105,6 +105,7 @@ const SlugProductManagement = () => {
                 short_description: detail.short_description,
                 active: detail.active,
                 description: detail.description,
+                index: detail.index,
                 imagesCode: arrImgConvert, // ảnh cũ giữ nguyên
                 imagesCodeOrigin: arrImgConvert, // ảnh cũ giữ nguyên
                 remainImg: detail.images,
@@ -152,6 +153,7 @@ const SlugProductManagement = () => {
             // formData.append('warranty', dataRequest.warranty);
             // formData.append('year', dataRequest.year);
             formData.append('short_description', dataRequest.short_description);
+            formData.append('index', dataRequest.index);
             // formData.append('more_infomation', dataRequest.more_infomation);
             formData.append('description', dataRequest.description);
             formData.append('active', dataRequest.active);
@@ -269,6 +271,19 @@ const SlugProductManagement = () => {
                                         listDataOfItem={brandState}
                                     />
                                 </Col> */}
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                    <InputNumberCommon
+                                        label={"Số thứ tự"}
+                                        attribute={"index"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.index}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
                                 <Col xs={24} sm={24} md={12}>
                                     <InputNumberCommon
                                         label={"Giá"}

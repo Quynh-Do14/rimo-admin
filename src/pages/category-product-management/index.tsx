@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Input, Pagination, Space, Button } from 'antd';
+import { Table, Input, Pagination, Space, Button, Row, Col } from 'antd';
 import styles from '../../asset/css/admin/admin-component.module.css';
 import categoryProductService from '../../infrastructure/repository/category/categoryProduct.service';
 import { useNavigate } from 'react-router-dom';
@@ -13,10 +13,11 @@ import { ActionCommon } from '../../infrastructure/common/action/action-common';
 import { PaginationCommon } from '../../infrastructure/common/pagination/PaginationPageSize';
 import DialogConfirmCommon from '../../infrastructure/common/modal/dialogConfirm';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
+import { CategoryProductInterface } from '../../infrastructure/interface/category/categoryProduct.interface';
 
 let timeout: any
 const ProductCategoryListPage = () => {
-    const [listResponse, setListResponse] = useState<Array<any>>([])
+    const [listResponse, setListResponse] = useState<Array<CategoryProductInterface>>([])
     const [total, setTotal] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [pageSize, setPageSize] = useState<number>(10);
@@ -112,20 +113,31 @@ const ProductCategoryListPage = () => {
         >
             <div className={styles.manage_container}>
                 <h2>Quản lý danh mục sản phẩm</h2>
-                <div className={styles.searchBar}>
-                    <Input
-                        className="form-control"
-                        placeholder="Tìm kiếm theo tên"
-                        value={searchText}
-                        onChange={onChangeSearchText}
-                    />
-                    <ButtonHref
-                        href={ROUTE_PATH.ADD_CATEGORY_PRODUCT_MANAGEMENT}
-                        title={'Thêm mới'}
-                        width={150}
-                        variant={'ps-btn--fullwidth'}
-                    />
-                </div>
+                <Row gutter={[15, 15]}>
+                    <Col xs={24} md={18}>
+                        <Input
+                            className="form-control"
+                            placeholder="Tìm kiếm theo tên"
+                            value={searchText}
+                            onChange={onChangeSearchText}
+                        />
+                    </Col>
+
+                    <Col xs={24} md={3}>
+                        <ButtonHref
+                            href={ROUTE_PATH.EDIT_INDEX_CATEGORY_PRODUCT_MANAGEMENT}
+                            title={'Thay đổi vị trí'}
+                            variant={'ps-btn--fullwidth'}
+                        />
+                    </Col>
+                    <Col xs={24} md={3}>
+                        <ButtonHref
+                            href={ROUTE_PATH.ADD_CATEGORY_PRODUCT_MANAGEMENT}
+                            title={'Thêm mới'}
+                            variant={'ps-btn--fullwidth'}
+                        />
+                    </Col>
+                </Row>
                 <div className={styles.table_container}>
                     <Table
                         dataSource={listResponse}
@@ -169,6 +181,16 @@ const ProductCategoryListPage = () => {
                             }
                             key={"name"}
                             dataIndex={"name"}
+                        />
+                        <Table.Column
+                            title={
+                                <TitleTableCommon
+                                    title="Thứ tự"
+                                    width={'100px'}
+                                />
+                            }
+                            key={"index"}
+                            dataIndex={"index"}
                         />
                         {/* <Table.Column
                             title={

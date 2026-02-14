@@ -16,11 +16,13 @@ export const ROUTE_PATH = {
     CATEGORY_PRODUCT_MANAGEMENT: `${PREFIX}/category-product-management`,
     ADD_CATEGORY_PRODUCT_MANAGEMENT: `${PREFIX}/category-product-management/add`,
     VIEW_CATEGORY_PRODUCT_MANAGEMENT: `${PREFIX}/category-product-management/view/:id`,
+    EDIT_INDEX_CATEGORY_PRODUCT_MANAGEMENT: `${PREFIX}/category-product-management/edit-index`,
 
     PRODUCT_MANAGEMENT: `${PREFIX}/product-management`,
     ADD_PRODUCT_MANAGEMENT: `${PREFIX}/product-management/add`,
     VIEW_PRODUCT_MANAGEMENT: `${PREFIX}/product-management/view/:id`,
     EDIT_PRODUCT_MANAGEMENT: `${PREFIX}/product-management/edit/:id`,
+    EDIT_INDEX_PRODUCT_MANAGEMENT: `${PREFIX}/product-management/edit-index`,
 
     PRODUCT_SERIES_MANAGEMENT: `${PREFIX}/product-series-management`,
     ADD_PRODUCT_SERIES_MANAGEMENT: `${PREFIX}/product-series-management/add`,

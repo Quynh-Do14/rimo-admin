@@ -210,7 +210,7 @@ const SloganListPage = () => {
                             title={
                                 <TitleTableCommon
                                     title="Thứ tự"
-                                    width={'150px'}
+                                    width={'100px'}
                                 />
                             }
                             key={"index"}

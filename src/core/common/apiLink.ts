@@ -17,6 +17,7 @@ export class Endpoint {
         static GetById = "/product/private"
         static Add = "/product"
         static Update = "/product"
+        static UpdateIndex = "/product/update-index"
         static Delete = "/product"
     }
     static ProductSeries = class {
@@ -38,6 +39,7 @@ export class Endpoint {
         static GetById = "/category/private"
         static Add = "/category"
         static Update = "/category"
+        static UpdateIndex = "/category/update-index"
         static Delete = "/category"
     }
     static Blog = class {

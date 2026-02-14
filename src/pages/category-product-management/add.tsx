@@ -12,6 +12,7 @@ import UploadAvatar from '../../infrastructure/common/input/upload-image';
 import InputTextCommon from '../../infrastructure/common/input/input-text-common';
 import TextAreaCommon from '../../infrastructure/common/input/textarea-common';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
+import InputNumberCommon from '../../infrastructure/common/input/input-number';
 
 
 const AddProductCategoryManagement = () => {
@@ -50,6 +51,7 @@ const AddProductCategoryManagement = () => {
                     image: "",
                     name: dataRequest.name,
                     description: "",
+                    index: dataRequest.index
                 },
                     onBack,
                     setLoading
@@ -107,6 +109,19 @@ const AddProductCategoryManagement = () => {
                                         attribute={"name"}
                                         isRequired={true}
                                         dataAttribute={dataRequest.name}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col span={24}>
+                                    <InputNumberCommon
+                                        label={"Số thứ tự"}
+                                        attribute={"index"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.index}
                                         setData={setDataRequest}
                                         disabled={false}
                                         validate={validate}
