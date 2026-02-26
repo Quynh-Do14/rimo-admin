@@ -194,7 +194,6 @@
 }
 
 .toggleBtn {
-  
   transition: all 0.3s ease;
 }
 
@@ -412,6 +411,31 @@
 }
 
 .logoutBtn i {
+  width: 20px;
+  text-align: center;
+}
+
+.optionBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #50b0f9;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.optionBtn:hover {
+  background-color: #f8f9fa;
+  color: #50c9f9;
+}
+
+.optionBtn i {
   width: 20px;
   text-align: center;
 }

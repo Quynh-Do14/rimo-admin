@@ -4,6 +4,10 @@ export class Endpoint {
         static Register = "auth/register"
         static Profile = "/auth/profile"
         static RefreshToken = "/auth/refresh-token"
+        static ChangePassword = "/auth/change-password"
+        static ForgotPassword = "/auth/forgot-password"
+        static ResetPassword = "/auth/reset-password"
+
     }
     static Banner = class {
         static Get = "/banner/private"

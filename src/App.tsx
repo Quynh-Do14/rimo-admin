@@ -4,6 +4,8 @@ import { privateRoutes } from './infrastructure/routes';
 import { ROUTE_PATH } from './core/common/appRouter';
 import LoginPage from './pages/login';
 import { PublicRoute } from './infrastructure/routes/public-router';
+import ResetPasswordPage from './pages/login/resetPassword';
+import ForgotPasswordPage from './pages/login/forgotPassword';
 
 function App() {
   return (
@@ -33,6 +35,9 @@ function App() {
             }
           })}
           <Route path={ROUTE_PATH.LOGIN} element={<PublicRoute component={<LoginPage />} />} />
+          <Route path={ROUTE_PATH.RESETPASSWORD} element={<PublicRoute component={<ResetPasswordPage />} />} />
+          <Route path={ROUTE_PATH.FORGOT_PASSWORD} element={<PublicRoute component={<ForgotPasswordPage />} />} />
+
         </Routes>
       </BrowserRouter>
     </div>

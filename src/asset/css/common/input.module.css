@@ -1,3 +1,6 @@
+.passwordWrapper {
+  position: relative;
+}
 .inputCommon label {
   display: block;
   margin-bottom: 8px;
@@ -66,4 +69,32 @@
 /* Căn lề container nếu có */
 .inputCommon {
   margin-bottom: 20px;
+}
+
+.passwordToggleBtn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8c8c8c;
+  transition: color 0.3s ease;
+}
+
+.passwordToggleBtn:hover {
+  color: #1890ff;
+}
+
+.passwordToggleBtn:focus {
+  outline: none;
+}
+
+.passwordToggleBtn svg {
+  display: block;
 }

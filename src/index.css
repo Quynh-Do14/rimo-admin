@@ -140,11 +140,20 @@ body {
 .flex {
   display: flex;
 }
+.flex-col {
+  flex-direction: column;
+}
 .justify-center {
   justify-content: center;
 }
 .gap-1 {
   gap: 8px;
+}
+.gap-2 {
+  gap: 16px;
+}
+.gap-4 {
+  gap: 32px;
 }
 
 .full-page-loading {
@@ -161,6 +170,15 @@ body {
 }
 .max-w-none {
   max-width: none;
+}
+
+.password-change-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: center;
+  margin: 0 0 0 0;
+  position: relative;
 }
 
 /* Video  */

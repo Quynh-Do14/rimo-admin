@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import authService from '../../infrastructure/repository/auth/auth.service';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ROUTE_PATH } from '../../core/common/appRouter';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
 import styles from '../../asset/css/admin/login.module.css';
-import InputTextLogin from '../../infrastructure/common/input/login/input-text-login';
 import { InputPasswordLogin } from '../../infrastructure/common/input/login/input-password-login';
 import { WarningMessage } from '../../infrastructure/common/toast/message';
 import logo from "../../asset/img/logo.png"
-const LoginPage = () => {
+const ResetPasswordPage = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [validate, setValidate] = useState<any>({});
     const [submittedTime, setSubmittedTime] = useState<any>();
@@ -33,23 +32,25 @@ const LoginPage = () => {
         return allRequestOK;
     };
 
+    const [searchParams] = useSearchParams();
+    const tokenFromQuery = searchParams.get('token');
     const router = useNavigate();
 
     const handleLoginSubmit = async () => {
         await setSubmittedTime(Date.now());
         if (isValidData()) {
             try {
-                const response = await authService.login(
+                const response = await authService.resetPassword(
                     {
-                        email: dataRequest.email,
-                        password: dataRequest.password,
+                        token: tokenFromQuery,
+                        newPassword: dataRequest.newPassword,
+                        confirmPassword: dataRequest.confirmPassword,
                     },
-                    () => { },
                     setLoading
                 );
 
                 if (response) {
-                    router(ROUTE_PATH.MAIN_LAYOUT);
+                    router(ROUTE_PATH.LOGIN);
                 }
             } catch (error) {
                 console.error('Login error:', error);
@@ -75,17 +76,17 @@ const LoginPage = () => {
                     <div className={styles.formWrapper}>
                         <div className={styles.formHeader}>
                             <h2 className={styles.formTitle}>
-                                Đăng nhập vào <span className={styles.highlight}>RIMO</span>
+                                Đặt lại <span className={styles.highlight}>mật khẩu</span>
                             </h2>
                             <p className={styles.formSubtitle}>
-                                Nhập thông tin đăng nhập của bạn để tiếp tục
+                                Nhập thông tin mật khẩu mới
                             </p>
                         </div>
-                        <InputTextLogin
-                            label={"Email"}
-                            attribute={"email"}
+                        <InputPasswordLogin
+                            label={"Mật khẩu mới"}
+                            attribute={"newPassword"}
                             isRequired={true}
-                            dataAttribute={dataRequest.email}
+                            dataAttribute={dataRequest.newPassword}
                             setData={setDataRequest}
                             disabled={false}
                             validate={validate}
@@ -93,31 +94,18 @@ const LoginPage = () => {
                             submittedTime={submittedTime}
                         />
                         <InputPasswordLogin
-                            label={"Mật khẩu"}
-                            attribute={"password"}
+                            label={"Xác nhận mật khẩu"}
+                            attribute={"confirmPassword"}
                             isRequired={true}
-                            dataAttribute={dataRequest.password}
+                            dataAttribute={dataRequest.confirmPassword}
                             setData={setDataRequest}
                             disabled={false}
                             validate={validate}
                             setValidate={setValidate}
                             submittedTime={submittedTime}
                         />
-                        <div className={styles.formOptions}>
-                            {/* <label className={styles.checkboxContainer}>
-                                <input
-                                    type="checkbox"
-                                    className={styles.checkboxInput}
-                                />
-                                <span className={styles.checkboxCheckmark}></span>
-                                <span className={styles.checkboxLabel}>Ghi nhớ đăng nhập</span>
-                            </label> */}
-                            <Link to={ROUTE_PATH.FORGOT_PASSWORD} className={styles.forgotPassword}>
-                                Quên mật khẩu?
-                            </Link>
-                        </div>
                         <button onClick={handleLoginSubmit} className={styles.submitButton}>
-                            <span className={styles.buttonText}>Đăng nhập</span>
+                            <span className={styles.buttonText}>Đổi mật khẩu</span>
                             <span className={styles.buttonIcon}>
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                                     <path d="M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -134,4 +122,4 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage
+export default ResetPasswordPage

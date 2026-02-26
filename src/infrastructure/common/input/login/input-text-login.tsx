@@ -74,7 +74,7 @@ const InputTextLogin = (props: Props) => {
                         <path d="M22 6L12 13L2 6"
                             stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    <span>Email</span>
+                    <span>{label}</span>
                 </label>
                 <div className={styles.inputWrapper}>
                     <input

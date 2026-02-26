@@ -104,62 +104,62 @@ class AuthService {
         }
     }
 
-    // async changePassword(data: object, onBack: Function, setLoading: Function) {
-    //     try {
-    //         return await RequestService.put(Endpoint.Auth.ChangePassword,
-    //             { ...data },
-    //         ).then(response => {
-    //             setLoading(false)
-    //             SuccessMessage("Thay đổi mật khẩu thành công", "Tài khoản của bạn sẽ được đăng xuất")
-    //             onBack()
-    //             return response;
-    //         });
-    //     } catch (error: any) {
-    //         FailMessage("Thay đổi mật khẩu không thành công", error.response.data.message)
-    //         console.error(error)
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // }
+    async changePassword(data: object, onBack: Function, setLoading: Function) {
+        try {
+            return await RequestService.post(Endpoint.Auth.ChangePassword,
+                { ...data },
+            ).then(response => {
+                setLoading(false)
+                SuccessMessage("Thay đổi mật khẩu thành công", "Tài khoản của bạn sẽ được đăng xuất")
+                onBack()
+                return response;
+            });
+        } catch (error: any) {
+            FailMessage("Thay đổi mật khẩu không thành công", error.response.data.message)
+            console.error(error)
+        } finally {
+            setLoading(false);
+        }
+    }
 
-    // async forgotPassword(data: object, setLoading: Function) {
-    //     setLoading(true)
-    //     try {
-    //         return await RequestService.post(Endpoint.Auth.ForgotPassword,
-    //             { ...data },
-    //         ).then((response) => {
-    //             if (response) {
-    //                 setLoading(false);
-    //                 SuccessMessage("Gửi Email thành công", "Yêu cầu thiết lập lại mật khẩu của bạn gửi thành công. Kiểm tra Email để thiết lập lại mật khẩu");
-    //                 return response;
-    //             }
-    //         });
-    //     } catch (error) {
-    //         FailMessage("Gửi Email không thành công", "Kiểm tra lại thông tin Email")
-    //         console.error(error)
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // }
-    // async resetPassword(code: string, data: object, setLoading: Function) {
-    //     setLoading(true)
-    //     try {
-    //         return await RequestService.put(`${Endpoint.Auth.ResetPassword}?code=${code}`,
-    //             { ...data },
-    //         ).then((response) => {
-    //             if (response) {
-    //                 setLoading(false);
-    //                 SuccessMessage("Đổi mật khẩu thành công", "");
-    //                 return response;
-    //             }
-    //         });
-    //     } catch (error) {
-    //         FailMessage("Đổi mật khẩu không thành công", "Kiểm tra lại thông tin Email")
-    //         console.error(error)
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // }
+    async forgotPassword(data: object, setLoading: Function) {
+        setLoading(true)
+        try {
+            return await RequestService.post(Endpoint.Auth.ForgotPassword,
+                { ...data },
+            ).then((response) => {
+                if (response) {
+                    setLoading(false);
+                    SuccessMessage("Gửi Email thành công", "Yêu cầu thiết lập lại mật khẩu của bạn gửi thành công. Kiểm tra Email để thiết lập lại mật khẩu");
+                    return response;
+                }
+            });
+        } catch (error: any) {
+            FailMessage("Gửi Email không thành công", error.response.data.message)
+            console.error(error)
+        } finally {
+            setLoading(false);
+        }
+    }
+    async resetPassword(data: object, setLoading: Function) {
+        setLoading(true)
+        try {
+            return await RequestService.post(`${Endpoint.Auth.ResetPassword}`,
+                { ...data },
+            ).then((response) => {
+                if (response) {
+                    setLoading(false);
+                    SuccessMessage("Đổi mật khẩu thành công", "");
+                    return response;
+                }
+            });
+        } catch (error: any) {
+            FailMessage("Đổi mật khẩu không thành công", error.response.data.message)
+            console.error(error)
+        } finally {
+            setLoading(false);
+        }
+    }
 
     // async verifyEmail(code: string, onBack: Function, setLoading: Function) {
     //     setLoading(true)

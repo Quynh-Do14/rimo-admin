@@ -64,7 +64,7 @@ export const InputPasswordLogin = (props: Props) => {
                         <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z"
                             stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    <span>Mật khẩu</span>
+                    <span>{label}</span>
                 </label>
                 <div className={styles.inputWrapper}>
                     <input

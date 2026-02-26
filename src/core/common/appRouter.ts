@@ -4,7 +4,9 @@ export const ROUTE_PATH = {
     // ADMIN
     MAIN_LAYOUT: `${PREFIX}/`,
     LOGIN: `${PREFIX}/login`,
-
+    RESETPASSWORD: `${PREFIX}/reset-password`,
+    FORGOT_PASSWORD: `${PREFIX}/auth/forgot-password`,
+    
     USER_MANAGEMENT: `${PREFIX}/user-management`,
     ADD_USER_MANAGEMENT: `${PREFIX}/user-management/add`,
     VIEW_USER_MANAGEMENT: `${PREFIX}/user-management/view/:id`,
