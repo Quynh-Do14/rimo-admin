@@ -20,6 +20,7 @@ import { FullPageLoading } from '../../infrastructure/common/loader/loading';
 import InputSelectStatus from '../../infrastructure/common/input/select-status';
 import Constants from '../../core/common/constants';
 import { BlogInterface } from '../../infrastructure/interface/blog/blog.interface';
+import RichTextEditor from '../../infrastructure/common/input/richTextEditor';
 
 
 const SlugBlogManagement = () => {
@@ -247,7 +248,7 @@ const SlugBlogManagement = () => {
                                     />
                                 </Col>
                                 <Col span={24}>
-                                    <TextEditorCommon
+                                    <RichTextEditor
                                         label={"Mô tả"}
                                         attribute={"description"}
                                         isRequired={true}

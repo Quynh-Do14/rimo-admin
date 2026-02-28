@@ -24,6 +24,7 @@ import { WarningMessage } from '../../infrastructure/common/toast/message';
 import Constants from '../../core/common/constants';
 import InputSelectStatus from '../../infrastructure/common/input/select-status';
 import { ProductInterface } from '../../infrastructure/interface/product/product.interface';
+import RichTextEditor from '../../infrastructure/common/input/richTextEditor';
 
 
 const SlugProductManagement = () => {
@@ -448,7 +449,7 @@ const SlugProductManagement = () => {
                                     />
                                 </Col> */}
                                 <Col span={24}>
-                                    <TextEditorCommon
+                                    <RichTextEditor
                                         label={"Mô tả"}
                                         attribute={"description"}
                                         isRequired={true}

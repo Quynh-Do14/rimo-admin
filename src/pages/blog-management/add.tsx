@@ -19,6 +19,7 @@ import TextEditorCommon from '../../infrastructure/common/input/text-editor-comm
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
 import InputSelectStatus from '../../infrastructure/common/input/select-status';
 import Constants from '../../core/common/constants';
+import RichTextEditor from '../../infrastructure/common/input/richTextEditor';
 
 const AddBlogManagement = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -196,7 +197,7 @@ const AddBlogManagement = () => {
                                     />
                                 </Col>
                                 <Col span={24}>
-                                    <TextEditorCommon
+                                    <RichTextEditor
                                         label={"Mô tả"}
                                         attribute={"description"}
                                         isRequired={true}

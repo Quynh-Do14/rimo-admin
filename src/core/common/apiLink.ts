@@ -7,7 +7,6 @@ export class Endpoint {
         static ChangePassword = "/auth/change-password"
         static ForgotPassword = "/auth/forgot-password"
         static ResetPassword = "/auth/reset-password"
-
     }
     static Banner = class {
         static Get = "/banner/private"
@@ -114,5 +113,9 @@ export class Endpoint {
         static Update = "/slogan"
         static UpdateIndex = "/slogan/update-index"
         static Delete = "/slogan"
+    }
+    static Upload = class {
+        static Single = "/upload/single"
+
     }
 }
