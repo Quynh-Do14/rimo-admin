@@ -73,7 +73,7 @@ body {
 /* Fix cho ReactQuill - QUAN TRỌNG */
 /* scroll custom */
 ::-webkit-scrollbar {
-  width: 2px;
+  width: 4px;
   height: 4px;
 }
 
