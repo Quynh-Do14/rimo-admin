@@ -1,15 +1,15 @@
 import { Endpoint } from "../../../core/common/apiLink";
 import { FailMessage, SuccessMessage } from "../../common/toast/message";
-import { BannerInterface, BannerParams } from "../../interface/banner/banner.interface";
+import { UpdateIndexCategoryRequestInterface } from "../../interface/category/categoryProduct.interface";
+import { ConfigPageInterface, ConfigPageParams } from "../../interface/configPage/configPage.interface";
 import { RequestService } from "../../utilities/response";
 
-
-class BannerService {
-    async GetBanner(params: BannerParams, setLoading: Function) {
+class ConfigPageService {
+    async GetConfigPage(params: ConfigPageParams, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService
-                .get(Endpoint.Banner.Get, {
+                .get(Endpoint.ConfigPage.Get, {
                     ...params
                 })
                 .then(response => {
@@ -25,11 +25,11 @@ class BannerService {
             setLoading(false);
         }
     };
-    async GetBannerById(id: string, setLoading: Function) {
+    async GetConfigPageById(id: string, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService
-                .get(`${Endpoint.Banner.GetById}/${id}`)
+                .get(`${Endpoint.ConfigPage.GetById}/${id}`)
                 .then(response => {
                     if (response) {
                         return response
@@ -45,11 +45,11 @@ class BannerService {
     };
 
 
-    async AddBannerAdmin(data: object, onBack: Function, setLoading: Function) {
+    async AddConfigPageAdmin(data: ConfigPageInterface, onBack: Function, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService
-                .postForm(Endpoint.Banner.Add,
+                .post(Endpoint.ConfigPage.Add,
                     data
                 )
                 .then(response => {
@@ -61,18 +61,18 @@ class BannerService {
                     setLoading(false)
                     return response;
                 });
-        } catch (error) {
-            FailMessage("Thêm mới không thành công", "Vui lòng kiểm tra thông tin")
+        } catch (error: any) {
+            FailMessage("Thêm mới không thành công", error.response.data.message || "Vui lòng kiểm tra thông tin")
             console.error(error)
         } finally {
             setLoading(false);
         }
     }
-    async UpdateBannerAdmin(id: string, data: BannerInterface, onBack: Function, setLoading: Function) {
+    async UpdateConfigPageAdmin(id: string, data: ConfigPageInterface, onBack: Function, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService
-                .putForm(`${Endpoint.Banner.Update}/${id}`,
+                .put(`${Endpoint.ConfigPage.Update}/${id}`,
                     data
                 )
                 .then(response => {
@@ -84,18 +84,42 @@ class BannerService {
                     setLoading(false)
                     return response;
                 });
-        } catch (error) {
-            FailMessage("Cập nhật không thành công", "Vui lòng kiểm tra thông tin")
+        } catch (error: any) {
+            FailMessage("Cập nhật không thành công", error.response.data.message || "Vui lòng kiểm tra thông tin")
             console.error(error)
         } finally {
             setLoading(false);
         }
     }
-    async DeleteBannerAdmin(id: string, setLoading: Function) {
+    async UpdateIndexConfigPageAdmin(data: UpdateIndexCategoryRequestInterface, onBack: Function, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService
-                .delete(`${Endpoint.Banner.Delete}/${id}`, {})
+                .put(Endpoint.ConfigPage.UpdateIndex,
+                    data
+                )
+                .then(response => {
+                    if (response) {
+                        onBack()
+                        SuccessMessage("Cập nhật thành công", "")
+                        return response
+                    }
+                    setLoading(false)
+                    return response;
+                });
+        } catch (error: any) {
+            FailMessage("Cập nhật không thành công", error.response.data.message || "Vui lòng kiểm tra thông tin")
+            console.error(error)
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    async DeleteConfigPageAdmin(id: string, setLoading: Function) {
+        setLoading(true)
+        try {
+            return await RequestService
+                .delete(`${Endpoint.ConfigPage.Delete}/${id}`, {})
                 .then(response => {
                     if (response) {
                         SuccessMessage("Xóa thành công", "")
@@ -104,8 +128,8 @@ class BannerService {
                     setLoading(false)
                     return response;
                 });
-        } catch (error) {
-            FailMessage("Xóa không thành công", "Vui lòng kiểm tra thông tin")
+        } catch (error: any) {
+            FailMessage("Xóa không thành công", error.response.data.message || "Vui lòng kiểm tra thông tin")
             console.error(error)
         } finally {
             setLoading(false);
@@ -113,6 +137,6 @@ class BannerService {
     }
 }
 
-const bannerService = new BannerService();
+const configPageService = new ConfigPageService();
 
-export default bannerService;
+export default configPageService;

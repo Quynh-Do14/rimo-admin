@@ -1,33 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { Image, Modal } from 'antd';
+import { useState, useEffect } from 'react';
 import Constants from '../../core/common/constants';
 import '../../asset/css/admin/view.css';
-import { StatusCommon } from '../../infrastructure/common/controls/Status';
 import ButtonCommon from '../../infrastructure/common/button/ButtonCommon';
 import { DetailRowCommon, DetailRowComponent } from '../../infrastructure/common/text/detail-row';
-import { configImageURL, convertDateShow } from '../../infrastructure/helper/helper';
-import { BlogInterface } from '../../infrastructure/interface/blog/blog.interface';
 import ButtonHref from '../../infrastructure/common/button/ButtonHref';
 import { ROUTE_PATH } from '../../core/common/appRouter';
 import AdminLayout from '../../infrastructure/common/layout/admin/MainLayout';
 import styles from '../../asset/css/admin/admin-component.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
-import blogService from '../../infrastructure/repository/blog/blog.service';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
+import { ContentPageInterface } from '../../infrastructure/interface/contentPage/contentPage.interface';
+import contentPageService from '../../infrastructure/repository/contentPage/contentPage.service';
 
-const ViewBlogManagement = () => {
-    const [detail, setDetail] = useState<BlogInterface>();
+const ViewContentPageManagement = () => {
+    const [detail, setDetail] = useState<ContentPageInterface>();
     const [loading, setLoading] = useState<boolean>(false);
     const router = useNavigate();
     const param = useParams();
     const onBack = () => {
-        router(ROUTE_PATH.BLOG_MANAGEMENT)
+        router(ROUTE_PATH.CONTENT_PAGE_MANAGEMENT)
     }
 
     const onGetByIdAsync = async () => {
         if (param.id) {
             try {
-                await blogService.GetBlogById(
+                await contentPageService.GetContentPageById(
                     String(param.id),
                     setLoading
                 ).then((res) => {
@@ -46,17 +43,17 @@ const ViewBlogManagement = () => {
     if (!detail) return null;
 
     // Tìm thông tin trạng thái
-    const statusResult = Constants.DisplayConfig.List.find(item => item.value == detail.active)
+    const typeResult = Constants.ContentPage.ListType.find(item => item.value == detail.type)
 
     return (
         <AdminLayout
-            breadcrumb={"Quản lý tin tức"}
-            title={"Chi tiết tin tức"}
+            breadcrumb={"Quản lý nội dung trang"}
+            title={"Chi tiết nội dung trang"}
             redirect={ROUTE_PATH.PRODUCT_MANAGEMENT}
         >
             <div className={styles.manage_container}>
                 <div className={styles.headerPage}>
-                    <h2>Chi tiết tin tức</h2>
+                    <h2>Chi tiết nội dung trang</h2>
                     <div className={styles.btn_container}>
                         <ButtonCommon
                             key="close"
@@ -66,7 +63,7 @@ const ViewBlogManagement = () => {
                             variant={'ps-btn--gray'}
                         />,
                         <ButtonHref
-                            href={`${(ROUTE_PATH.EDIT_BLOG_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${detail.id}`}
+                            href={`${(ROUTE_PATH.EDIT_CONTENT_PAGE_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${detail.id}`}
                             title={'Cập nhật'}
                             width={150}
                             variant={'ps-btn--fullwidth'}
@@ -74,42 +71,16 @@ const ViewBlogManagement = () => {
                     </div>
                 </div>
                 <div className={styles.table_container}>
-                    <DetailRowComponent
-                        label={'Ảnh'}
-                        value={
-                            <Image src={configImageURL(detail.image)} alt={detail.title} width={400} />
-                        }
-                    />
                     <DetailRowCommon
-                        label={'Tiêu đề'}
-                        value={detail.title}
-                    />
-                    <DetailRowCommon
-                        label={'Danh mục'}
-                        value={detail.category_name || ""}
-                    />
-                    <DetailRowComponent
-                        label={'Trạng thái'}
-                        value={
-                            statusResult
-                            &&
-                            <StatusCommon title={statusResult?.label} status={statusResult.value} />
-                        }
-                    />
-                    <DetailRowCommon
-                        label={'Mô tả ngắn'}
-                        value={detail.short_description}
-                    />
-                    <DetailRowCommon
-                        label={'Ngày tạo'}
-                        value={convertDateShow(detail.created_at) || ""}
+                        label={'Loại trang'}
+                        value={typeResult?.label || ""}
                     />
                     <DetailRowComponent
                         label={'Mô tả'}
                         value={
                             <article
                                 className="prose max-w-none"
-                                dangerouslySetInnerHTML={{ __html: detail.description }}
+                                dangerouslySetInnerHTML={{ __html: detail.content }}
                             />
                         }
                     />
@@ -120,4 +91,4 @@ const ViewBlogManagement = () => {
     );
 };
 
-export default ViewBlogManagement;
+export default ViewContentPageManagement;

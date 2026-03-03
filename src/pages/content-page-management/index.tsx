@@ -1,26 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Input, Pagination, Space, Button } from 'antd';
+import { Table, Col, Row } from 'antd';
 import styles from '../../asset/css/admin/admin-component.module.css';
+import { useNavigate } from 'react-router-dom';
 import Constants from '../../core/common/constants';
-import categoryBlogService from '../../infrastructure/repository/category/categoryBlog.service';
 import AdminLayout from '../../infrastructure/common/layout/admin/MainLayout';
 import { ROUTE_PATH } from '../../core/common/appRouter';
 import ButtonHref from '../../infrastructure/common/button/ButtonHref';
 import { TitleTableCommon } from '../../infrastructure/common/text/title-table-common';
-import { ActionCommon } from '../../infrastructure/common/action/action-common';
 import { PaginationCommon } from '../../infrastructure/common/pagination/PaginationPageSize';
 import DialogConfirmCommon from '../../infrastructure/common/modal/dialogConfirm';
-import { useNavigate } from 'react-router-dom';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
-import { CategoryBlogInterface } from '../../infrastructure/interface/category/categoryBlog.interface';
+import SelectSearchCommon from '../../infrastructure/common/input/select-search-common';
+import { CategoryBlogState } from '../../core/atoms/category/categoryState';
+import { useRecoilValue } from 'recoil';
+import { ActionAdvangeCommon } from '../../infrastructure/common/action/action-approve-common';
+import { BlogInterface } from '../../infrastructure/interface/blog/blog.interface';
+import { ContentPageInterface } from '../../infrastructure/interface/contentPage/contentPage.interface';
+import contentPageService from '../../infrastructure/repository/contentPage/contentPage.service';
 
 let timeout: any
-const BlogCategoryListPage = () => {
-    const [listResponse, setListResponse] = useState<Array<CategoryBlogInterface>>([])
+const ContentPageListPage = () => {
+    const [listResponse, setListResponse] = useState<Array<ContentPageInterface>>([])
     const [total, setTotal] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [pageSize, setPageSize] = useState<number>(10);
-    const [searchText, setSearchText] = useState<string>("");
+    const [type, settype] = useState<string>("");
 
     const [idSelected, setIdSelected] = useState<string>("");
 
@@ -29,15 +33,16 @@ const BlogCategoryListPage = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const router = useNavigate();
+    const categoryBlogState = useRecoilValue(CategoryBlogState).data;
 
-    const onGetListAsync = async ({ search = "", size = pageSize, page = currentPage }) => {
+    const onGetListAsync = async ({ type = "", size = pageSize, page = currentPage }) => {
         const param = {
             page: page,
             limit: size,
-            search: search,
+            type: type
         }
         try {
-            await categoryBlogService.GetBlogCategory(
+            await contentPageService.GetContentPage(
                 param,
                 setLoading
             ).then((res) => {
@@ -49,17 +54,10 @@ const BlogCategoryListPage = () => {
             console.error(error)
         }
     }
-    const onSearch = async (search = "", size = pageSize, page = 1) => {
-        await onGetListAsync({ search: search, size: size, page: page });
+    const onSearch = async (type = "", size = pageSize, page = 1) => {
+        await onGetListAsync({ type: type, size: size, page: page });
     };
 
-    const onChangeSearchText = (e: any) => {
-        setSearchText(e.target.value);
-        clearTimeout(timeout);
-        timeout = setTimeout(() => {
-            onSearch(e.target.value, pageSize, currentPage,).then((_) => { });
-        }, Constants.DEBOUNCE_SEARCH);
-    };
 
     useEffect(() => {
         onSearch().then(_ => { });
@@ -67,14 +65,19 @@ const BlogCategoryListPage = () => {
 
     const onChangePage = async (value: any) => {
         setCurrentPage(value)
-        await onSearch(searchText, pageSize, value).then(_ => { });
+        await onSearch(type, pageSize, value).then(_ => { });
     };
 
     const onPageSizeChanged = async (value: any) => {
         setPageSize(value)
         setCurrentPage(1)
-        await onSearch(searchText, value, 1).then(_ => { });
+        await onSearch(type, value, 1).then(_ => { });
     };
+    const onChangetype = async (value: any) => {
+        settype(value)
+        await onSearch(value, pageSize, currentPage).then(_ => { });
+    };
+
     // Xóa bài
     const onOpenModalDelete = (id: any) => {
         setIsDeleteModal(true);
@@ -87,7 +90,7 @@ const BlogCategoryListPage = () => {
 
     const onDeleteAsync = async () => {
         try {
-            await categoryBlogService.DeleteBlogCategoryAdmin(
+            await contentPageService.DeleteContentPageAdmin(
                 idSelected,
                 setLoading
             ).then((res) => {
@@ -103,31 +106,40 @@ const BlogCategoryListPage = () => {
     };
 
     const onNavigate = (id: any) => {
-        router(`${(ROUTE_PATH.VIEW_CATEGORY_BLOG_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
-    }
+        router(`${(ROUTE_PATH.EDIT_CONTENT_PAGE_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
+    };
+
+    const onView = (id: any) => {
+        router(`${(ROUTE_PATH.VIEW_CONTENT_PAGE_MANAGEMENT).replace(`${Constants.UseParams.Id}`, "")}${id}`);
+    };
 
     return (
         <AdminLayout
-            breadcrumb={"Quản lý danh mục tin tức"}
+            breadcrumb={"Quản lý nội dung trang"}
             title={""}
-            redirect={ROUTE_PATH.CATEGORY_BLOG_MANAGEMENT}
+            redirect={ROUTE_PATH.CONTENT_PAGE_MANAGEMENT}
         >
             <div className={styles.manage_container}>
-                <h2>Quản lý danh mục tin tức</h2>
-                <div className={styles.searchBar}>
-                    <Input
-                        className="form-control"
-                        placeholder="Tìm kiếm theo tên"
-                        value={searchText}
-                        onChange={onChangeSearchText}
-                    />
-                    <ButtonHref
-                        href={ROUTE_PATH.ADD_CATEGORY_BLOG_MANAGEMENT}
-                        title={'Thêm mới'}
-                        width={150}
-                        variant={'ps-btn--fullwidth'}
-                    />
-                </div>
+                <h2>Quản lý nội dung trang</h2>
+                <Row gutter={[15, 15]}>
+                    <Col xs={24} md={21}>
+                        <SelectSearchCommon
+                            listDataOfItem={Constants.ContentPage.ListType}
+                            onChange={onChangetype}
+                            value={type}
+                            label={'Loại trang'}
+                            labelName='label'
+                            valueName='value'
+                        />
+                    </Col>
+                    <Col xs={24} md={3}>
+                        <ButtonHref
+                            href={ROUTE_PATH.ADD_CONTENT_PAGE_MANAGEMENT}
+                            title={'Thêm mới'}
+                            variant={'ps-btn--fullwidth'}
+                        />
+                    </Col>
+                </Row>
                 <div className={styles.table_container}>
                     <Table
                         dataSource={listResponse}
@@ -147,15 +159,20 @@ const BlogCategoryListPage = () => {
                                 </div>
                             )}
                         />
+
                         <Table.Column
                             title={
                                 <TitleTableCommon
-                                    title="Tên danh mục"
-                                    width={'150px'}
+                                    title="Loại trang"
+                                    width={'200px'}
                                 />
                             }
-                            key={"name"}
-                            dataIndex={"name"}
+                            key={"type"}
+                            dataIndex={"type"}
+                            render={(val, _record) => {
+                                const result = Constants.ContentPage.ListType.find(item => item.value == val)
+                                return <div>{result?.label || ""}</div>
+                            }}
                         />
                         <Table.Column
                             title={
@@ -168,8 +185,14 @@ const BlogCategoryListPage = () => {
                             align='center'
                             width={"60px"}
                             render={(action, record: any) => (
-                                <ActionCommon
+                                <ActionAdvangeCommon
+                                    show='Xem chi tiết'
+                                    onClickShow={() => onView(record.id)}
+                                    detail={'Sửa'}
                                     onClickDetail={() => onNavigate(record.id)}
+                                    approve={''}
+                                    onClickApprove={() => { }}
+                                    remove={'Xóa'}
                                     onClickDelete={() => onOpenModalDelete(record.id)}
                                 />
                             )}
@@ -187,7 +210,7 @@ const BlogCategoryListPage = () => {
                     />
                 </div>
                 <DialogConfirmCommon
-                    message={"Bạn có muốn xóa danh mục tin tức này ra khỏi hệ thống"}
+                    message={"Bạn có muốn xóa nội dung trang này ra khỏi hệ thống"}
                     titleCancel={"Bỏ qua"}
                     titleOk={"Xóa"}
                     visible={isDeleteModal}
@@ -201,4 +224,4 @@ const BlogCategoryListPage = () => {
 
     );
 }
-export default BlogCategoryListPage;
+export default ContentPageListPage;

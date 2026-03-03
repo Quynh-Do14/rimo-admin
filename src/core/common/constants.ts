@@ -1,4 +1,8 @@
 import { ROUTE_PATH } from "./appRouter"
+import section1 from "../../asset/img/section/section1.png"
+import section2 from "../../asset/img/section/section2.png"
+import section3 from "../../asset/img/section/section3.png"
+import section4 from "../../asset/img/section/section4.png"
 
 export interface MenuInterface {
   id: string
@@ -41,6 +45,13 @@ export default class Constants {
             icon: 'fas fa-images',
             role: ["ADMIN", 'SELLER']
           },
+          {
+            id: 'homepage-config',
+            text: 'Cấu hình trang chủ', // Đã đổi tên
+            url: ROUTE_PATH.CONFIG_PAGE_MANAGEMENT,
+            icon: 'fas fa-home', // Đã đổi icon thành hình ngôi nhà
+            role: ["ADMIN", 'SELLER']
+          },
         ]
       },
       {
@@ -64,13 +75,6 @@ export default class Constants {
             icon: 'fas fa-folder-open',
             role: ["ADMIN", 'WRITTER']
           },
-          // {
-          //   id: 'series',
-          //   text: 'Dòng sản phẩm',
-          //   url: ROUTE_PATH.CATEGORY_AGENCY_MANAGEMENT,
-          //   icon: 'fas fa-layer-group',
-          //   role: ["ADMIN", 'SELLER']
-          // }
         ]
       },
       {
@@ -100,6 +104,13 @@ export default class Constants {
         url: ROUTE_PATH.VIDEO_MANAGEMENT,
         icon: 'fas fa-video',
         role: ["ADMIN", 'WRITTER']
+      },
+      {
+        id: 'content-page-other',
+        text: 'Nội dung các trang', // Mục riêng cho các trang khác
+        url: ROUTE_PATH.CONTENT_PAGE_MANAGEMENT, // Có thể cần thêm route riêng
+        icon: 'fas fa-file-alt', // Icon văn bản
+        role: ["ADMIN", 'SELLER', 'WRITTER']
       },
       {
         id: 'contact-management',
@@ -239,6 +250,101 @@ export default class Constants {
       },
     ]
   }
+  static ConfigPage = class {
+    static List = [
+      {
+        label: 'Tiêu đề Website',
+        value: "TITLE_PAGE",
+        isShowBackground: false,
+        darkBackground: false,
+        image: null
+      },
+      {
+        label: 'Khung 1',
+        value: "SECTION_1",
+        isShowBackground: true,
+        darkBackground: true,
+        image: section1
+      },
+      {
+        label: 'Khung 2',
+        value: "SECTION_2",
+        isShowBackground: true,
+        darkBackground: true,
+        image: section2
+      },
+      {
+        label: 'Khung 3',
+        value: "SECTION_3",
+        isShowBackground: true,
+        darkBackground: true,
+        image: section3
+      },
+      {
+        label: 'Khung 4',
+        value: "SECTION_4",
+        isShowBackground: true,
+        darkBackground: false,
+        image: section4
+      },
+    ]
+    static ListIndex = [
+      {
+        label: 'Vị trí 1',
+        value: "1",
+      },
+      {
+        label: 'Vị trí 2',
+        value: "2",
+      },
+      {
+        label: 'Vị trí 3',
+        value: "3",
+      },
+      {
+        label: 'Vị trí 4',
+        value: "4",
+      },
+    ]
+  }
+
+  static ContentPage = class {
+    static ListType = [
+      {
+        label: 'Chân trang',
+        value: "FOOTER",
+      },
+      {
+        label: 'Giới thiệu',
+        value: "INTRODUCE",
+      },
+      {
+        label: 'Thông tin về điều kiện giao dịch chung',
+        value: "GIAO_DICH_CHUNG",
+      },
+      {
+        label: 'Chính sách bảo mật',
+        value: "BAO_MAT",
+      },
+      {
+        label: 'Chính sách mua hàng',
+        value: "MUA_HANG",
+      },
+      {
+        label: 'Chính sách bảo hành - đổi trả',
+        value: "BAO_HANH",
+      },
+      {
+        label: 'Thông tin về vận chuyển và giao nhận',
+        value: "VAN_CHUYEN",
+      },
+      {
+        label: 'Thông tin về các phương thức thanh toán',
+        value: "THANH_TOAN",
+      },
+    ]
+  }
+
   static AdminStatusConfig = class {
     static Show = [
       {
@@ -270,5 +376,6 @@ export default class Constants {
         value: "false"
       }
     ]
+
   }
 }

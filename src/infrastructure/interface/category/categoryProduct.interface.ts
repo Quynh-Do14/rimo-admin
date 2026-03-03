@@ -3,10 +3,10 @@ import { ProductInterface } from "../product/product.interface";
 export interface CategoryProductInterface {
     id?: number;
     name: string;
-    description: string;
-    image: string;
+    description?: string;
+    image?: string;
     index: number;
-    products: ProductInterface[]
+    products?: ProductInterface[]
 }
 
 export interface CategoryProductParams {

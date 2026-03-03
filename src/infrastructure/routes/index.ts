@@ -23,8 +23,16 @@ import ProductCategoryListPage from "../../pages/category-product-management";
 import AddProductCategoryManagement from "../../pages/category-product-management/add";
 import SlugProductCategoryManagement from "../../pages/category-product-management/slug";
 import UpdateIndexCategoryManagement from "../../pages/category-product-management/update-index";
+import ConfigPageListPage from "../../pages/config-page-management";
+import AddConfigPageManagement from "../../pages/config-page-management/add";
+import SlugConfigPageManagement from "../../pages/config-page-management/slug";
+import UpdateIndexConfigPageManagement from "../../pages/config-page-management/update-index";
 import ContactListPage from "../../pages/contact-management";
 import ViewContactMangement from "../../pages/contact-management/view";
+import ContentPageListPage from "../../pages/content-page-management";
+import AddContentPageManagement from "../../pages/content-page-management/add";
+import SlugContentPageManagement from "../../pages/content-page-management/slug";
+import ViewContentPageManagement from "../../pages/content-page-management/view";
 import LoginPage from "../../pages/login";
 import ProductListPage from "../../pages/product-management";
 import AddProductManagement from "../../pages/product-management/add";
@@ -263,7 +271,7 @@ export const privateRoutes = [
         path: ROUTE_PATH.VIDEO_MANAGEMENT,
         component: VideoListPage,
         private: true,
-        role: ["ADMIN", 'SELLER']
+        role: ["ADMIN", 'SELLER',]
     },
     {
         path: ROUTE_PATH.ADD_VIDEO_MANAGEMENT,
@@ -313,6 +321,56 @@ export const privateRoutes = [
         component: ViewSloganManagement,
         private: true,
         role: ["ADMIN", 'SELLER']
+    },
+
+    {
+        path: ROUTE_PATH.CONFIG_PAGE_MANAGEMENT,
+        component: ConfigPageListPage,
+        private: true,
+        role: ["ADMIN", 'SELLER']
+    },
+    {
+        path: ROUTE_PATH.ADD_CONFIG_PAGE_MANAGEMENT,
+        component: AddConfigPageManagement,
+        private: true,
+        role: ["ADMIN", 'SELLER']
+    },
+    {
+        path: ROUTE_PATH.EDIT_CONFIG_PAGE_MANAGEMENT,
+        component: SlugConfigPageManagement,
+        private: true,
+        role: ["ADMIN", 'SELLER']
+    },
+    {
+        path: ROUTE_PATH.EDIT_INDEX_CONFIG_PAGE_MANAGEMENT,
+        component: UpdateIndexConfigPageManagement,
+        private: true,
+        role: ["ADMIN", 'SELLER']
+    },
+
+    {
+        path: ROUTE_PATH.CONTENT_PAGE_MANAGEMENT,
+        component: ContentPageListPage,
+        private: true,
+        role: ["ADMIN", 'SELLER', 'WRITTER']
+    },
+    {
+        path: ROUTE_PATH.ADD_CONTENT_PAGE_MANAGEMENT,
+        component: AddContentPageManagement,
+        private: true,
+        role: ["ADMIN", 'SELLER', 'WRITTER']
+    },
+    {
+        path: ROUTE_PATH.EDIT_CONTENT_PAGE_MANAGEMENT,
+        component: SlugContentPageManagement,
+        private: true,
+        role: ["ADMIN", 'SELLER', 'WRITTER']
+    },
+    {
+        path: ROUTE_PATH.VIEW_CONTENT_PAGE_MANAGEMENT,
+        component: ViewContentPageManagement,
+        private: true,
+        role: ["ADMIN", 'SELLER', 'WRITTER']
     },
 
     {

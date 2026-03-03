@@ -75,7 +75,7 @@ const TextAreaCommon = (props: Props) => {
         <div className={styles.inputCommon}>
             <label htmlFor={`${attribute}-input`}>
                 <span>
-                    {label} {isRequired && <span className="required">*</span>}
+                    {label} {isRequired && <span className={styles.required}>*</span>}
                 </span>
             </label>
             <textarea

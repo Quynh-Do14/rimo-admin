@@ -1,10 +1,11 @@
 import { Endpoint } from "../../../core/common/apiLink";
 import { FailMessage, SuccessMessage } from "../../common/toast/message";
+import { BlogInterface, BlogParams } from "../../interface/blog/blog.interface";
 import { RequestService } from "../../utilities/response";
 
 
 class BlogService {
-    async GetBlog(params: any, setLoading: Function) {
+    async GetBlog(params: BlogParams, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService
@@ -44,7 +45,7 @@ class BlogService {
     };
 
 
-    async AddBlogAdmin(data: object, onBack: Function, setLoading: Function) {
+    async AddBlogAdmin(data: BlogInterface, onBack: Function, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService
@@ -67,7 +68,7 @@ class BlogService {
             setLoading(false);
         }
     }
-    async UpdateBlogAdmin(id: string, data: object, onBack: Function, setLoading: Function) {
+    async UpdateBlogAdmin(id: string, data: BlogInterface, onBack: Function, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService

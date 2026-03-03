@@ -1,26 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from '../../asset/css/admin/admin-component.module.css';
+import { Col, Row } from 'antd';
+import { useRecoilValue } from 'recoil';
+import { CategoryBlogState } from '../../core/atoms/category/categoryState';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ROUTE_PATH } from '../../core/common/appRouter';
-import { configImageURL } from '../../infrastructure/helper/helper';
-import bannerService from '../../infrastructure/repository/banner/banner.service';
 import { WarningMessage } from '../../infrastructure/common/toast/message';
 import AdminLayout from '../../infrastructure/common/layout/admin/MainLayout';
 import ButtonHref from '../../infrastructure/common/button/ButtonHref';
 import ButtonCommon from '../../infrastructure/common/button/ButtonCommon';
-import UploadAvatar from '../../infrastructure/common/input/upload-image';
-import { Col, Row } from 'antd';
-import InputTextCommon from '../../infrastructure/common/input/input-text-common';
-import InputSelectCommon from '../../infrastructure/common/input/select-common';
-import Constants from '../../core/common/constants';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
 import InputSelectStatus from '../../infrastructure/common/input/select-status';
-import { BannerInterface } from '../../infrastructure/interface/banner/banner.interface';
+import Constants from '../../core/common/constants';
+import RichTextEditor from '../../infrastructure/common/input/richTextEditor';
+import contentPageService from '../../infrastructure/repository/contentPage/contentPage.service';
+import { ContentPageInterface } from '../../infrastructure/interface/contentPage/contentPage.interface';
 
 
-const SlugBannerManagement = () => {
-    const [detail, setDetail] = useState<BannerInterface>();
-    const [originalImage, setOriginalImage] = useState<string | null>(null);
+const SlugContentPageManagement = () => {
+    const [detail, setDetail] = useState<ContentPageInterface>();
     const [loading, setLoading] = useState<boolean>(false);
     const [validate, setValidate] = useState<any>({});
     const [submittedTime, setSubmittedTime] = useState<any>();
@@ -44,16 +42,17 @@ const SlugBannerManagement = () => {
         });
         return allRequestOK;
     };
+    const categoryBlog = useRecoilValue(CategoryBlogState).data;
     const router = useNavigate();
     const param = useParams();
     const onBack = () => {
-        router(ROUTE_PATH.BANNER_MANAGEMENT)
+        router(ROUTE_PATH.CONTENT_PAGE_MANAGEMENT)
     }
 
     const onGetByIdAsync = async () => {
         if (param.id) {
             try {
-                await bannerService.GetBannerById(
+                await contentPageService.GetContentPageById(
                     String(param.id),
                     setLoading
                 ).then((res) => {
@@ -72,36 +71,23 @@ const SlugBannerManagement = () => {
 
     useEffect(() => {
         if (detail) {
-            const fullImage = configImageURL(detail.image);
-            setOriginalImage(fullImage);
             setDataRequest({
-                image: configImageURL(detail.image),
-                name: detail.name,
                 type: detail.type,
-                active: detail.active,
-
+                content: detail.content,
             });
         };
     }, [detail]);
 
     const onUpdateAsync = async () => {
         await setSubmittedTime(Date.now());
-
         if (isValidData()) {
             try {
-                const payload: any = {
-                    name: dataRequest.name,
-                    type: dataRequest.type,
-                    active: dataRequest.active,
-                };
-
-                if (dataRequest.image !== originalImage) {
-                    payload.image = dataRequest.image;
-                }
-
-                await bannerService.UpdateBannerAdmin(
+                await contentPageService.UpdateContentPageAdmin(
                     String(param.id),
-                    payload,
+                    {
+                        type: dataRequest.type,
+                        content: dataRequest.content,
+                    },
                     onBack,
                     setLoading
                 );
@@ -115,16 +101,16 @@ const SlugBannerManagement = () => {
 
     return (
         <AdminLayout
-            breadcrumb={"Quản lý banner"}
-            title={"Thêm banner"}
-            redirect={ROUTE_PATH.BANNER_MANAGEMENT}
+            breadcrumb={"Quản lý nội dung trang"}
+            title={"Cập nhật nội dung trang"}
+            redirect={ROUTE_PATH.CONTENT_PAGE_MANAGEMENT}
         >
             <div className={styles.manage_container}>
                 <div className={styles.headerPage}>
-                    <h2>Cập nhật banner</h2>
+                    <h2>Cập nhật nội dung trang</h2>
                     <div className={styles.btn_container}>
                         <ButtonHref
-                            href={ROUTE_PATH.BANNER_MANAGEMENT}
+                            href={ROUTE_PATH.CONTENT_PAGE_MANAGEMENT}
                             title={'Quay lại'}
                             width={150}
                             variant={'ps-btn--gray'}
@@ -139,32 +125,11 @@ const SlugBannerManagement = () => {
                 </div>
                 <div className={styles.table_container}>
                     <Row align="top">
-                        <Col xs={24} sm={24} md={10} lg={8} xl={6} xxl={5} className={styles.form_container}>
-                            <UploadAvatar
-                                dataAttribute={dataRequest.image}
-                                setData={setDataRequest}
-                                attribute={'image'}
-                                label={'Ảnh'}
-                            />
-                        </Col>
-                        <Col xs={24} sm={24} md={14} lg={16} xl={18} xxl={19} className={styles.form_container}>
+                        <Col span={24} className={styles.form_container}>
                             <Row gutter={[16, 16]}>
                                 <Col span={24}>
-                                    <InputTextCommon
-                                        label={"Tên ảnh"}
-                                        attribute={"name"}
-                                        isRequired={true}
-                                        dataAttribute={dataRequest.name}
-                                        setData={setDataRequest}
-                                        disabled={false}
-                                        validate={validate}
-                                        setValidate={setValidate}
-                                        submittedTime={submittedTime}
-                                    />
-                                </Col>
-                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                                    <InputSelectCommon
-                                        label={"Loại ảnh"}
+                                    <InputSelectStatus
+                                        label={"Loại trang"}
                                         attribute={"type"}
                                         isRequired={true}
                                         dataAttribute={dataRequest.type}
@@ -173,25 +138,22 @@ const SlugBannerManagement = () => {
                                         validate={validate}
                                         setValidate={setValidate}
                                         submittedTime={submittedTime}
-                                        listDataOfItem={Constants.BannerType.List}
-                                        labelName='label'
+                                        listDataOfItem={Constants.ContentPage.ListType}
                                         valueName='value'
+                                        labelName='label'
                                     />
                                 </Col>
-                                <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                                    <InputSelectStatus
-                                        label={"Trạng thái"}
-                                        attribute={"active"}
+                                <Col span={24}>
+                                    <RichTextEditor
+                                        label={"Mô tả"}
+                                        attribute={"content"}
                                         isRequired={true}
-                                        dataAttribute={dataRequest.active}
+                                        dataAttribute={dataRequest.content}
                                         setData={setDataRequest}
                                         disabled={false}
                                         validate={validate}
                                         setValidate={setValidate}
                                         submittedTime={submittedTime}
-                                        listDataOfItem={Constants.DisplayConfig.List}
-                                        valueName='value'
-                                        labelName='label'
                                     />
                                 </Col>
                             </Row>
@@ -204,4 +166,4 @@ const SlugBannerManagement = () => {
     )
 }
 
-export default SlugBannerManagement
+export default SlugContentPageManagement

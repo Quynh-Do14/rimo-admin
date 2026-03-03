@@ -1,10 +1,11 @@
 import { Endpoint } from "../../../core/common/apiLink";
 import { FailMessage, SuccessMessage } from "../../common/toast/message";
+import { CategoryBlogInterface, CategoryBlogParams } from "../../interface/category/categoryBlog.interface";
 import { RequestService } from "../../utilities/response";
 
 
 class CategoryBlogService {
-    async GetBlogCategory(params: any, setLoading: Function) {
+    async GetBlogCategory(params: CategoryBlogParams, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService
@@ -44,7 +45,7 @@ class CategoryBlogService {
     };
 
 
-    async AddBlogCategoryAdmin(data: object, onBack: Function, setLoading: Function) {
+    async AddBlogCategoryAdmin(data: CategoryBlogInterface, onBack: Function, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService
@@ -67,7 +68,7 @@ class CategoryBlogService {
             setLoading(false);
         }
     }
-    async UpdateBlogCategoryAdmin(id: string, data: object, onBack: Function, setLoading: Function) {
+    async UpdateBlogCategoryAdmin(id: string, data: CategoryBlogInterface, onBack: Function, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService

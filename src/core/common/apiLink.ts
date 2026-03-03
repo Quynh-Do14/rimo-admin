@@ -114,8 +114,22 @@ export class Endpoint {
         static UpdateIndex = "/slogan/update-index"
         static Delete = "/slogan"
     }
+    static ConfigPage = class {
+        static Get = "/config-page"
+        static GetById = "/config-page"
+        static Add = "/config-page"
+        static Update = "/config-page"
+        static UpdateIndex = "/config-page/update-index"
+        static Delete = "/config-page"
+    }
+    static ContentPage = class {
+        static Get = "/content-page"
+        static GetById = "/content-page"
+        static Add = "/content-page"
+        static Update = "/content-page"
+        static Delete = "/content-page"
+    }
     static Upload = class {
         static Single = "/upload/single"
-
     }
 }

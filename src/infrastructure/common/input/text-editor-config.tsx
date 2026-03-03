@@ -17,25 +17,16 @@ type Props = {
     validate: any,
     setValidate: Function,
     submittedTime: any,
+    isDarkBackground: boolean
 }
 
 // Định nghĩa modules toolbar bên ngoài để tránh re-render không cần thiết
 const modules = {
     toolbar: {
         container: [
-            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-            [{ 'font': [] }],
-            [{ 'size': ['small', false, 'large', 'huge'] }], // Chú ý: size có thể không hoạt động với tất cả font
             ['bold', 'italic', 'underline', 'strike'],
-            ['blockquote', 'code-block'],
-            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-            [{ 'script': 'sub' }, { 'script': 'super' }],
-            [{ 'indent': '-1' }, { 'indent': '+1' }],
-            [{ 'direction': 'rtl' }],
-            [{ 'color': [] }, { 'background': [] }],
-            [{ 'align': [] }],
-            ['link', 'image', 'video'],
-            ['clean']
+            [{ 'color': ['#ffd700', '#000000', '#FFFFFF', '#666'] },
+            { 'background': ['#ffd700', '#000000', '#FFFFFF', '#666'] }],
         ],
         handlers: {
             // Có thể thêm custom handlers ở đây nếu cần
@@ -47,29 +38,16 @@ const modules = {
 };
 
 const formats = [
-    'header',
     'font',
-    'size',
     'bold',
     'italic',
     'underline',
     'strike',
-    'blockquote',
-    'code-block',
-    'list',
-    'bullet',
-    'script',
-    'indent',
-    'direction',
     'color',
     'background',
-    'align',
-    'link',
-    'image',
-    'video'
 ];
 
-const TextEditorCommon = (props: Props) => {
+const TextEditorConfig = (props: Props) => {
     const {
         label,
         attribute,
@@ -80,6 +58,7 @@ const TextEditorCommon = (props: Props) => {
         validate,
         setValidate,
         submittedTime,
+        isDarkBackground
     } = props;
 
     const [editorValue, setEditorValue] = useState<string>('');
@@ -161,13 +140,9 @@ const TextEditorCommon = (props: Props) => {
                             onChange={onChange}
                             modules={modules}
                             formats={formats}
-                            style={{
-                                height: "80vh", // Giảm chiều cao để dễ sử dụng
-                                marginBottom: 100,
-                                fontFamily: 'Arial, sans-serif'
-                            }}
                             readOnly={disabled}
                             placeholder={`Nhập nội dung ${labelLower}...`}
+                            className={isDarkBackground ? "quill-dark-editor" : "quill-light-editor"}
                         />
                     </div>
                 </Suspense>
@@ -178,4 +153,4 @@ const TextEditorCommon = (props: Props) => {
     );
 };
 
-export default TextEditorCommon;
+export default TextEditorConfig;

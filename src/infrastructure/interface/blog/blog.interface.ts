@@ -5,12 +5,13 @@ export interface BlogInterface {
     image: string;
     short_description: string;
     blog_category_id: number;
-    user_id: number;
-    category_name: string;
-    user_name: string;
-    created_at: string;
-    active: boolean
-    related_blogs: BlogInterface[]
+    user_id?: number;
+    category_name?: string;
+    user_name?: string;
+    created_at?: string;
+    active: boolean;
+    is_draft?: boolean;
+    related_blogs?: BlogInterface[]
 }
 
 export interface BlogParams {

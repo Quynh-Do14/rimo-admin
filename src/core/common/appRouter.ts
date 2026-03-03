@@ -6,7 +6,7 @@ export const ROUTE_PATH = {
     LOGIN: `${PREFIX}/login`,
     RESETPASSWORD: `${PREFIX}/reset-password`,
     FORGOT_PASSWORD: `${PREFIX}/auth/forgot-password`,
-    
+
     USER_MANAGEMENT: `${PREFIX}/user-management`,
     ADD_USER_MANAGEMENT: `${PREFIX}/user-management/add`,
     VIEW_USER_MANAGEMENT: `${PREFIX}/user-management/view/:id`,
@@ -66,6 +66,16 @@ export const ROUTE_PATH = {
     EDIT_SLOGAN_MANAGEMENT: `${PREFIX}/slogan-management/edit/:id`,
     EDIT_INDEX_SLOGAN_MANAGEMENT: `${PREFIX}/slogan-management/edit-index`,
     VIEW_SLOGAN_MANAGEMENT: `${PREFIX}/slogan-management/view/:id`,
+
+    CONFIG_PAGE_MANAGEMENT: `${PREFIX}/config-page-management`,
+    ADD_CONFIG_PAGE_MANAGEMENT: `${PREFIX}/config-page-management/add`,
+    EDIT_CONFIG_PAGE_MANAGEMENT: `${PREFIX}/config-page-management/edit/:id`,
+    EDIT_INDEX_CONFIG_PAGE_MANAGEMENT: `${PREFIX}/config-page-management/edit-index`,
+
+    CONTENT_PAGE_MANAGEMENT: `${PREFIX}/content-page-management`,
+    ADD_CONTENT_PAGE_MANAGEMENT: `${PREFIX}/content-page-management/add`,
+    EDIT_CONTENT_PAGE_MANAGEMENT: `${PREFIX}/content-page-management/edit/:id`,
+    VIEW_CONTENT_PAGE_MANAGEMENT: `${PREFIX}/content-page-management/view/:id`,
 
     CONTACT_MANAGEMENT: `${PREFIX}/contact-management`,
     VIEW_CONTACT_MANAGEMENT: `${PREFIX}/contact-management/view/:id`,

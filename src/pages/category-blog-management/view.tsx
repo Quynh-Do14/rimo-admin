@@ -70,8 +70,8 @@ const SlugCategoryBlogManagement = () => {
 
     useEffect(() => {
         if (detail) {
-            const fullImage = configImageURL(detail.image);
-            setOriginalImage(fullImage);
+            // const fullImage = configImageURL(detail.image);
+            // setOriginalImage(fullImage);
             setDataRequest({
                 name: detail.name,
 
