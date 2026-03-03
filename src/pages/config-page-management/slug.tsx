@@ -180,7 +180,7 @@ const SlugConfigPageManagement = () => {
                                     <InputTextCommon
                                         label={"Nội dung thẻ"}
                                         attribute={"box_content"}
-                                        isRequired={true}
+                                        isRequired={false}
                                         dataAttribute={dataRequest.box_content}
                                         setData={setDataRequest}
                                         disabled={false}
@@ -223,7 +223,7 @@ const SlugConfigPageManagement = () => {
                                     <TextAreaCommon
                                         label={"Mô tả"}
                                         attribute={"description"}
-                                        isRequired={false}
+                                        isRequired={typeSelected == 'SECTION_1'}
                                         dataAttribute={dataRequest.description}
                                         setData={setDataRequest}
                                         disabled={false}
@@ -280,13 +280,13 @@ const SlugConfigPageManagement = () => {
                                     }
                                 </Col>
                                 {
-                                    typeSelected == 'ACHIEVEMENT'
+                                    typeSelected == 'SECTION_1'
                                         ?
                                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                                             <InputSelectCommon
                                                 label={"Số thứ tự"}
                                                 attribute={"index"}
-                                                isRequired={typeSelected == 'ACHIEVEMENT'}
+                                                isRequired={typeSelected == 'SECTION_1'}
                                                 dataAttribute={dataRequest.index}
                                                 setData={setDataRequest}
                                                 disabled={false}

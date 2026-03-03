@@ -138,19 +138,26 @@ const AddConfigPageManagement = () => {
                                 <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                                     <img src={typeImage} alt="" width={"100%"} className='' />
                                 </Col>
-                                <Col span={24}>
-                                    <InputTextCommon
-                                        label={"Nội dung thẻ"}
-                                        attribute={"box_content"}
-                                        isRequired={true}
-                                        dataAttribute={dataRequest.box_content}
-                                        setData={setDataRequest}
-                                        disabled={false}
-                                        validate={validate}
-                                        setValidate={setValidate}
-                                        submittedTime={submittedTime}
-                                    />
-                                </Col>
+                                {
+                                    typeSelected !== 'TITLE_PAGE' && typeSelected !== 'SECTION_1'
+                                        ?
+                                        <Col span={24}>
+                                            <InputTextCommon
+                                                label={"Nội dung thẻ"}
+                                                attribute={"box_content"}
+                                                isRequired={false}
+                                                dataAttribute={dataRequest.box_content}
+                                                setData={setDataRequest}
+                                                disabled={false}
+                                                validate={validate}
+                                                setValidate={setValidate}
+                                                submittedTime={submittedTime}
+                                            />
+                                        </Col>
+                                        :
+                                        null
+                                }
+
                                 <Col span={24}>
                                     {
                                         isShowkBackground
@@ -185,7 +192,7 @@ const AddConfigPageManagement = () => {
                                     <TextAreaCommon
                                         label={"Mô tả"}
                                         attribute={"description"}
-                                        isRequired={typeSelected == 'ACHIEVEMENT'}
+                                        isRequired={typeSelected == 'SECTION_1'}
                                         dataAttribute={dataRequest.description}
                                         setData={setDataRequest}
                                         disabled={false}
@@ -217,7 +224,7 @@ const AddConfigPageManagement = () => {
                                             ?
                                             null
                                             :
-                                            (dataRequest?.title || dataRequest?.description)
+                                            (dataRequest?.title || dataRequest?.description || dataRequest?.box_content)
                                                 ?
                                                 <div className={`section-header ${isDarkBackground ? "dark" : "light"}`}>
                                                     {
@@ -242,13 +249,13 @@ const AddConfigPageManagement = () => {
                                     }
                                 </Col>
                                 {
-                                    typeSelected == 'ACHIEVEMENT'
+                                    typeSelected == 'SECTION_1'
                                         ?
                                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                                             <InputSelectCommon
                                                 label={"Số thứ tự"}
                                                 attribute={"index"}
-                                                isRequired={typeSelected == 'ACHIEVEMENT'}
+                                                isRequired={typeSelected == 'SECTION_1'}
                                                 dataAttribute={dataRequest.index}
                                                 setData={setDataRequest}
                                                 disabled={false}
