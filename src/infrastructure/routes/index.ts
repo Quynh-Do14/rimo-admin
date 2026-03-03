@@ -271,7 +271,7 @@ export const privateRoutes = [
         path: ROUTE_PATH.VIDEO_MANAGEMENT,
         component: VideoListPage,
         private: true,
-        role: ["ADMIN", 'SELLER',]
+        role: ["ADMIN", 'SELLER']
     },
     {
         path: ROUTE_PATH.ADD_VIDEO_MANAGEMENT,
