@@ -91,6 +91,8 @@ const SlugAgencyManagement = () => {
                 long: detail.long,
                 lat: detail.lat,
                 phone_number: detail.phone_number,
+                phone_number_2: detail.phone_number_2,
+                phone_number_3: detail.phone_number_3,
                 star_rate: detail.star_rate,
                 active: detail.active,
                 agency_categories_type: detail.agency_categories_type.map((item) => item.category_id)
@@ -112,6 +114,8 @@ const SlugAgencyManagement = () => {
                     long: dataRequest.long,
                     lat: dataRequest.lat,
                     phone_number: dataRequest.phone_number,
+                    phone_number_2: dataRequest.phone_number_2,
+                    phone_number_3: dataRequest.phone_number_3,
                     active: dataRequest.active,
                     star_rate: dataRequest.star_rate,
                     agency_categories_type: JSON.stringify(dataRequest.agency_categories_type)
@@ -225,7 +229,7 @@ const SlugAgencyManagement = () => {
                                         submittedTime={submittedTime}
                                     />
                                 </Col>
-                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                <Col span={24}>
                                     <InputTextCommon
                                         label={"Địa chỉ"}
                                         attribute={"address"}
@@ -250,6 +254,34 @@ const SlugAgencyManagement = () => {
                                         setValidate={setValidate}
                                         submittedTime={submittedTime}
                                     />
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                    <InputTextCommon
+                                        label={"Số điện thoại 2"}
+                                        attribute={"phone_number_2"}
+                                        isRequired={false}
+                                        dataAttribute={dataRequest.phone_number_2}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                                    <InputTextCommon
+                                        label={"Số điện thoại 3"}
+                                        attribute={"phone_number_3"}
+                                        isRequired={false}
+                                        dataAttribute={dataRequest.phone_number_3}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                                 </Col>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                                     <InputSelectProvince

@@ -28,7 +28,7 @@ function GoogleMapView({ selectedAgency }: Props) {
     const [activeMarker, setActiveMarker] = useState<AgencyInterface | null>(null);
 
     const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: 'AIzaSyD1ICiOLsU1OSuiEOMkjP0gvVHbu1jDsY8',
+        googleMapsApiKey: '',
     });
 
     const onLoad = useCallback((map: google.maps.Map) => {

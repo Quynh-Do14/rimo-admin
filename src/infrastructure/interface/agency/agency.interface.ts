@@ -5,6 +5,8 @@ export interface AgencyInterface {
     lat: string;
     long: string;
     phone_number: string;
+    phone_number_2: string;
+    phone_number_3: string;
     image: string;
     province: string;
     district: string;
