@@ -1,6 +1,6 @@
 import { Endpoint } from "../../../core/common/apiLink";
 import { FailMessage, SuccessMessage } from "../../common/toast/message";
-import { BlogInterface, BlogParams } from "../../interface/blog/blog.interface";
+import { BlogInterface, BlogParams, BlogRequestInterface } from "../../interface/blog/blog.interface";
 import { RequestService } from "../../utilities/response";
 
 
@@ -45,7 +45,7 @@ class BlogService {
     };
 
 
-    async AddBlogAdmin(data: BlogInterface, onBack: Function, setLoading: Function) {
+    async AddBlogAdmin(data: BlogRequestInterface, onBack: Function, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService
@@ -61,14 +61,14 @@ class BlogService {
                     setLoading(false)
                     return response;
                 });
-        } catch (error) {
-            FailMessage("Thêm mới không thành công", "Vui lòng kiểm tra thông tin")
+        } catch (error: any) {
+            FailMessage("Thêm mới không thành công", error.response.data.message || "Vui lòng kiểm tra thông tin")
             console.error(error)
         } finally {
             setLoading(false);
         }
     }
-    async UpdateBlogAdmin(id: string, data: BlogInterface, onBack: Function, setLoading: Function) {
+    async UpdateBlogAdmin(id: string, data: BlogRequestInterface, onBack: Function, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService
@@ -84,8 +84,8 @@ class BlogService {
                     setLoading(false)
                     return response;
                 });
-        } catch (error) {
-            FailMessage("Cập nhật không thành công", "Vui lòng kiểm tra thông tin")
+        } catch (error: any) {
+            FailMessage("Cập nhật không thành công", error.response.data.message || "Vui lòng kiểm tra thông tin")
             console.error(error)
         } finally {
             setLoading(false);
@@ -104,8 +104,8 @@ class BlogService {
                     setLoading(false)
                     return response;
                 });
-        } catch (error) {
-            FailMessage("Xóa không thành công", "Vui lòng kiểm tra thông tin")
+        } catch (error: any) {
+            FailMessage("Xóa không thành công", error.response.data.message || "Vui lòng kiểm tra thông tin")
             console.error(error)
         } finally {
             setLoading(false);

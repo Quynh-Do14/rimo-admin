@@ -3,7 +3,7 @@ import styles from '../../asset/css/admin/admin-component.module.css';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ROUTE_PATH } from '../../core/common/appRouter';
 import categoryProductService from '../../infrastructure/repository/category/categoryProduct.service';
-import { configImageURL } from '../../infrastructure/helper/helper';
+import { configImageURL, convertSlug } from '../../infrastructure/helper/helper';
 import { WarningMessage } from '../../infrastructure/common/toast/message';
 import AdminLayout from '../../infrastructure/common/layout/admin/MainLayout';
 import ButtonHref from '../../infrastructure/common/button/ButtonHref';
@@ -105,7 +105,8 @@ const SlugProductCategoryManagement = () => {
                         image: "",
                         name: dataRequest.name,
                         description: "",
-                        index: dataRequest.index
+                        index: dataRequest.index,
+                        slug: convertSlug(dataRequest.name)
                     },
                     onBack,
                     setLoading

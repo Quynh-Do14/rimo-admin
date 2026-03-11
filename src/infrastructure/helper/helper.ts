@@ -1,4 +1,5 @@
 import moment from "moment";
+import slugify from "slugify";
 const baseURL = process.env.REACT_APP_API_URL
 export const validateFields = (isImplicitChange = false, key: any, isCheck: any, setError: Function, error: any, message: string) => {
     if (isImplicitChange) {
@@ -101,4 +102,11 @@ export const extractYouTubeId = (url: string): string | null => {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
     return (match && match[2].length === 11) ? match[2] : null;
+};
+
+export const convertSlug = (str: string) => {
+    if (str) {
+        return slugify(str, { lower: true, locale: "vi" })
+    }
+    return ""
 };

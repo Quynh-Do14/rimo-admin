@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from '../../asset/css/admin/admin-component.module.css';
 import { Col, Row } from 'antd';
-
 import { useRecoilValue } from 'recoil';
 import blogService from '../../infrastructure/repository/blog/blog.service';
 import { CategoryBlogState } from '../../core/atoms/category/categoryState';
@@ -13,13 +12,13 @@ import ButtonHref from '../../infrastructure/common/button/ButtonHref';
 import ButtonCommon from '../../infrastructure/common/button/ButtonCommon';
 import UploadAvatar from '../../infrastructure/common/input/upload-image';
 import InputTextCommon from '../../infrastructure/common/input/input-text-common';
-import InputSelectCommon from '../../infrastructure/common/input/select-common';
 import TextAreaCommon from '../../infrastructure/common/input/textarea-common';
-import TextEditorCommon from '../../infrastructure/common/input/text-editor-common';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
 import InputSelectStatus from '../../infrastructure/common/input/select-status';
 import Constants from '../../core/common/constants';
 import RichTextEditor from '../../infrastructure/common/input/richTextEditor';
+import InputSlugCommon from '../../infrastructure/common/input/input-slug-common';
+import InputMultiCommon from '../../infrastructure/common/input/input-multi';
 
 const AddBlogManagement = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -50,6 +49,7 @@ const AddBlogManagement = () => {
     const onBack = () => {
         router(ROUTE_PATH.BLOG_MANAGEMENT)
     }
+
     const onCreateAsync = async () => {
         await setSubmittedTime(Date.now());
         if (isValidData()) {
@@ -61,6 +61,8 @@ const AddBlogManagement = () => {
                     blog_category_id: dataRequest.blog_category_id,
                     description: dataRequest.description,
                     active: dataRequest.active,
+                    slug: dataRequest.slug,
+                    keyword: JSON.stringify(dataRequest.keyword)
                 },
                     onBack,
                     setLoading
@@ -76,17 +78,18 @@ const AddBlogManagement = () => {
 
     };
 
-
     const onCreateDraftAsync = async () => {
         try {
             await blogService.AddBlogAdmin({
                 image: dataRequest.image,
                 title: dataRequest.title,
+                slug: dataRequest.slug,
                 short_description: dataRequest.short_description,
                 blog_category_id: dataRequest.blog_category_id,
                 description: dataRequest.description,
                 active: false,
-                is_draft: true
+                is_draft: true,
+                keyword: JSON.stringify(dataRequest.keyword)
             },
                 onBack,
                 setLoading
@@ -96,7 +99,6 @@ const AddBlogManagement = () => {
             console.error(error)
         }
     };
-
 
     return (
         <AdminLayout
@@ -146,6 +148,33 @@ const AddBlogManagement = () => {
                                         attribute={"title"}
                                         isRequired={true}
                                         dataAttribute={dataRequest.title}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col span={24}>
+                                    <InputSlugCommon
+                                        label={"Đường dẫn"}
+                                        attribute={"slug"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.slug}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                        titleValue={dataRequest.title}
+                                    />
+                                </Col>
+                                <Col span={24}>
+                                    <InputMultiCommon
+                                        label={"Từ khóa"}
+                                        attribute={"keyword"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.keyword}
                                         setData={setDataRequest}
                                         disabled={false}
                                         validate={validate}

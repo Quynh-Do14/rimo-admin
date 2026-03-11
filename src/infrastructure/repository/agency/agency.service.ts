@@ -1,9 +1,10 @@
 import { Endpoint } from "../../../core/common/apiLink";
 import { FailMessage, SuccessMessage } from "../../common/toast/message";
+import { AgencyInterface, AgencyParams, AgencyRequestInterface } from "../../interface/agency/agency.interface";
 import { RequestService } from "../../utilities/response";
 
 class AgencyService {
-    async GetAgency(params: any, setLoading: Function) {
+    async GetAgency(params: AgencyParams, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService
@@ -43,7 +44,7 @@ class AgencyService {
     };
 
 
-    async AddAgencyAdmin(data: object, onBack: Function, setLoading: Function) {
+    async AddAgencyAdmin(data: AgencyRequestInterface, onBack: Function, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService
@@ -59,14 +60,14 @@ class AgencyService {
                     setLoading(false)
                     return response;
                 });
-        } catch (error) {
-            FailMessage("Thêm mới không thành công", "Vui lòng kiểm tra thông tin")
+        } catch (error: any) {
+            FailMessage("Thêm mới không thành công", error.response.data.message || "Vui lòng kiểm tra thông tin")
             console.error(error)
         } finally {
             setLoading(false);
         }
     }
-    async UpdateAgencyAdmin(id: string, data: object, onBack: Function, setLoading: Function) {
+    async UpdateAgencyAdmin(id: string, data: AgencyRequestInterface, onBack: Function, setLoading: Function) {
         setLoading(true)
         try {
             return await RequestService
@@ -82,8 +83,8 @@ class AgencyService {
                     setLoading(false)
                     return response;
                 });
-        } catch (error) {
-            FailMessage("Cập nhật không thành công", "Vui lòng kiểm tra thông tin")
+        } catch (error: any) {
+            FailMessage("Cập nhật không thành công", error.response.data.message || "Vui lòng kiểm tra thông tin")
             console.error(error)
         } finally {
             setLoading(false);
@@ -102,8 +103,8 @@ class AgencyService {
                     setLoading(false)
                     return response;
                 });
-        } catch (error) {
-            FailMessage("Xóa không thành công", "Vui lòng kiểm tra thông tin")
+        } catch (error: any) {
+            FailMessage("Xóa không thành công", error.response.data.message || "Vui lòng kiểm tra thông tin")
             console.error(error)
         } finally {
             setLoading(false);

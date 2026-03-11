@@ -78,8 +78,16 @@ const ViewProductManagement = () => {
                             }
                         />
                         <DetailRowCommon
-                            label={'Tiêu đề'}
+                            label={'Tên sản phẩm'}
                             value={detail.name}
+                        />
+                        <DetailRowCommon
+                            label={'Đường dẫn'}
+                            value={detail.slug}
+                        />
+                        <DetailRowCommon
+                            label={'Từ khóa'}
+                            value={detail.keyword.map(item => item.keyword).join(", ")}
                         />
                         <DetailRowCommon
                             label={'Danh mục'}

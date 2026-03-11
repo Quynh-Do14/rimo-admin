@@ -85,6 +85,14 @@ const ViewBlogManagement = () => {
                         value={detail.title}
                     />
                     <DetailRowCommon
+                        label={'Đường dẫn'}
+                        value={detail.slug}
+                    />
+                    <DetailRowCommon
+                        label={'Từ khóa'}
+                        value={detail.keyword.map(item => item.keyword).join(", ")}
+                    />
+                    <DetailRowCommon
                         label={'Danh mục'}
                         value={detail.category_name || ""}
                     />

@@ -13,6 +13,7 @@ import InputTextCommon from '../../infrastructure/common/input/input-text-common
 import TextAreaCommon from '../../infrastructure/common/input/textarea-common';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
 import InputNumberCommon from '../../infrastructure/common/input/input-number';
+import { convertSlug } from '../../infrastructure/helper/helper';
 
 
 const AddProductCategoryManagement = () => {
@@ -51,7 +52,8 @@ const AddProductCategoryManagement = () => {
                     image: "",
                     name: dataRequest.name,
                     description: "",
-                    index: dataRequest.index
+                    index: dataRequest.index,
+                    slug: convertSlug(dataRequest.name)
                 },
                     onBack,
                     setLoading

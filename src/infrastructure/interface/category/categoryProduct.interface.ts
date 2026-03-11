@@ -7,6 +7,7 @@ export interface CategoryProductInterface {
     image?: string;
     index: number;
     products?: ProductInterface[]
+    slug: string
 }
 
 export interface CategoryProductParams {

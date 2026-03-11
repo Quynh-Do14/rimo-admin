@@ -13,14 +13,14 @@ import ButtonHref from '../../infrastructure/common/button/ButtonHref';
 import ButtonCommon from '../../infrastructure/common/button/ButtonCommon';
 import UploadAvatar from '../../infrastructure/common/input/upload-image';
 import InputTextCommon from '../../infrastructure/common/input/input-text-common';
-import InputSelectCommon from '../../infrastructure/common/input/select-common';
 import TextAreaCommon from '../../infrastructure/common/input/textarea-common';
-import TextEditorCommon from '../../infrastructure/common/input/text-editor-common';
 import { FullPageLoading } from '../../infrastructure/common/loader/loading';
 import InputSelectStatus from '../../infrastructure/common/input/select-status';
 import Constants from '../../core/common/constants';
 import { BlogInterface } from '../../infrastructure/interface/blog/blog.interface';
 import RichTextEditor from '../../infrastructure/common/input/richTextEditor';
+import InputSlugCommon from '../../infrastructure/common/input/input-slug-common';
+import InputMultiCommon from '../../infrastructure/common/input/input-multi';
 
 
 const SlugBlogManagement = () => {
@@ -87,6 +87,9 @@ const SlugBlogManagement = () => {
                 blog_category_id: detail.blog_category_id,
                 description: detail.description,
                 active: detail.active,
+                slug: detail.slug,
+                keyword: detail.keyword.map((item) => item.keyword)
+
             });
         };
     }, [detail]);
@@ -102,7 +105,9 @@ const SlugBlogManagement = () => {
                     blog_category_id: dataRequest.blog_category_id,
                     description: dataRequest.description,
                     active: dataRequest.active,
-                    is_draft: false
+                    slug: dataRequest.slug,
+                    is_draft: false,
+                    keyword: JSON.stringify(dataRequest.keyword)
                 };
 
                 if (dataRequest.image !== originalImage) {
@@ -122,6 +127,7 @@ const SlugBlogManagement = () => {
             WarningMessage("Nhập thiếu thông tin", "Vui lòng nhập đầy đủ thông tin");
         }
     };
+    console.log('dataRequest', dataRequest);
 
     const onUpdateDraftAsync = async () => {
         try {
@@ -131,7 +137,8 @@ const SlugBlogManagement = () => {
                 blog_category_id: dataRequest.blog_category_id,
                 description: dataRequest.description,
                 active: false,
-                is_draft: true
+                is_draft: true,
+                keyword: JSON.stringify(dataRequest.keyword)
             };
 
             if (dataRequest.image !== originalImage) {
@@ -197,6 +204,34 @@ const SlugBlogManagement = () => {
                                         attribute={"title"}
                                         isRequired={true}
                                         dataAttribute={dataRequest.title}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col span={24}>
+                                    <InputSlugCommon
+                                        label={"Đường dẫn"}
+                                        attribute={"slug"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.slug}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                        titleValue={dataRequest.title}
+                                        isUpdate={true}
+                                    />
+                                </Col>
+                                <Col span={24}>
+                                    <InputMultiCommon
+                                        label={"Từ khóa"}
+                                        attribute={"keyword"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.keyword}
                                         setData={setDataRequest}
                                         disabled={false}
                                         validate={validate}
