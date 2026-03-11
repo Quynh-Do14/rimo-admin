@@ -187,7 +187,7 @@ const AddProductManagement = () => {
                                     <InputMultiCommon
                                         label={"Từ khóa"}
                                         attribute={"keyword"}
-                                        isRequired={true}
+                                        isRequired={false}
                                         dataAttribute={dataRequest.keyword}
                                         setData={setDataRequest}
                                         disabled={false}
