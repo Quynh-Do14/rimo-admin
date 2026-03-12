@@ -230,13 +230,23 @@ const RichTextEditor = (props: RichTextEditorProps) => {
 
                     // Toolbar đầy đủ
                     toolbar: [
-                        'undo redo | formatselect | fontselect fontsizeselect | forecolor backcolor',
-                        'bold italic underline strikethrough | superscript subscript | alignleft aligncenter alignright alignjustify',
-                        'bullist numlist outdent indent | blockquote | removeformat',
-                        'table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
-                        'link image media | code | fullscreen preview print',
-                        'hr | pagebreak | anchor | charmap | emoticons | insertdatetime'
+                        'undo redo | blocks | fontfamily fontsize',
+                        'bold italic underline strikethrough | superscript subscript | forecolor backcolor',
+                        'alignleft aligncenter alignright alignjustify',
+                        'bullist numlist outdent indent | blockquote',
+                        'removeformat | code | fullscreen preview',
+                        'link image media table',
+                        'hr | pagebreak | anchor | charmap | emoticons'
                     ].join(' | '),
+
+                    // Cấu hình font family
+                    font_family_formats: 'Arial=Arial; Times New Roman=Times New Roman; Courier New=Courier New; Verdana=Verdana; Work Sans=Work Sans; Roboto=Roboto; Open Sans=Open Sans; Lato=Lato; Montserrat=Montserrat; Helvetica=Helvetica; Georgia=Georgia; Tahoma=Tahoma; Trebuchet MS=Trebuchet MS; Impact=Impact; Comic Sans MS=Comic Sans MS',
+
+                    // Cấu hình font size
+                    font_size_formats: '8pt 10pt 12pt 14pt 16pt 18pt 20pt 24pt 28pt 32pt 36pt 48pt 60pt 72pt',
+
+                    // Cho phép custom font size (người dùng có thể nhập tay)
+                    font_size_input: true,
 
                     // Plugins
                     plugins: [
@@ -262,28 +272,22 @@ const RichTextEditor = (props: RichTextEditorProps) => {
 
                     // Content CSS
                     content_style: `
-            body { 
-              font-family: Work Sans, sans-serif; 
-              font-optical-sizing: auto;
-              font-size: 14px; 
-              margin: 15px;
-            }
-            table {
-              border-collapse: collapse;
-              width: 100%;
-            }
-            td, th {
-              border: 1px solid #bcbcbc;
-              padding: 8px;
-            }
-            th {
-              background-color: #f2f2f2;
-            }
-            img {
-              max-width: 100%;
-              height: auto;
-            }
-          `,
+                        table {
+                        border-collapse: collapse;
+                        width: 100%;
+                        }
+                        td, th {
+                        border: 1px solid #bcbcbc;
+                        padding: 8px;
+                        }
+                        th {
+                        background-color: #f2f2f2;
+                        }
+                        img {
+                        max-width: 100%;
+                        height: auto;
+                        }
+                    `,
 
                     branding: false,
                 }}
