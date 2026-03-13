@@ -57,20 +57,7 @@ const InputSlugCommon = (props: Props) => {
     };
 
     useEffect(() => {
-        if (isUpdate) {
-            const slugValue = convertSlug(dataAttribute) || '';
-            setValue(slugValue);
-            setData({
-                [attribute]: slugValue
-            });
-        }
-        else if (titleValue) {
-            const slugValue = convertSlug(titleValue) || '';
-            setValue(slugValue);
-            setData({
-                [attribute]: slugValue
-            });
-        }
+
     }, []);
 
     useEffect(() => {
@@ -85,10 +72,25 @@ const InputSlugCommon = (props: Props) => {
     }, [titleValue, isFocused]);
 
     useEffect(() => {
+        if (isUpdate) {
+            const slugValue = convertSlug(dataAttribute) || '';
+            setValue(slugValue);
+            setData({
+                [attribute]: slugValue
+            });
+        }
+        else if (titleValue) {
+            const slugValue = convertSlug(titleValue) || '';
+            setValue(slugValue);
+            setData({
+                [attribute]: slugValue
+            });
+        }
+
         if (dataAttribute !== undefined && dataAttribute !== value) {
             setValue(dataAttribute || '');
         }
-    }, [dataAttribute]);
+    }, [dataAttribute, isUpdate]);
 
     useEffect(() => {
         if (submittedTime != null) {

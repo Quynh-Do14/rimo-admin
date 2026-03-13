@@ -127,7 +127,7 @@ const SlugBlogManagement = () => {
             WarningMessage("Nhập thiếu thông tin", "Vui lòng nhập đầy đủ thông tin");
         }
     };
-    console.log('dataRequest', dataRequest);
+    console.log('detail', detail);
 
     const onUpdateDraftAsync = async () => {
         try {
