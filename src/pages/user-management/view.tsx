@@ -89,7 +89,7 @@ const SlugUserManagement = () => {
                     {
                         name: dataRequest.name,
                         email: dataRequest.email,
-                        active: active,
+                        active: dataRequest.active,
                         phone_number: dataRequest.phone_number,
                         role_id: dataRequest.role_id,
                     },

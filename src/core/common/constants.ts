@@ -107,9 +107,9 @@ export default class Constants {
       },
       {
         id: 'content-page-other',
-        text: 'Nội dung các trang', // Mục riêng cho các trang khác
-        url: ROUTE_PATH.CONTENT_PAGE_MANAGEMENT, // Có thể cần thêm route riêng
-        icon: 'fas fa-file-alt', // Icon văn bản
+        text: 'Nội dung các trang', 
+        url: ROUTE_PATH.CONTENT_PAGE_MANAGEMENT,
+        icon: 'fas fa-file-alt',
         role: ["ADMIN", 'SELLER', 'WRITTER']
       },
       {

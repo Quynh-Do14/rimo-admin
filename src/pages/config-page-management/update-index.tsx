@@ -117,7 +117,6 @@ const UpdateIndexConfigPageManagement = () => {
         indexList.forEach(item => {
             indexMap.set(item.id, Number(item.index));
         });
-        console.log('indexList', indexList);
 
         const result = listResponse.map(item => {
             if (indexMap.has(item.id)) {
@@ -129,9 +128,6 @@ const UpdateIndexConfigPageManagement = () => {
             return item;
         });
         const duplicate = hasDuplicate(result)
-        console.log('result', result);
-        console.log('duplicate', duplicate);
-
         if (duplicate) {
             WarningMessage("Tồn tại các vị trí trùng nhau", "")
             return

@@ -121,11 +121,11 @@ const SlugConfigPageManagement = () => {
                 setTypeSelected(background.value)
             }
         }
-        if (dataRequest.type == "TITLE_PAGE") {
-            setDataRequest({
-                title: ""
-            })
-        }
+        // if (dataRequest.type == "TITLE_PAGE") {
+        //     setDataRequest({
+        //         title: ""
+        //     })
+        // }
     }, [dataRequest.type]);
 
     return (
