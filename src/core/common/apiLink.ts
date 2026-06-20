@@ -90,8 +90,7 @@ export class Endpoint {
     }
 
     static APIDistrict = class {
-        // static Get = "https://provinces.open-api.vn/api/v1/p/"
-        static Get = "https://production.cas.so/address-kit/2025-07-01/provinces/"
+        static Get = "https://provinces.open-api.vn/api/v2/p/"
     }
 
     static Video = class {

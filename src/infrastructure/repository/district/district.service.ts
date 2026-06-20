@@ -22,8 +22,7 @@ class DistrictApiService {
     async getDetail(code: string, setLoading: Function) {
         setLoading(true);
         try {
-            // return await axios.get(`${Endpoint.APIDistrict.Get}${code}?depth=2`,)
-            return await axios.get(`${Endpoint.APIDistrict.Get}${code}/communes`,)
+            return await axios.get(`${Endpoint.APIDistrict.Get}${code}?depth=2`,)
                 .then(response => {
                     setLoading(false)
                     return response.data;
