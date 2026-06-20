@@ -96,7 +96,7 @@ const AddAgencyManagement = () => {
                 param,
                 setLoading
             ).then((res) => {
-                setListProvince(res.provinces);
+                setListProvince(res);
             })
         }
         catch (error) {
@@ -111,7 +111,7 @@ const AddAgencyManagement = () => {
                     String(dataRequest.province).split('-')[0],
                     setLoading
                 ).then((res) => {
-                    setListDistrict(res.communes);
+                    setListDistrict(res.wards);
                 })
             }
             catch (error) {
