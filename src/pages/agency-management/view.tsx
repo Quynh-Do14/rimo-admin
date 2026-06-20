@@ -91,8 +91,12 @@ const ViewAgencyManagement = () => {
                         value={detail.province.split('-')[1]}
                     />
                     <DetailRowCommon
-                        label={'Huyện'}
+                        label={"Phường/Xã"}
                         value={detail.district}
+                    />
+                    <DetailRowCommon
+                        label={'Địa chỉ'}
+                        value={detail.address}
                     />
                     <DetailRowComponent
                         label={'Tọa độ'}
