@@ -147,7 +147,7 @@ const AgencyListPage = () => {
                 param,
                 setLoading
             ).then((res) => {
-                setListProvince(res);
+                setListProvince(res.provinces);
             })
         }
         catch (error) {
@@ -162,7 +162,7 @@ const AgencyListPage = () => {
                     String(province).split('-')[0],
                     setLoading
                 ).then((res) => {
-                    setListDistrict(res.districts);
+                    setListDistrict(res.communes);
                 })
             }
             catch (error) {
@@ -211,7 +211,7 @@ const AgencyListPage = () => {
                             listDataOfItem={listDistrict}
                             onChange={onChangeDistrict}
                             value={district}
-                            label={'Huyện'}
+                            label={"Phường/Xã"}
                             valueName='name'
                             labelName='name'
                         />

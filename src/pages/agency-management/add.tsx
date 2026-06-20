@@ -96,7 +96,7 @@ const AddAgencyManagement = () => {
                 param,
                 setLoading
             ).then((res) => {
-                setListProvince(res);
+                setListProvince(res.provinces);
             })
         }
         catch (error) {
@@ -111,7 +111,7 @@ const AddAgencyManagement = () => {
                     String(dataRequest.province).split('-')[0],
                     setLoading
                 ).then((res) => {
-                    setListDistrict(res.districts);
+                    setListDistrict(res.communes);
                 })
             }
             catch (error) {
@@ -250,7 +250,7 @@ const AddAgencyManagement = () => {
                                 </Col>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                                     <InputSelectCommon
-                                        label={"Huyện"}
+                                        label={"Phường/Xã"}
                                         attribute={"district"}
                                         isRequired={true}
                                         dataAttribute={dataRequest.district}
