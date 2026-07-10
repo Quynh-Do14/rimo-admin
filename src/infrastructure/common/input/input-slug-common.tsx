@@ -34,6 +34,9 @@ const InputSlugCommon = (props: Props) => {
     const [value, setValue] = useState<string>("");
     const [isFocused, setIsFocused] = useState<boolean>(false);
     const prevTitleValueRef = useRef<string>(titleValue);
+    const isUserEditingRef = useRef<boolean>(false);
+    const prevDataAttributeRef = useRef<any>(dataAttribute);
+    const isInitializedRef = useRef<boolean>(false);
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = e.target.value || "";
@@ -41,6 +44,7 @@ const InputSlugCommon = (props: Props) => {
         setData({
             [attribute]: newValue
         });
+        isUserEditingRef.current = true;
     };
 
     const labelLower = label?.toLowerCase();
@@ -56,12 +60,38 @@ const InputSlugCommon = (props: Props) => {
         setIsFocused(true);
     };
 
+    // Effect để khởi tạo giá trị ban đầu
     useEffect(() => {
-
+        if (!isInitializedRef.current) {
+            if (isUpdate && dataAttribute) {
+                // Khi update, giữ nguyên giá trị dataAttribute (đã có dấu -)
+                setValue(dataAttribute);
+                setData({
+                    [attribute]: dataAttribute
+                });
+            } else if (titleValue) {
+                // Khi tạo mới, tạo slug từ title
+                const slugValue = convertSlug(titleValue) || '';
+                setValue(slugValue);
+                setData({
+                    [attribute]: slugValue
+                });
+            }
+            isInitializedRef.current = true;
+            prevTitleValueRef.current = titleValue;
+            prevDataAttributeRef.current = dataAttribute;
+        }
     }, []);
 
+    // Effect để cập nhật slug khi titleValue thay đổi (chỉ khi user không đang chỉnh sửa)
     useEffect(() => {
-        if (!isFocused && titleValue && titleValue !== prevTitleValueRef.current) {
+        // Nếu user đang chỉnh sửa, không tự động cập nhật
+        if (isUserEditingRef.current) {
+            return;
+        }
+
+        // Chỉ cập nhật khi titleValue thay đổi và có giá trị
+        if (titleValue && titleValue !== prevTitleValueRef.current) {
             const slugValue = convertSlug(titleValue) || '';
             setValue(slugValue);
             setData({
@@ -69,32 +99,43 @@ const InputSlugCommon = (props: Props) => {
             });
         }
         prevTitleValueRef.current = titleValue;
-    }, [titleValue, isFocused]);
+    }, [titleValue]);
 
+    // Effect để reset trạng thái user editing khi dataAttribute thay đổi từ bên ngoài
     useEffect(() => {
-        if (isUpdate) {
-            const slugValue = convertSlug(dataAttribute) || '';
-            setValue(slugValue);
-            setData({
-                [attribute]: slugValue
-            });
-        }
-        else if (titleValue) {
-            const slugValue = convertSlug(titleValue) || '';
-            setValue(slugValue);
-            setData({
-                [attribute]: slugValue
-            });
-        }
+        if (!isInitializedRef.current) return;
 
-        if (dataAttribute !== undefined && dataAttribute !== value) {
+        if (isUpdate && dataAttribute !== undefined && dataAttribute !== prevDataAttributeRef.current) {
+            // Khi update, giữ nguyên giá trị dataAttribute
+            setValue(dataAttribute);
+            setData({
+                [attribute]: dataAttribute
+            });
+            isUserEditingRef.current = false;
+            prevDataAttributeRef.current = dataAttribute;
+        } else if (!isUpdate && dataAttribute !== undefined && dataAttribute !== prevDataAttributeRef.current) {
+            // Khi tạo mới và dataAttribute thay đổi (ví dụ reset form)
             setValue(dataAttribute || '');
+            setData({
+                [attribute]: dataAttribute || ''
+            });
+            isUserEditingRef.current = false;
+            prevDataAttributeRef.current = dataAttribute;
         }
     }, [dataAttribute, isUpdate]);
 
+    // Effect để xử lý khi submit
     useEffect(() => {
         if (submittedTime != null) {
             onBlur(true);
+            // Khi submit, nếu slug rỗng thì tạo từ titleValue
+            if (titleValue && !value) {
+                const slugValue = convertSlug(titleValue) || '';
+                setValue(slugValue);
+                setData({
+                    [attribute]: slugValue
+                });
+            }
         }
     }, [submittedTime]);
 
