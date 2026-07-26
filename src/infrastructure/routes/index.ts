@@ -42,6 +42,9 @@ import ViewProductManagement from "../../pages/product-management/view";
 import ProductSeriesListPage from "../../pages/product-series-management";
 import AddProductSeriesManagement from "../../pages/product-series-management/add";
 import SlugProductSeriesManagement from "../../pages/product-series-management/slug";
+import SEOProductListPage from "../../pages/seo-product";
+import AddSEOProductListManagement from "../../pages/seo-product/add";
+import SlugSEOProductManagement from "../../pages/seo-product/view";
 import SeriesListPage from "../../pages/series-management";
 import AddSeriesManagement from "../../pages/series-management/add";
 import SlugSeriesManagement from "../../pages/series-management/view";
@@ -385,4 +388,24 @@ export const privateRoutes = [
         private: true,
         role: ["ADMIN", 'SELLER']
     },
+
+    {
+        path: ROUTE_PATH.SEO_PRODUCT_MANAGEMENT,
+        component: SEOProductListPage,
+        private: true,
+        role: ["ADMIN", 'WRITTER']
+    },
+    {
+        path: ROUTE_PATH.ADD_SEO_PRODUCT_MANAGEMENT,
+        component: AddSEOProductListManagement,
+        private: true,
+        role: ["ADMIN", 'WRITTER']
+    },
+    {
+        path: ROUTE_PATH.EDIT_SEO_PRODUCT_MANAGEMENT,
+        component: SlugSEOProductManagement,
+        private: true,
+        role: ["ADMIN", 'WRITTER']
+    },
+
 ]

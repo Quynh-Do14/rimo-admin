@@ -80,4 +80,7 @@ export const ROUTE_PATH = {
     CONTACT_MANAGEMENT: `${PREFIX}/contact-management`,
     VIEW_CONTACT_MANAGEMENT: `${PREFIX}/contact-management/view/:id`,
 
+    SEO_PRODUCT_MANAGEMENT: `${PREFIX}/seo-product-management`,
+    ADD_SEO_PRODUCT_MANAGEMENT: `${PREFIX}/seo-product-management/add`,
+    EDIT_SEO_PRODUCT_MANAGEMENT: `${PREFIX}/seo-product-management/edit/:id`,
 }

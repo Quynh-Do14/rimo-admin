@@ -85,6 +85,13 @@ export default class Constants {
         role: ["ADMIN", 'SELLER']
       },
       {
+        id: 'seo-product',
+        text: 'Bài viết SEO cho sản phẩm',
+        url: ROUTE_PATH.SEO_PRODUCT_MANAGEMENT,
+        icon: 'fas fa-box-open',
+        role: ["ADMIN", 'WRITTER']
+      },
+      {
         id: 'agency-management',
         text: 'Quản lý đại lý',
         url: ROUTE_PATH.AGENCY_MANAGEMENT,
