@@ -34,7 +34,16 @@ const SEOProductListPage = () => {
 
     const router = useNavigate();
     const categoryProductState = useRecoilValue(CategoryProductState).data;
-
+    const newItem = {
+        id: 0,
+        index: 1000,
+        name: "Sản phẩm RIMO",
+        slug: "san-pham",
+        description: "",
+        image: "",
+        products: []
+    };
+    const categoryProductStateNew = [newItem, ...categoryProductState];
     const onGetListAsync = async ({ search = "", size = pageSize, page = currentPage }) => {
         const param = {
             page: page,
@@ -118,10 +127,11 @@ const SEOProductListPage = () => {
                 <h2>Quản lý bài viết SEO cho sản phẩm</h2>
                 <div className={styles.searchBar}>
                     <SelectSearchCommon
-                        listDataOfItem={categoryProductState}
+                        listDataOfItem={categoryProductStateNew}
                         onChange={onChangeCategory}
                         value={categorySlug}
                         label={'Danh mục'}
+                        valueName='slug'
                     />
                     <ButtonHref
                         href={ROUTE_PATH.ADD_SEO_PRODUCT_MANAGEMENT}
