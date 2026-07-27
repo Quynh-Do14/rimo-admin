@@ -131,7 +131,7 @@ export class Endpoint {
     }
     static SEOProduct = class {
         static Get = "/seo-product"
-        static GetById = "/seo-product"
+        static GetById = "/seo-product/private"
         static Add = "/seo-product"
         static Update = "/seo-product"
         static Delete = "/seo-product"
