@@ -15,6 +15,8 @@ import { useRecoilValue } from 'recoil';
 import { CategoryProductState } from '../../core/atoms/category/categoryState';
 import InputSelectStatus from '../../infrastructure/common/input/select-status';
 import InputTextCommon from '../../infrastructure/common/input/input-text-common';
+import InputMultiCommon from '../../infrastructure/common/input/input-multi';
+import TextAreaCommon from '../../infrastructure/common/input/textarea-common';
 
 const SlugSEOProductManagement = () => {
     const [detail, setDetail] = useState<SEOProductInterface>();
@@ -88,7 +90,8 @@ const SlugSEOProductManagement = () => {
                 category_id: detail.category_id,
                 slug: detail.slug,
                 content: detail.content,
-
+                description: detail.description,
+                keyword: detail.keyword.map((item: any) => item.keyword)
             });
         };
     }, [detail]);
@@ -101,10 +104,12 @@ const SlugSEOProductManagement = () => {
                 await seoProductService.UpdateSEOProductAdmin(
                     String(param.id),
                     {
-                        title: result?.name || "",
+                        title: dataRequest.title,
                         category_id: result?.id ? result.id : 0,
                         slug: dataRequest.slug,
                         content: dataRequest.content,
+                        description: dataRequest.description,
+                        keyword: JSON.stringify(dataRequest.keyword)
                     },
                     onBack,
                     setLoading
@@ -119,13 +124,13 @@ const SlugSEOProductManagement = () => {
 
     return (
         <AdminLayout
-            breadcrumb={"Quản lý danh mục tin tức"}
-            title={"Cập nhật danh mục tin tức"}
+            breadcrumb={"Quản lý bài viết SEO cho sản phẩm"}
+            title={"Cập nhật bài viết"}
             redirect={ROUTE_PATH.SEO_PRODUCT_MANAGEMENT}
         >
             <div className={styles.manage_container}>
                 <div className={styles.headerPage}>
-                    <h2>Cập nhật danh mục tin tức</h2>
+                    <h2>Cập nhật bài viết</h2>
                     <div className={styles.btn_container}>
                         <ButtonHref
                             href={ROUTE_PATH.SEO_PRODUCT_MANAGEMENT}
@@ -145,7 +150,7 @@ const SlugSEOProductManagement = () => {
                     <Row align="top">
                         <Col span={24} className={styles.form_container}>
                             <Row gutter={[16, 16]}>
-                                <Col span={24}>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                                     <InputSelectStatus
                                         label={"Danh mục"}
                                         attribute={"slug"}
@@ -161,7 +166,7 @@ const SlugSEOProductManagement = () => {
                                         labelName='name'
                                     />
                                 </Col>
-                                <Col span={24}>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                                     <InputTextCommon
                                         label={"Đường dẫn"}
                                         attribute={"slug"}
@@ -169,6 +174,45 @@ const SlugSEOProductManagement = () => {
                                         dataAttribute={dataRequest.slug}
                                         setData={setDataRequest}
                                         disabled={true}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col span={24}>
+                                    <InputTextCommon
+                                        label={"Tiêu đề"}
+                                        attribute={"title"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.title}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col span={24}>
+                                    <InputMultiCommon
+                                        label={"Từ khóa"}
+                                        attribute={"keyword"}
+                                        isRequired={false}
+                                        dataAttribute={dataRequest.keyword}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col span={24}>
+                                    <TextAreaCommon
+                                        label={"Mô tả ngắn"}
+                                        attribute={"description"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.description}
+                                        setData={setDataRequest}
+                                        disabled={false}
                                         validate={validate}
                                         setValidate={setValidate}
                                         submittedTime={submittedTime}

@@ -14,6 +14,8 @@ import InputSelectStatus from '../../infrastructure/common/input/select-status';
 import { useRecoilValue } from 'recoil';
 import { CategoryProductState } from '../../core/atoms/category/categoryState';
 import InputTextCommon from '../../infrastructure/common/input/input-text-common';
+import InputMultiCommon from '../../infrastructure/common/input/input-multi';
+import TextAreaCommon from '../../infrastructure/common/input/textarea-common';
 
 const AddSEOProductListManagement = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -61,10 +63,12 @@ const AddSEOProductListManagement = () => {
             try {
                 await seoProductService.AddSEOProductAdmin(
                     {
-                        title: result?.name || "",
+                        title: dataRequest.title,
                         category_id: result?.id ? result.id : 0,
                         slug: dataRequest.slug,
                         content: dataRequest.content,
+                        description: dataRequest.description,
+                        keyword: JSON.stringify(dataRequest.keyword)
                     },
                     onBack,
                     setLoading
@@ -77,7 +81,6 @@ const AddSEOProductListManagement = () => {
         else {
             WarningMessage("Nhập thiếu thông tin", "Vui lòng nhập đầy đủ thông tin")
         };
-
     };
 
     return (
@@ -108,7 +111,7 @@ const AddSEOProductListManagement = () => {
                     <Row align="top">
                         <Col span={24} className={styles.form_container}>
                             <Row gutter={[16, 16]}>
-                                <Col span={24}>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                                     <InputSelectStatus
                                         label={"Danh mục"}
                                         attribute={"slug"}
@@ -124,7 +127,7 @@ const AddSEOProductListManagement = () => {
                                         labelName='name'
                                     />
                                 </Col>
-                                <Col span={24}>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                                     <InputTextCommon
                                         label={"Đường dẫn"}
                                         attribute={"slug"}
@@ -132,6 +135,45 @@ const AddSEOProductListManagement = () => {
                                         dataAttribute={dataRequest.slug}
                                         setData={setDataRequest}
                                         disabled={true}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col span={24}>
+                                    <InputTextCommon
+                                        label={"Tiêu đề"}
+                                        attribute={"title"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.title}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col span={24}>
+                                    <InputMultiCommon
+                                        label={"Từ khóa"}
+                                        attribute={"keyword"}
+                                        isRequired={false}
+                                        dataAttribute={dataRequest.keyword}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
+                                    />
+                                </Col>
+                                <Col span={24}>
+                                    <TextAreaCommon
+                                        label={"Mô tả ngắn"}
+                                        attribute={"description"}
+                                        isRequired={true}
+                                        dataAttribute={dataRequest.description}
+                                        setData={setDataRequest}
+                                        disabled={false}
                                         validate={validate}
                                         setValidate={setValidate}
                                         submittedTime={submittedTime}
