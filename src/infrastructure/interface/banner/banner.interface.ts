@@ -4,6 +4,7 @@ export interface BannerInterface {
     type: "HOMEPAGE" | "INTRODUCE" | "AGENCY" | "CONTACT" | "POLICY";
     image: string;
     active: boolean
+    url: string
 }
 
 export interface BannerParams {

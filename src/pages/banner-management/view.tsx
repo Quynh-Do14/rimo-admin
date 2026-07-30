@@ -79,7 +79,7 @@ const SlugBannerManagement = () => {
                 name: detail.name,
                 type: detail.type,
                 active: detail.active,
-
+                url: detail.url,
             });
         };
     }, [detail]);
@@ -93,6 +93,7 @@ const SlugBannerManagement = () => {
                     name: dataRequest.name,
                     type: dataRequest.type,
                     active: dataRequest.active,
+                    url: dataRequest.url,
                 };
 
                 if (dataRequest.image !== originalImage) {
@@ -192,6 +193,19 @@ const SlugBannerManagement = () => {
                                         listDataOfItem={Constants.DisplayConfig.List}
                                         valueName='value'
                                         labelName='label'
+                                    />
+                                </Col>
+                                <Col span={24}>
+                                    <InputTextCommon
+                                        label={"Đường dẫn"}
+                                        attribute={"url"}
+                                        isRequired={false}
+                                        dataAttribute={dataRequest.url}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
                                     />
                                 </Col>
                             </Row>

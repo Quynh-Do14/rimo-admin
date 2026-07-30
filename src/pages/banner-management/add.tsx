@@ -53,6 +53,7 @@ const AddBannerManagement = () => {
                     name: dataRequest.name,
                     type: dataRequest.type,
                     active: dataRequest.active,
+                    url: dataRequest.url,
                 },
                     onBack,
                     setLoading
@@ -147,6 +148,19 @@ const AddBannerManagement = () => {
                                         listDataOfItem={Constants.DisplayConfig.List}
                                         valueName='value'
                                         labelName='label'
+                                    />
+                                </Col>
+                                <Col span={24}>
+                                    <InputTextCommon
+                                        label={"Đường dẫn"}
+                                        attribute={"url"}
+                                        isRequired={false}
+                                        dataAttribute={dataRequest.url}
+                                        setData={setDataRequest}
+                                        disabled={false}
+                                        validate={validate}
+                                        setValidate={setValidate}
+                                        submittedTime={submittedTime}
                                     />
                                 </Col>
                             </Row>

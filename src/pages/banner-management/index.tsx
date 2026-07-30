@@ -216,7 +216,7 @@ const BannerListPage = () => {
                             title={
                                 <TitleTableCommon
                                     title="Loại ảnh"
-                                    width={'200px'}
+                                    width={'100px'}
                                 />
                             }
                             key={"type"}
@@ -224,6 +224,19 @@ const BannerListPage = () => {
                             render={(val, _record) => {
                                 const result = Constants.BannerType.List.find(item => item.value == val)
                                 return <div>{result?.label || ""}</div>
+                            }}
+                        />
+                        <Table.Column
+                            title={
+                                <TitleTableCommon
+                                    title="Đường dẫn"
+                                    width={'150px'}
+                                />
+                            }
+                            key={"url"}
+                            dataIndex={"url"}
+                            render={(val, _record) => {
+                                return <a href={val} target='_blank'>{val}</a>
                             }}
                         />
                         <Table.Column

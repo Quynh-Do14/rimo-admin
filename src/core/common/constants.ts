@@ -88,7 +88,7 @@ export default class Constants {
         id: 'seo-product',
         text: 'Bài viết SEO cho sản phẩm',
         url: ROUTE_PATH.SEO_PRODUCT_MANAGEMENT,
-        icon: 'fas fa-box-open',
+        icon: 'fas fa-file-pen',
         role: ["ADMIN", 'WRITTER']
       },
       {
